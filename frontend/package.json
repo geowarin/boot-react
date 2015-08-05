@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Spring boot and react frontend",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "bundle": "webpack --optimize-minimize --optimize-dedupe --output-public-path ''"
   },
   "keywords": [
     "react",

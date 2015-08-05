@@ -49,3 +49,11 @@ eclipse {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
+
+jar {
+  from('frontend/dist') {
+    into 'static'
+  }
+}
+
+processResources.dependsOn('frontend:bundle')
