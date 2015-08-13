@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import 'whatwg-fetch';
+import axios from 'axios';
 
 export default class App extends Component {
 
   componentDidMount() {
-    fetch('/api/simple')
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        console.log(res)
-      });
+    axios.get('/api/simple')
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
   }
 
   render() {
