@@ -4,7 +4,7 @@
   "description": "Spring boot and react frontend",
   "scripts": {
     "start": "node server.js",
-    "bundle": "webpack --optimize-minimize --optimize-dedupe --output-public-path ''"
+    "bundle": "webpack -p --optimize-dedupe"
   },
   "keywords": [
     "react",
