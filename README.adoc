@@ -1,0 +1,41 @@
+# Spring boot and react hot loader
+
+Be more productive than ever with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
+and https://github.com/gaearon/react-hot-loader[react hot loader].
+
+Everything from backend to frontend will automatically reload.
+
+See http://geowarin.github.io/spring-boot-and-react-hot.html[my article] for an in-depth explanation.
+
+## Developing
+
+The spring boot project is the gradle top-level project.
+The frontend sub-project contains the javascript code.
+
+Installing the npm dependencies:
+
+```
+./gradlew frontend:npmInstall
+```
+
+Now you can simply launch the spring boot application with the `dev` profile
+with the flag `--spring.profiles.active=dev`
+
+## Shipping
+
+This command will generate an optimized bundle and include it in the jar.
+
+```
+./gradlew clean assemble
+```
+
+You can then launch it with:
+
+```
+java -jar build/libs/boot-react-0.0.1-SNAPSHOT.jar
+```
+
+With spring boot 1.3, you can install the application http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-service[as a linux service]
+
+
+
