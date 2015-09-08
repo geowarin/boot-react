@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router';
-import MyComponent from './Component';
-import App from './App';
+import MyComponent from './ui/Component';
+import App from './ui/App';
 
 export default (
   <Route name="app" component={App}>
