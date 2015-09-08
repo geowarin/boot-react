@@ -1,6 +1,6 @@
 import React               from 'react';
 import { Router }          from 'react-router';
-import { history }         from 'react-router/lib/HashHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { Provider }        from 'react-redux';
 import reducers            from './reducers';
 import routes              from './routes';
@@ -29,7 +29,7 @@ React.render(
     </DebugPanel>
     <Provider store={store}>
       {() =>
-        <Router children={routes} history={history}/>
+        <Router children={routes} history={createBrowserHistory()}/>
       }
     </Provider>
   </div>,
