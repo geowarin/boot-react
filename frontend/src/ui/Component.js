@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
+import fetchResource from '../actions/fetchResource';
 
 @connect(state => ({
-  counter : state.counter
+  items: state.simple.items
 }))
 class MyComponent extends Component {
 
   static propTypes = {
-    dispatch : React.PropTypes.func.isRequired,
-    counter  : React.PropTypes.number.isRequired
+    dispatch: React.PropTypes.func.isRequired,
+    items: React.PropTypes.object.isRequired
   };
 
-  //componentDidMount() {
-  //  axios.get('/api/simple')
-  //    .then(res => console.log(res.data))
-  //    .catch(err => console.error(err))
-  //}
-
-  // normally you'd import an action creator, but I don't want to create
-  // a file that you're just going to delete anyways!
-  _increment () {
-    this.props.dispatch({ type : 'COUNTER_INCREMENT' });
+  fetch() {
+    this.props.dispatch(fetchResource());
   }
 
   render() {
+    var list = this.props.items.map((item) => {
+      return (<li>{item}</li>)
+    });
+
     return (
       <div>
-        <h1>Hello, guys.</h1>
-        <h2>Sample Counter: {this.props.counter}</h2>
-        <button onClick={this._increment.bind(this)}>
-          Increment
+        <h2>Data:</h2>
+        <ul>
+          {{list}}
+        </ul>
+        <button onClick={this.fetch.bind(this)}>
+          Fetch
         </button>
       </div>
     );

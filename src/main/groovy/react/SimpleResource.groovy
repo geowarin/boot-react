@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class SimpleResource {
 
-    @RequestMapping('/api/simple')
-    Map resource() {
-        [simple: 'resource']
-    }
+  @RequestMapping('/api/simple')
+  List<String> resource() {
+    (1..new Random().nextInt(10) + 2).collect { it.toString() }
+  }
 }

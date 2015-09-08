@@ -10,7 +10,7 @@ import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import { devTools, persistState } from 'redux-devtools';
 
 const initialState = {
-  counter: 0
+  simple: {items: []}
 };
 
 const finalCreateStore = compose(
