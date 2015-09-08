@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 @connect(state => ({
   counter : state.counter
 }))
-export default class MyComponent extends Component {
+class MyComponent extends Component {
 
   static propTypes = {
     dispatch : React.PropTypes.func.isRequired,
@@ -36,3 +36,5 @@ export default class MyComponent extends Component {
     );
   }
 }
+
+export default MyComponent;
