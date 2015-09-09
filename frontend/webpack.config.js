@@ -24,10 +24,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     root: path.join(__dirname, 'src'),
-    alias: [
-      {'reducers': '/reducers'},
-      {'ui': '/ui'}
-    ]
   },
   module: {
     loaders: [{

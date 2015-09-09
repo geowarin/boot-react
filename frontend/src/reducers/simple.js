@@ -1,6 +1,5 @@
 import { createReducer } from './createReducer';
-
-const ON_FETCH = 'ON_FETCH';
+import { ON_FETCH } from 'constants';
 
 const initialState = {
   items: []
