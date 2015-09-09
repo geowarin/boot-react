@@ -14,13 +14,19 @@ node {
   download = true
 }
 
-task bundle(type: NpmTask) {
-    args = ['run', 'bundle']
+task clean() {
+  new File('dist').delete()
 }
 
+task assemble(type: NpmTask) {
+    args = ['run', 'bundle']
+}
 task start(type: NpmTask) {
     args = ['start']
 }
+task test(type: NpmTask) {
+    args = ['test']
+}
 
 start.dependsOn(npm_install)
-bundle.dependsOn(npm_install)
+assemble.dependsOn(npm_install)

@@ -56,4 +56,4 @@ jar {
   }
 }
 
-processResources.dependsOn(':frontend:bundle')
+assemble.dependsOn(':frontend:assemble')
