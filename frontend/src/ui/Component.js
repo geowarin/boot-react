@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetchResource from '../actions/fetchResource';
 
-@connect(state => ({
-  items: state.simple.items
-}))
-class MyComponent extends Component {
-
+export class MyComponent extends Component {
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    items: React.PropTypes.object.isRequired
+    items: React.PropTypes.array.isRequired
   };
 
   fetch() {
@@ -35,4 +31,6 @@ class MyComponent extends Component {
   }
 }
 
-export default MyComponent;
+export default connect(state => ({
+  items: state.simple.items
+}))(MyComponent);
