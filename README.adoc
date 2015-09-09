@@ -1,5 +1,7 @@
 # Spring boot and react hot loader
 
+image:https://travis-ci.org/geowarin/boot-react.svg["Build Status", link="https://travis-ci.org/geowarin/boot-react"]
+
 Be more productive than ever with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
 and https://github.com/gaearon/react-hot-loader[react hot loader].
 
