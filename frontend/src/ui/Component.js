@@ -6,10 +6,9 @@ import fetchResource from '../actions/fetchResource';
   items: state.simple.items
 }))
 class MyComponent extends Component {
-
   static propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    items: React.PropTypes.object.isRequired
+    items: React.PropTypes.array.isRequired
   };
 
   fetch() {
