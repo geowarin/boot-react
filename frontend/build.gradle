@@ -2,7 +2,10 @@ plugins {
     id "com.moowork.node" version "0.10"
 }
 
+apply plugin: 'base'
 version '0.0.1'
+
+buildDir = 'dist'
 
 node {
   // Version of node to use.
@@ -14,11 +17,7 @@ node {
   download = true
 }
 
-task clean() {
-  new File('dist').delete()
-}
-
-task assemble(type: NpmTask) {
+task bundle(type: NpmTask) {
     args = ['run', 'bundle']
 }
 task start(type: NpmTask) {
@@ -28,5 +27,6 @@ task test(type: NpmTask) {
     args = ['test']
 }
 
+check.dependsOn(test)
 start.dependsOn(npm_install)
-assemble.dependsOn(npm_install)
+assemble.dependsOn(bundle)
