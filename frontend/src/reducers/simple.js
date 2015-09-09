@@ -1,5 +1,5 @@
 import { createReducer } from './createReducer';
-import { ON_FETCH } from 'constants';
+import { ON_FETCH } from 'actions/fetchResource';
 
 const initialState = {
   items: []

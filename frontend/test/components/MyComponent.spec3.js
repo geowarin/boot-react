@@ -33,7 +33,7 @@ describe('components', () => {
   describe('MyComponent', () => {
 
     it('should render correctly using shallow renderer', () => {
-      const { output, renderer } = setup();
+      const { output } = setup();
 
       expect(output.type).toBe('div');
 

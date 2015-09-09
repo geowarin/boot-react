@@ -1,6 +1,6 @@
 import expect from 'expect';
 import fetchResource from 'actions/fetchResource';
-import { ON_FETCH } from 'constants/index';
+import { ON_FETCH } from 'actions/fetchResource';
 import nock from 'nock';
 
 describe('actions', () => {

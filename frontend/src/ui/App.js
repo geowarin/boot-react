@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router';
 
 export default class App extends Component {
 
   render() {
     return (
       <div>
+        <div className="menu">
+          <Link to="/login">login</Link> { ' | ' }
+          <Link to="/logout">logout</Link> { ' | ' }
+          <Link to="/private">private</Link>
+        </div>
         {this.props.children}
       </div>
     );

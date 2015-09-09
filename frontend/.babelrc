@@ -6,7 +6,6 @@
   "extra": {
     "module-alias": [
       { "src": "./src/actions", "expose": "actions" },
-      { "src": "./src/constants", "expose": "constants" },
       { "src": "./src/reducers", "expose": "reducers" },
       { "src": "./src/ui", "expose": "ui" }
     ]

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ON_FETCH } from 'constants/index';
+
+export const ON_FETCH = 'ON_FETCH';
 
 export default function fetchResource() {
   return dispatch => {
