@@ -51,9 +51,9 @@ task wrapper(type: Wrapper) {
 }
 
 jar {
-  from('frontend/dist') {
+  from('../frontend/dist') {
     into 'static'
   }
 }
 
-processResources.dependsOn('frontend:bundle')
+processResources.dependsOn(':frontend:bundle')
