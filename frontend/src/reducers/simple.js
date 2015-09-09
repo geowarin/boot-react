@@ -1,4 +1,4 @@
-import { createReducer } from '../utils';
+import { createReducer } from './createReducer';
 
 const ON_FETCH = 'ON_FETCH';
 
