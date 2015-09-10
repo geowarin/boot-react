@@ -1,3 +1,1 @@
-export default {
-  ON_FETCH: 'ON_FETCH'
-}
+export const ON_FETCH = 'ON_FETCH';
