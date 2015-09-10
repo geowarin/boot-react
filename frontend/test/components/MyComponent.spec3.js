@@ -1,5 +1,5 @@
 import expect from 'expect';
-import jsdomReact from '../jsdomReact';
+import jsdomReact from '../utils/jsdomReact';
 import React from 'react/addons';
 import { MyComponent } from 'ui/Component';
 import { createStore } from 'redux';
