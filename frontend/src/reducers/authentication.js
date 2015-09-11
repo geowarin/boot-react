@@ -10,6 +10,7 @@ const initialState = {
 
 export default createReducer(initialState, {
   [LOGIN_SUCCESS]: (state, data) => {
+    localStorage.setItem('auth-token', data.token);
     console.log('Login successful');
     return {
       ...state,
