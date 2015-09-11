@@ -1,0 +1,6 @@
+---
+spring:
+  profiles: redis-docker
+  redis:
+    host: 172.16.98.131
+    port: 6379
