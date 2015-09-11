@@ -52,4 +52,4 @@ jar {
   }
 }
 
-assemble.dependsOn(':frontend:assemble')
+jar.dependsOn(':frontend:assemble')

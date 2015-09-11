@@ -28,7 +28,6 @@ function setup() {
 }
 
 describe('components', () => {
-  jsdomReact();
 
   describe('MyComponent', () => {
 
