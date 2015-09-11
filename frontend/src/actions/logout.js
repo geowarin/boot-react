@@ -1,4 +1,4 @@
-const LOGOUT = 'LOGOUT';
+export const LOGOUT = 'LOGOUT';
 
 export default function logout() {
   return (dispatch) => {
