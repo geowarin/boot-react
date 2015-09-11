@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import fetchResource from '../actions/fetchResource';
+import fetchResource from 'actions/fetchResource';
 
 export class MyComponent extends Component {
   static propTypes = {
