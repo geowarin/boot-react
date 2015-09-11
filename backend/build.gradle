@@ -39,6 +39,7 @@ dependencies {
   compile 'org.springframework.boot:spring-boot-starter-security'
   compile 'org.springframework.session:spring-session'
   compile 'org.springframework.boot:spring-boot-starter-redis'
+  compile 'com.github.kstyrc:embedded-redis:0.6'
   testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 

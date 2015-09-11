@@ -1,4 +1,4 @@
-package react.webpack
+package react.config.webpack
 
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.context.annotation.Bean
