@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Router, Route, Redirect } from 'react-router';
+import { Router, Route, Redirect, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,8 +18,8 @@ export default class RouterComponent extends Component {
       <Provider store={this.props.store}>
         {() =>
           <Router history={createBrowserHistory()}>
-            <Route name="app" component={App}>
-              <Route component={MyComponent} path="/"/>
+            <Route name="app" component={App} path="/">
+              <IndexRoute component={MyComponent}/>
               <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
               <Route path="login" component={LoginPage}/>
               <Route path="logout" onEnter={this.props.logout}/>

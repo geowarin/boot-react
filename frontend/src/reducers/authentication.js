@@ -2,6 +2,7 @@ import { createReducer } from './createReducer';
 
 import { LOGIN_SUCCESS, LOGIN_FAILED } from 'actions/login';
 import { LOGOUT } from 'actions/logout';
+import { SESSION_INFO_FETCHED } from 'actions/getSessionInfo';
 
 const initialState = {
   loggedIn: false,
@@ -32,6 +33,14 @@ export default createReducer(initialState, {
       ...state,
       loggedIn: false,
       token: null
+    };
+  },
+  [SESSION_INFO_FETCHED]: (state, data) => {
+    console.log('Session info', data);
+    return {
+      ...state,
+      loggedIn: true,
+      session: data
     };
   }
 });
