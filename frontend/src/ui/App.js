@@ -5,11 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import getSessionInfo from 'actions/getSessionInfo'
 
-export class App extends Component {
-
-  componentDidMount() {
-    this.props.getSessionInfo();
-  }
+export default class App extends Component {
 
   render() {
     return (
@@ -25,8 +21,3 @@ export class App extends Component {
     );
   }
 }
-
-export default connect(
-    state => ({ }),
-    dispatch => (bindActionCreators({ getSessionInfo }, dispatch))
-)(App);

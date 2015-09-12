@@ -5,7 +5,7 @@ import { LOGOUT } from 'actions/logout';
 import { SESSION_INFO_FETCHED } from 'actions/getSessionInfo';
 
 const initialState = {
-  loggedIn: false,
+  isAuthenticated: false,
   token: null
 };
 
@@ -15,23 +15,25 @@ export default createReducer(initialState, {
     console.log('Login successful');
     return {
       ...state,
-      loggedIn: true,
+      isAuthenticated: true,
       token: data.token
     };
   },
   [LOGIN_FAILED]: (state, data) => {
     console.warn('Login failed');
+    localStorage.removeItem('auth-token');
     return {
       ...state,
-      loggedIn: false,
+      isAuthenticated: false,
       token: null
     };
   },
   [LOGOUT]: (state, data) => {
     console.log('Logout');
+    localStorage.removeItem('auth-token');
     return {
       ...state,
-      loggedIn: false,
+      isAuthenticated: false,
       token: null
     };
   },
@@ -39,7 +41,7 @@ export default createReducer(initialState, {
     console.log('Session info', data);
     return {
       ...state,
-      loggedIn: true,
+      isAuthenticated: true,
       session: data
     };
   }

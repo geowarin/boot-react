@@ -23,5 +23,9 @@ function configureStore() {
   return store;
 }
 
-export default configureStore()(reducers);
+var initialize = (initialState) => {
+  return configureStore()(reducers, initialState)
+};
+
+export default initialize;
 
