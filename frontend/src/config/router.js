@@ -22,7 +22,7 @@ export default class RouterComponent extends Component {
               <IndexRoute component={MyComponent}/>
               <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
               <Route path="login" component={LoginPage}/>
-              <Route path="logout" onEnter={this.props.logout}/>
+              <Route path="logout" onEnter={this.logout.bind(this)}/>
             </Route>
           </Router>
         }
@@ -37,6 +37,10 @@ export default class RouterComponent extends Component {
     }
   }
 
+  logout(nextState, redirectTo) {
+    this.props.logout();
+    redirectTo('/login');
+  }
 }
 
 export default connect(

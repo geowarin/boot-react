@@ -32,4 +32,9 @@ class AuthenticationResource {
   def session(HttpSession session) {
     session.getAttribute('user')
   }
+
+  @RequestMapping(method = RequestMethod.DELETE)
+  def logout(HttpSession session) {
+    session.invalidate()
+  }
 }
