@@ -23,7 +23,6 @@ var render = (isAuthenticated, session = {}) => {
     </div>,
     document.getElementById('root')
   );
-
 };
 
 axios.get('/api/session/info')

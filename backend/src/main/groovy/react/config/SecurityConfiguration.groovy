@@ -33,7 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .requestCache()
       .requestCache(new NullRequestCache())
       .and()
-      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).and().csrf().disable();
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
+      .and().csrf().disable();
   }
 
   @Autowired

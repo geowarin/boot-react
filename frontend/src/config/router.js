@@ -11,13 +11,15 @@ import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
 import logout from 'actions/logout';
 
+const history = createBrowserHistory();
+
 export default class RouterComponent extends Component {
 
   render() {
     return (
       <Provider store={this.props.store}>
         {() =>
-          <Router history={createBrowserHistory()}>
+          <Router history={history}>
             <Route name="app" component={App} path="/">
               <IndexRoute component={MyComponent}/>
               <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
