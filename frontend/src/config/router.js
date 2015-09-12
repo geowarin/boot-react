@@ -20,7 +20,7 @@ export default class RouterComponent extends Component {
           <Router history={createBrowserHistory()}>
             <Route name="app" component={App}>
               <Route component={MyComponent} path="/"/>
-              <Route component={PrivatePage} path="/private" onEnter={this.requireAuth.bind(this)}/>
+              <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
               <Route path="login" component={LoginPage}/>
               <Route path="logout" onEnter={this.props.logout}/>
             </Route>
@@ -33,7 +33,7 @@ export default class RouterComponent extends Component {
   requireAuth(nextState, redirectTo) {
     const isLoggedIn = this.props.authentication.loggedIn;
     if (!isLoggedIn) {
-      redirectTo('/login', {nextPathname: nextState.location.pathname})
+      redirectTo(null, '/login', {nextPathname: nextState.location.pathname})
     }
   }
 
