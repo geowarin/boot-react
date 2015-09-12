@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import fetchResource from 'actions/fetchResource';
 
 export class MyComponent extends Component {
@@ -9,7 +10,7 @@ export class MyComponent extends Component {
   };
 
   fetch() {
-    this.props.dispatch(fetchResource());
+    this.props.fetchResource();
   }
 
   render() {
@@ -31,6 +32,7 @@ export class MyComponent extends Component {
   }
 }
 
-export default connect(state => ({
-  items: state.simple.items
-}))(MyComponent);
+export default connect(
+    state => ({items: state.simple.items}),
+    dispatch => (bindActionCreators({ fetchResource }, dispatch))
+)(MyComponent);
