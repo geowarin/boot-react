@@ -10,7 +10,7 @@ export class App extends Component {
       <div>
         <div className="menu">
           <Link to="/">Home</Link> { ' | ' }
-          {{loginLogout}} { ' | ' }
+          {loginLogout} { ' | ' }
           <Link to="/private">private</Link>
         </div>
         {this.props.children}

@@ -23,7 +23,7 @@ module.exports = {
   ],
   resolve: {
     extensions: ['', '.js'],
-    root: path.join(__dirname, 'src'),
+    root: path.join(__dirname, 'src')
   },
   module: {
     loaders: [{

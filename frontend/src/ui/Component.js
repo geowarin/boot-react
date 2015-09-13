@@ -14,15 +14,14 @@ export class MyComponent extends Component {
   }
 
   render() {
-    var list = this.props.items.map((item) => {
-      return (<li>{item}</li>)
-    });
+    var items = this.props.items;
+    var list = items.map((item, index) => <li key={index}>{item}</li>);
 
     return (
       <div>
         <h2>Data:</h2>
         <ul>
-          {{list}}
+          {list}
         </ul>
         <button onClick={this.fetch.bind(this)}>
           Fetch

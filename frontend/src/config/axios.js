@@ -1,13 +1,16 @@
 import axios from 'axios';
 
 export default () => {
-  axios.interceptors.request.use((config => {
+  var onSuccess = config => {
     var token = localStorage.getItem('auth-token');
     if (token) {
       config.headers['X-Auth-Token'] = token;
     }
     return config;
-  }), (error => {
+  };
+  var onError = error => {
+    console.log(error);
     return Promise.reject(error);
-  }));
+  };
+  axios.interceptors.request.use(onSuccess, onError);
 }
