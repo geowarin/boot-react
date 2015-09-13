@@ -4,9 +4,7 @@ import groovy.json.JsonOutput
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.http.MediaType
-import org.springframework.mock.web.MockHttpSession
 import org.springframework.session.MapSessionRepository
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.session.web.http.SessionRepositoryFilter
 import org.springframework.test.context.ActiveProfiles
@@ -20,16 +18,13 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 
 @ContextConfiguration(
   loader = SpringApplicationContextLoader,
   classes = [BootReactApplication]
 )
 @WebAppConfiguration
-@ActiveProfiles(['production'])
 abstract class AbstractMvcSpec extends Specification {
 
   @Autowired
