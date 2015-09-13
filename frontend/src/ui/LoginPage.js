@@ -15,8 +15,8 @@ export class LoginPage extends Component {
         <h2>Login page</h2>
 
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input name="username" ref="username"/>
-          <input name="password" ref="password"/>
+          <input type="text" ref="username"/>
+          <input type="password" ref="password"/>
 
           <input type="submit" value="Login" onClick={this.onSubmit}/>
         </form>
@@ -31,11 +31,13 @@ export class LoginPage extends Component {
     var password = findDOMNode(this.refs.password).value;
 
     var onLogged = () => {
-        var { location, history } = this.props;
+      var { location, history } = this.props;
 
-        if (location.state && location.state.nextPathname) {
-          history.replaceState(null, location.state.nextPathname);
-        }
+      let nextPath = '/';
+      if (location.state && location.state.nextPathname) {
+        nextPath = location.state.nextPathname;
+      }
+      history.replaceState(null, nextPath);
     };
 
     this.props.login(username, password, onLogged);
@@ -43,6 +45,6 @@ export class LoginPage extends Component {
 }
 
 export default connect(
-    state => ({ }),
-    dispatch => (bindActionCreators({ login }, dispatch))
+    state => ({}),
+    dispatch => (bindActionCreators({login}, dispatch))
 )(LoginPage);
