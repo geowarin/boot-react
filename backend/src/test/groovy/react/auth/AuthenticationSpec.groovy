@@ -36,16 +36,4 @@ class AuthenticationSpec extends AbstractMvcSpec {
     then:
     response.andExpect(status().isOk())
   }
-
-  def "get session"() {
-    given:
-    def session = [user: [username: 'user']]
-
-    when:
-    def response = doGetWithSession('/api/session', session)
-
-    then:
-    response.andExpect(status().isOk())
-    response.andExpect(jsonPath('$.username', is('user')))
-  }
 }
