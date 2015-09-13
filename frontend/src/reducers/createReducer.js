@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function createReducer (initialState, reducerMap) {
+export function createReducer(initialState, reducerMap) {
   return (state = initialState, action = null) => {
     const reducer = reducerMap[action.type];
 

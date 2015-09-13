@@ -44,6 +44,6 @@ export default class RouterComponent extends Component {
 }
 
 export default connect(
-    state => ({ isAuthenticated: state.authentication.isAuthenticated }),
-    dispatch => (bindActionCreators({ logout }, dispatch))
+    state => ({isAuthenticated: state.authentication.isAuthenticated}),
+    dispatch => (bindActionCreators({logout}, dispatch))
 )(RouterComponent);

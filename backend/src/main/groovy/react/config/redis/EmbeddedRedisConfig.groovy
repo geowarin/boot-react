@@ -13,7 +13,6 @@ import javax.annotation.PreDestroy;
 @EnableRedisHttpSession
 @Profile('redis-embedded')
 public class EmbeddedRedisConfig {
-
   private static RedisServer redisServer;
 
   @Bean
@@ -32,5 +31,4 @@ public class EmbeddedRedisConfig {
   public void destroy() {
     redisServer.stop();
   }
-
 }

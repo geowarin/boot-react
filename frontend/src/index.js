@@ -7,25 +7,25 @@ import axiosConfig from 'config/axios';
 
 axiosConfig();
 
-var render = (isAuthenticated, session = {}) => {
+var render = (session) => {
   const initialState = {
     authentication: {
-      token: session.token,
-      isAuthenticated: isAuthenticated
+      token: session.token || null,
+      isAuthenticated: session.isAuthenticated || false
     }
   };
   const store = initStore(initialState);
 
   React.render(
     <div>
-      <DevToolsComponent store={store} />
-      <RouterComponent store={store} />
+      <DevToolsComponent store={store}/>
+      <RouterComponent store={store}/>
     </div>,
     document.getElementById('root')
   );
 };
 
-axios.get('/api/session/info')
-  .then(res => render(true, res.data))
-  .catch(err => render(false));
+axios.get('/api/session')
+  .then(res => render(res.data))
+  .catch(err => render());
 

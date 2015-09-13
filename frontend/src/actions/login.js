@@ -6,7 +6,7 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 export default function login(username, password, onLogged) {
 
   return (dispatch) => {
-    axios.post('/api/session/login', {
+    axios.post('/api/session', {
         username: username,
         password: password
     })
