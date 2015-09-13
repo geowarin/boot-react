@@ -24,7 +24,7 @@ class AuthenticationResource {
     authenticationManager.authenticate(authentication)
     SecurityContextHolder.context.authentication = authentication
 
-    httpSession.setAttribute('user', [name: credentials.username, token: httpSession.id, isAuthenticated: true])
+    httpSession.setAttribute('user', [username: credentials.username, token: httpSession.id, isAuthenticated: true])
     session(httpSession)
   }
 

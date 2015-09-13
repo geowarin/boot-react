@@ -11,7 +11,8 @@ var render = (session) => {
   const initialState = {
     authentication: {
       token: session.token || null,
-      isAuthenticated: session.isAuthenticated || false
+      isAuthenticated: session.isAuthenticated || false,
+      username: session.username || null
     }
   };
   const store = initStore(initialState);

@@ -5,7 +5,8 @@ import { LOGOUT } from 'actions/logout';
 
 const initialState = {
   isAuthenticated: false,
-  token: null
+  token: null,
+  username: null
 };
 
 export default createReducer(initialState, {
@@ -14,8 +15,9 @@ export default createReducer(initialState, {
     console.log('Login successful');
     return {
       ...state,
-      isAuthenticated: true,
-      token: data.token
+      isAuthenticated: data.isAuthenticated,
+      token: data.token,
+      username: data.username
     };
   },
   [LOGIN_FAILED]: (state, data) => {
@@ -24,7 +26,8 @@ export default createReducer(initialState, {
     return {
       ...state,
       isAuthenticated: false,
-      token: null
+      token: null,
+      username: null
     };
   },
   [LOGOUT]: (state, data) => {
@@ -33,7 +36,8 @@ export default createReducer(initialState, {
     return {
       ...state,
       isAuthenticated: false,
-      token: null
+      token: null,
+      username: null
     };
   }
 });
