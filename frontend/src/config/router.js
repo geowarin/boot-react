@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Router, Route, Redirect, IndexRoute } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import history from './history'
 import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -10,8 +10,6 @@ import MyComponent from 'ui/Component';
 import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
 import logout from 'actions/logout';
-
-const history = createBrowserHistory();
 
 export default class RouterComponent extends Component {
 
