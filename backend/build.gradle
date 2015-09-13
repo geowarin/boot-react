@@ -41,6 +41,9 @@ dependencies {
   compile 'org.springframework.boot:spring-boot-starter-redis'
   compile 'com.github.kstyrc:embedded-redis:0.6'
   testCompile 'org.springframework.boot:spring-boot-starter-test'
+  testCompile 'org.spockframework:spock-spring'
+  testCompile 'org.springframework.security:spring-security-test'
+  testCompile 'com.jayway.jsonpath:json-path'
 }
 
 
