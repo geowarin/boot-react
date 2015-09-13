@@ -39,6 +39,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     then:
     response.andExpect(status().isOk())
     response.andExpect(jsonPath('$.username', is('user')))
+    token != null
   }
 
   def "get session"() {
@@ -64,5 +65,4 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     response.andExpect(status().isOk())
     response.andExpect(content().string(''))
   }
-
 }

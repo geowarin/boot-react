@@ -33,13 +33,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .requestCache(new NullRequestCache())
       .and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
-      .and().csrf().disable();
+      .and().csrf().disable()
   }
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     auth
       .inMemoryAuthentication()
-      .withUser('user').password('password').roles('USER');
+      .withUser('user').password('password').roles('USER')
   }
 }

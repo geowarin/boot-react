@@ -9,6 +9,7 @@ import org.springframework.session.MapSessionRepository
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.session.web.http.SessionRepositoryFilter
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
@@ -28,24 +29,25 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
   classes = [BootReactApplication]
 )
 @WebAppConfiguration
+@ActiveProfiles(['production'])
 abstract class AbstractMvcSpec extends Specification {
 
   @Autowired
-  WebApplicationContext wac
+  private WebApplicationContext wac
 
   MockMvc mvc
 
   @Shared
-  def sessionRepository = new MapSessionRepository()
+  private def sessionRepository = new MapSessionRepository()
 
   def setup() {
-    def filter = new SessionRepositoryFilter(sessionRepository)
-    filter.setHttpSessionStrategy(new HeaderHttpSessionStrategy())
+    def sessionFilter = new SessionRepositoryFilter(sessionRepository)
+    sessionFilter.httpSessionStrategy = new HeaderHttpSessionStrategy()
 
     mvc = MockMvcBuilders
       .webAppContextSetup(this.wac)
       .apply(springSecurity())
-      .addFilter(filter)
+      .addFilter(sessionFilter)
       .build();
   }
 
@@ -58,14 +60,6 @@ abstract class AbstractMvcSpec extends Specification {
 
   ResultActions doGet(String url) {
     this.mvc.perform(get(url))
-  }
-
-  ResultActions doGetWithSession(String url, Map<String, ?> session) {
-    def mockSession = new MockHttpSession()
-    session.each {
-      mockSession.setAttribute(it.key, it.value)
-    }
-    this.mvc.perform(get(url).session(mockSession))
   }
 
   ResultActions doGetWithToken(String url, String token) {

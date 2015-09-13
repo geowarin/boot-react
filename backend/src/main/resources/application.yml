@@ -1,0 +1,16 @@
+
+# By default launch with webpack and a map backed
+# Session implementation
+
+spring.profiles.active: webpack,fake-redis
+
+---
+
+# in production, use redis
+spring:
+    profiles: production
+    active: # none
+#    redis:
+#      password:
+#      host:
+#      port:

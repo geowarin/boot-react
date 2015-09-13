@@ -19,7 +19,7 @@ class AuthenticationResource {
   AuthenticationManager authenticationManager
 
   @RequestMapping(method = RequestMethod.POST)
-  def auth(@RequestBody def credentials, HttpSession httpSession) {
+  def login(@RequestBody def credentials, HttpSession httpSession) {
     Authentication authentication = new UsernamePasswordAuthenticationToken(credentials.username, credentials.password)
     authenticationManager.authenticate(authentication)
     SecurityContextHolder.context.authentication = authentication
