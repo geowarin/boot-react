@@ -33,7 +33,7 @@ export default class RouterComponent extends Component {
   }
 
   requireAuth(nextState, redirectTo) {
-    const isAuthenticated = this.props.authentication.isAuthenticated;
+    const isAuthenticated = this.props.isAuthenticated;
     if (!isAuthenticated) {
       redirectTo({nextPathname: nextState.location.pathname}, '/login')
     }
@@ -46,6 +46,6 @@ export default class RouterComponent extends Component {
 }
 
 export default connect(
-    state => ({ authentication: state.authentication }),
+    state => ({ isAuthenticated: state.authentication.isAuthenticated }),
     dispatch => (bindActionCreators({ logout }, dispatch))
 )(RouterComponent);
