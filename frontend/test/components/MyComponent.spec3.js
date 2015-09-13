@@ -39,7 +39,7 @@ describe('components', () => {
       const ul = output.props.children.find(item => item.type === 'ul');
       expect(ul).toNotEqual(null);
 
-      const li = ul.props.children.list.filter(item => item.type === 'li');
+      const li = ul.props.children.filter(item => item.type === 'li');
       expect(li.length).toEqual(2);
     });
   });
