@@ -33,9 +33,9 @@ export default class RouterComponent extends Component {
   }
 
   requireAuth(nextState, redirectTo) {
-    const isLoggedIn = this.props.authentication.isAuthenticated;
-    if (!isLoggedIn) {
-      redirectTo(null, '/login', {nextPathname: nextState.location.pathname})
+    const isAuthenticated = this.props.authentication.isAuthenticated;
+    if (!isAuthenticated) {
+      redirectTo({nextPathname: nextState.location.pathname}, '/login')
     }
   }
 

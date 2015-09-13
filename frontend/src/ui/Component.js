@@ -5,7 +5,7 @@ import fetchResource from 'actions/fetchResource';
 
 export class MyComponent extends Component {
   static propTypes = {
-    dispatch: React.PropTypes.func.isRequired,
+    fetchResource: React.PropTypes.func.isRequired,
     items: React.PropTypes.array.isRequired
   };
 
