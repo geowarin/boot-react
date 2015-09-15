@@ -21,20 +21,22 @@ class SinglePageAppConfig extends WebMvcConfigurerAdapter {
 
   @Override
   void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler('/**.js').addResourceLocations('classpath:/static/')
-    registry.addResourceHandler('/**').resourceChain(false).addResolver(new FixedResourceResolver('/static/index.html'))
+    registry.addResourceHandler('/**')
+      .addResourceLocations('classpath:/static/')
+      .resourceChain(false)
+      .addResolver(new SpaResourceResolver())
   }
 
-  class FixedResourceResolver implements ResourceResolver {
-    Resource resource
-
-    FixedResourceResolver(String path) {
-      this.resource = new ClassPathResource(path)
-    }
+  class SpaResourceResolver implements ResourceResolver {
+    Resource index = new ClassPathResource('/static/index.html')
 
     @Override
     Resource resolveResource(HttpServletRequest request, String requestPath, List<? extends Resource> locations, ResourceResolverChain chain) {
-      requestPath.startsWith('api') ? null : resource
+      if (requestPath.startsWith('api')) {
+        return null
+      }
+      def foundResource = locations.collect { it.createRelative(requestPath) }.find { it.exists() }
+      return foundResource ?: index
     }
 
     @Override
