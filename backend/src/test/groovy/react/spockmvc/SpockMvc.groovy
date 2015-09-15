@@ -6,8 +6,6 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 
-import javax.servlet.http.Cookie
-
 class SpockMvc {
   private MockMvc mvc
 
@@ -42,18 +40,18 @@ class SpockMvc {
         .contentType(MediaType.APPLICATION_JSON)
         .content(JsonOutput.toJson(data))
     }
-    params.cookies.each {
-      builder.cookie(it)
-    }
-    params.headers.each {
-      builder.header(it.key, it.value)
-    }
     spockMvc(builder, params)
   }
 
   private SpockMvcResult spockMvc(MockHttpServletRequestBuilder builder, RequestParams params) {
     if (params.authToken) {
       builder.header('X-Auth-Token', params.authToken)
+    }
+    params.cookies.each {
+      builder.cookie(it)
+    }
+    params.headers.each {
+      builder.header(it.key, it.value)
     }
     def resultActions = this.mvc.perform(builder)
     new SpockMvcResult(resultActions.andReturn())

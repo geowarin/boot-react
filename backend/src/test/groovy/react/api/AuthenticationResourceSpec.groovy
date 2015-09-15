@@ -1,17 +1,10 @@
 package react.api
 
-import groovy.json.JsonSlurper
 import org.springframework.http.HttpStatus
 import react.AbstractMvcSpec
 import react.spockmvc.RequestParams
-import react.spockmvc.SpockMvc
 import spock.lang.Shared
 import spock.lang.Stepwise
-
-import static org.hamcrest.Matchers.*
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @Stepwise
 class AuthenticationResourceSpec extends AbstractMvcSpec {
@@ -24,7 +17,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'badpassword']
 
     when:
-    def res = spockMvc.post('/api/session', credentials)
+    def res = post('/api/session', credentials)
 
     then:
     res.status == HttpStatus.FORBIDDEN
@@ -35,7 +28,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'password']
 
     when:
-    def res = spockMvc.post('/api/session', credentials)
+    def res = post('/api/session', credentials)
     token = res.json.token
 
     then:
@@ -46,7 +39,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
 
   def "get session"() {
     when:
-    def res = spockMvc.get('/api/session', new RequestParams(authToken: token))
+    def res = get('/api/session', new RequestParams(authToken: token))
 
     then:
     res.status == HttpStatus.OK
@@ -55,13 +48,13 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
 
   def "delete session"() {
     when:
-    def res = spockMvc.delete('/api/session', new RequestParams(authToken: token))
+    def res = delete('/api/session', new RequestParams(authToken: token))
 
     then:
     res.status == HttpStatus.OK
 
     when:
-    res = spockMvc.get('/api/session', new RequestParams(authToken: token))
+    res = get('/api/session', new RequestParams(authToken: token))
 
     then:
     res.status == HttpStatus.OK
