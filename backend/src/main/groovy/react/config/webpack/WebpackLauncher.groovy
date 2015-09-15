@@ -29,9 +29,13 @@ class WebpackLauncher {
     }
 
     private void startWebpackDevServer() {
-      String cmd = isWindows() ? 'cmd /c npm start' : 'npm start'
-      cmd.execute(null, new File('frontend')).consumeProcessOutput(System.out, System.err)
+      String cmd = isWindows() ? 'cmd /c gradlew.bat frontend:start' : './gradlew frontend:start'
+      def process = cmd.execute()
+      process.consumeProcessOutput(System.out, System.err)
       System.setProperty(WEBPACK_SERVER_PROPERTY, 'true')
+      System.addShutdownHook {
+        process.destroy()
+      }
     }
   }
 }
