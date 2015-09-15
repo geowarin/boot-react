@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import react.spockmvc.SpockMvc
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -32,6 +33,8 @@ abstract class AbstractMvcSpec extends Specification {
 
   MockMvc mvc
 
+  SpockMvc spockMvc
+
   @Shared
   private def sessionRepository = new MapSessionRepository()
 
@@ -43,7 +46,8 @@ abstract class AbstractMvcSpec extends Specification {
       .webAppContextSetup(this.wac)
       .apply(springSecurity())
       .addFilter(sessionFilter)
-      .build();
+      .build()
+    spockMvc = new SpockMvc(mvc)
   }
 
   ResultActions post(String url, def data, String token = null) {

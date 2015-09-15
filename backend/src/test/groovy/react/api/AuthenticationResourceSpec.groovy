@@ -1,7 +1,10 @@
 package react.api
 
 import groovy.json.JsonSlurper
+import org.springframework.http.HttpStatus
 import react.AbstractMvcSpec
+import react.spockmvc.RequestParams
+import react.spockmvc.SpockMvc
 import spock.lang.Shared
 import spock.lang.Stepwise
 
@@ -21,10 +24,10 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'badpassword']
 
     when:
-    def response = post('/api/session', credentials)
+    def res = spockMvc.post('/api/session', credentials)
 
     then:
-    response.andExpect(status().isForbidden())
+    res.status == HttpStatus.FORBIDDEN
   }
 
   def "good authentication"() {
@@ -32,37 +35,36 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'password']
 
     when:
-    def response = post('/api/session', credentials)
-    def res = new JsonSlurper().parseText(response.andReturn().response.getContentAsString())
-    token = res.token
+    def res = spockMvc.post('/api/session', credentials)
+    token = res.json.token
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(jsonPath('$.username', is('user')))
+    res.status == HttpStatus.OK
+    res.json.username == 'user'
     token != null
   }
 
   def "get session"() {
     when:
-    def response = get('/api/session', token)
+    def res = spockMvc.get('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(jsonPath('$.username', is('user')))
+    res.status == HttpStatus.OK
+    res.json.username == 'user'
   }
 
   def "delete session"() {
     when:
-    def response = delete('/api/session', token)
+    def res = spockMvc.delete('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
+    res.status == HttpStatus.OK
 
     when:
-    response = get('/api/session', token)
+    res = spockMvc.get('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(content().string(''))
+    res.status == HttpStatus.OK
+    res.content.isEmpty()
   }
 }
