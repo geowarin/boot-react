@@ -23,6 +23,7 @@ export default class RouterComponent extends Component {
               <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
               <Route path="login" component={LoginPage}/>
               <Route path="logout" onEnter={this.onLogout.bind(this)}/>
+              <Route path="other" component={MyComponent} />
             </Route>
           </Router>
         }
@@ -38,9 +39,7 @@ export default class RouterComponent extends Component {
   }
 
   onLogout() {
-    this.props.logout().then(() => {
-      history.replaceState(null, '/login');
-    })
+    this.props.logout().then(() => history.replaceState(null, '/login'))
   }
 }
 

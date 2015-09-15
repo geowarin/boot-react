@@ -9,13 +9,14 @@ export default () => {
     }
     return config;
   };
-  const noOp = (response) => response;
+  const identity = (response) => response;
   let onResponseError = (error) => {
     if (error.status == 403) {
-      history.replaceState(null, '/login');
+      const currentPath = window.location.pathname;
+      history.replaceState({nextPathname: currentPath}, '/login');
     }
     return Promise.reject(error);
   };
   axios.interceptors.request.use(onRequestSuccess);
-  axios.interceptors.response.use(noOp, onResponseError);
+  axios.interceptors.response.use(identity, onResponseError);
 }
