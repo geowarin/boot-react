@@ -53,6 +53,13 @@ class SpockMvc {
     params.headers.each {
       builder.header(it.key, it.value)
     }
+    params.accepts.each {
+      builder.accept(it)
+    }
+    builder.characterEncoding(params.encoding)
+    if (params.locale) {
+      builder.locale(params.locale)
+    }
     def resultActions = this.mvc.perform(builder)
     new SpockMvcResult(resultActions.andReturn())
   }

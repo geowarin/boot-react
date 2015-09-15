@@ -2,6 +2,7 @@ package react.spockmvc
 
 import groovy.json.JsonSlurper
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.test.web.servlet.MvcResult
 
@@ -24,7 +25,18 @@ class SpockMvcResult {
     result.response.contentAsString
   }
 
-  Map<String, String> getHeader() {
+  Locale getLocale() {
+    result.response.locale
+  }
+
+  MediaType getContentType() {
+    if (result.response.contentType)
+      MediaType.parseMediaType(result.response.contentType)
+    else
+      null
+  }
+
+  Map<String, String> getHeaders() {
     MockHttpServletResponse response = result.response
     response.getHeaderNames().collectEntries { name ->
       [(name): response.getHeaders(name).join(',')]

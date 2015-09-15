@@ -1,6 +1,7 @@
 package react.api
 
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import react.AbstractMvcSpec
 import react.spockmvc.RequestParams
 import spock.lang.Shared
