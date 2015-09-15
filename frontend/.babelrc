@@ -1,0 +1,14 @@
+{
+  "stage": 0,
+  "plugins": [
+    "babel-plugin-module-alias"
+  ],
+  "extra": {
+    "module-alias": [
+      { "src": "./src/actions", "expose": "actions" },
+      { "src": "./src/config", "expose": "config" },
+      { "src": "./src/reducers", "expose": "reducers" },
+      { "src": "./src/ui", "expose": "ui" }
+    ]
+  }
+}

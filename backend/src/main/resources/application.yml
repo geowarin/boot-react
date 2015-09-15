@@ -1,0 +1,9 @@
+spring.devtools.livereload.enabled: false
+
+---
+spring:
+    profiles: production
+#    redis:
+#      password:
+#      host:
+#      port:
