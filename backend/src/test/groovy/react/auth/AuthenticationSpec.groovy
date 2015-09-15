@@ -9,7 +9,7 @@ class AuthenticationSpec extends AbstractMvcSpec {
 
   def "unauthenticated users cannot get resource"() {
     when:
-    def response = doGet("/api/simple")
+    def response = get("/api/simple")
 
     then:
     response.andExpect(status().isForbidden())
@@ -18,7 +18,7 @@ class AuthenticationSpec extends AbstractMvcSpec {
   @WithMockUser
   def "authenticated users can get resource"() {
     when:
-    def response = doGet("/api/simple")
+    def response = get("/api/simple")
 
     then:
     response.andExpect(status().isOk())

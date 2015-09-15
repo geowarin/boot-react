@@ -21,7 +21,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'badpassword']
 
     when:
-    def response = doPost('/api/session', credentials)
+    def response = post('/api/session', credentials)
 
     then:
     response.andExpect(status().isForbidden())
@@ -32,7 +32,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'password']
 
     when:
-    def response = doPost('/api/session', credentials)
+    def response = post('/api/session', credentials)
     def res = new JsonSlurper().parseText(response.andReturn().response.getContentAsString())
     token = res.token
 
@@ -44,7 +44,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
 
   def "get session"() {
     when:
-    def response = doGetWithToken('/api/session', token)
+    def response = get('/api/session', token)
 
     then:
     response.andExpect(status().isOk())
@@ -53,13 +53,13 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
 
   def "delete session"() {
     when:
-    def response = doDeleteWithToken('/api/session', token)
+    def response = delete('/api/session', token)
 
     then:
     response.andExpect(status().isOk())
 
     when:
-    response = doGetWithToken('/api/session', token)
+    response = get('/api/session', token)
 
     then:
     response.andExpect(status().isOk())
