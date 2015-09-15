@@ -10,12 +10,12 @@ export default () => {
     return config;
   };
   const noOp = (response) => response;
-  let onResonseError = (error) => {
+  let onResponseError = (error) => {
     if (error.status == 403) {
       history.replaceState(null, '/login');
     }
     return Promise.reject(error);
   };
   axios.interceptors.request.use(onRequestSuccess);
-  axios.interceptors.response.use(noOp, onResonseError);
+  axios.interceptors.response.use(noOp, onResponseError);
 }

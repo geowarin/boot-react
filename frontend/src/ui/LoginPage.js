@@ -30,17 +30,18 @@ export class LoginPage extends Component {
     var username = findDOMNode(this.refs.username).value;
     var password = findDOMNode(this.refs.password).value;
 
-    var onLogged = () => {
-      var { location, history } = this.props;
+    this.props.login(username, password)
+      .then(this.onLogged.bind(this));
+  }
 
-      let nextPath = '/';
-      if (location.state && location.state.nextPathname) {
-        nextPath = location.state.nextPathname;
-      }
-      history.replaceState(null, nextPath);
-    };
+  onLogged() {
+    var { location, history } = this.props;
 
-    this.props.login(username, password, onLogged);
+    let nextPath = '/';
+    if (location.state && location.state.nextPathname) {
+      nextPath = location.state.nextPathname;
+    }
+    history.replaceState(null, nextPath);
   }
 }
 
