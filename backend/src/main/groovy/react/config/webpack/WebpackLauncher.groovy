@@ -1,5 +1,6 @@
 package react.config.webpack
 
+import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,8 +15,9 @@ class WebpackLauncher {
     new WebpackRunner()
   }
 
-  class WebpackRunner implements InitializingBean {
+  class WebpackRunner implements InitializingBean, DisposableBean {
     static final String WEBPACK_SERVER_PROPERTY = 'webpack-server-loaded'
+    private process
 
     static boolean isWindows() {
       System.getProperty('os.name').toLowerCase().contains('windows')
@@ -30,11 +32,16 @@ class WebpackLauncher {
 
     private void startWebpackDevServer() {
       String cmd = isWindows() ? 'cmd /c gradlew.bat frontend:start' : './gradlew frontend:start'
-      def process = cmd.execute()
+      process = cmd.execute()
       process.consumeProcessOutput(System.out, System.err)
       System.setProperty(WEBPACK_SERVER_PROPERTY, 'true')
-      System.addShutdownHook {
-        process.destroy()
+    }
+
+    @Override
+    void destroy() throws Exception {
+      if (process) {
+        process.destroyForcibly()
+        process.waitFor()
       }
     }
   }
