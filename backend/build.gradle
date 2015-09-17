@@ -28,8 +28,8 @@ repositories {
   mavenCentral()
   maven { url "https://repo.spring.io/snapshot" }
   maven { url "https://repo.spring.io/milestone" }
+  maven { url "http://dl.bintray.com/geowarin/maven" }
 }
-
 
 dependencies {
   compile 'org.springframework.boot:spring-boot-devtools'
@@ -43,7 +43,7 @@ dependencies {
   testCompile 'org.springframework.boot:spring-boot-starter-test'
   testCompile 'org.springframework.security:spring-security-test'
   testCompile 'org.spockframework:spock-spring'
-  testCompile 'com.jayway.jsonpath:json-path'
+  testCompile 'com.geowarin:spring-spock-mvc:0.2'
 }
 
 

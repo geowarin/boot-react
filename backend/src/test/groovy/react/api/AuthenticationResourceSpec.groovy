@@ -1,14 +1,10 @@
 package react.api
 
-import groovy.json.JsonSlurper
+import org.springframework.http.HttpStatus
 import react.AbstractMvcSpec
 import spock.lang.Shared
 import spock.lang.Stepwise
-
-import static org.hamcrest.Matchers.*
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import spockmvc.RequestParams
 
 @Stepwise
 class AuthenticationResourceSpec extends AbstractMvcSpec {
@@ -21,10 +17,10 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'badpassword']
 
     when:
-    def response = post('/api/session', credentials)
+    def res = post('/api/session', credentials)
 
     then:
-    response.andExpect(status().isForbidden())
+    res.status == HttpStatus.FORBIDDEN
   }
 
   def "good authentication"() {
@@ -32,37 +28,36 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def credentials = [username: 'user', password: 'password']
 
     when:
-    def response = post('/api/session', credentials)
-    def res = new JsonSlurper().parseText(response.andReturn().response.getContentAsString())
-    token = res.token
+    def res = post('/api/session', credentials)
+    token = res.json.token
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(jsonPath('$.username', is('user')))
+    res.status == HttpStatus.OK
+    res.json.username == 'user'
     token != null
   }
 
   def "get session"() {
     when:
-    def response = get('/api/session', token)
+    def res = get('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(jsonPath('$.username', is('user')))
+    res.status == HttpStatus.OK
+    res.json.username == 'user'
   }
 
   def "delete session"() {
     when:
-    def response = delete('/api/session', token)
+    def res = delete('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
+    res.status == HttpStatus.OK
 
     when:
-    response = get('/api/session', token)
+    res = get('/api/session', new RequestParams(authToken: token))
 
     then:
-    response.andExpect(status().isOk())
-    response.andExpect(content().string(''))
+    res.status == HttpStatus.OK
+    res.content.isEmpty()
   }
 }
