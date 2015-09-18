@@ -17,17 +17,15 @@ node {
   download = true
 }
 
-task bundle(type: NpmTask) {
-    args = ['run', 'bundle']
+task bundle(type: NpmTask, dependsOn: ['npm_install']) {
+  args = ['run', 'bundle']
 }
-task start(type: NpmTask) {
-    args = ['start']
+task start(type: NpmTask, dependsOn: ['npm_install']) {
+  args = ['start']
 }
-task test(type: NpmTask) {
-    args = ['test']
+task test(type: NpmTask, dependsOn: ['npm_install']) {
+  args = ['test']
 }
 
 check.dependsOn(test)
-start.dependsOn(npm_install)
-bundle.dependsOn(npm_install)
 assemble.dependsOn(bundle)
