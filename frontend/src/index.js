@@ -4,6 +4,7 @@ import RouterComponent from 'config/router';
 import DevToolsComponent from 'config/devtools';
 import axios from 'axios';
 import axiosConfig from 'config/axios';
+import isDev from 'isDev';
 
 axiosConfig();
 
@@ -16,10 +17,11 @@ var render = (session) => {
     }
   };
   const store = initStore(initialState);
+  const devTools = isDev ? <DevToolsComponent store={store}/> : null;
 
   React.render(
     <div>
-      <DevToolsComponent store={store}/>
+      {devTools}
       <RouterComponent store={store}/>
     </div>,
     document.getElementById('root')

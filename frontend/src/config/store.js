@@ -3,14 +3,14 @@ import reducers from 'reducers';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
+import isDev from 'isDev';
 
 function configureStore() {
-  const store = compose(
-    applyMiddleware(thunk),
-    devTools()
-    // Lets you write ?debug_session=<name> in address bar to persist debug sessions
-    //persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-  )(createStore);
+  let middlewares = [applyMiddleware(thunk)];
+  if (isDev) {
+    middlewares.push(devTools());
+  }
+  const store = compose(...middlewares)(createStore);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

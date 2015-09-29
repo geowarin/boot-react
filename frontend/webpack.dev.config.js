@@ -16,6 +16,11 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify('development')
+      }
+    }),
     new HtmlWebpackPlugin({
       title: 'Boot React',
       template: path.join(__dirname, 'assets/index-template.html')

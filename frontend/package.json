@@ -40,6 +40,7 @@
   "dependencies": {
     "axios": "^0.5.4",
     "history": "^1.8.5",
+    "isdev": "^1.0.1",
     "react": "^0.13.3",
     "react-redux": "^2.1.1",
     "react-router": "^1.0.0-rc1",
