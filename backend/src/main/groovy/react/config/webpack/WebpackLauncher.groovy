@@ -1,5 +1,6 @@
 package react.config.webpack
 
+import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,8 +15,10 @@ class WebpackLauncher {
     new WebpackRunner()
   }
 
-  class WebpackRunner implements InitializingBean {
+  class WebpackRunner implements InitializingBean, DisposableBean {
     static final String WEBPACK_SERVER_PROPERTY = 'webpack-server-loaded'
+    public static final NODE_VERSION = '4.1.1'
+    private Process process
 
     static boolean isWindows() {
       System.getProperty('os.name').toLowerCase().contains('windows')
@@ -29,12 +32,28 @@ class WebpackLauncher {
     }
 
     private void startWebpackDevServer() {
-      String cmd = isWindows() ? 'cmd /c gradlew.bat frontend:start' : './gradlew frontend:start'
-      def process = cmd.execute()
+      File nodeExecutable = findGradleNode()
+      String cmd = isWindows() ? "cmd /c $nodeExecutable server.js" : "$nodeExecutable server.js"
+      process = cmd.execute(null, new File('frontend'))
       process.consumeProcessOutput(System.out, System.err)
       System.setProperty(WEBPACK_SERVER_PROPERTY, 'true')
-      System.addShutdownHook {
-        process.destroy()
+    }
+
+    private File findGradleNode() {
+      def nodejs = new File(System.getProperty('user.home'), '.gradle/nodejs')
+      def nodeDir = nodejs.listFiles().find { it.name.contains(NODE_VERSION) }
+
+      if (!nodeDir) {
+        throw new Error('Could not find node please run "gradlew :frontend:npmInstall"')
+      }
+      new File(nodeDir, 'bin/node')
+    }
+
+    @Override
+    void destroy() throws Exception {
+      if (process) {
+        process.destroyForcibly()
+        process.waitFor()
       }
     }
   }
