@@ -11,7 +11,7 @@ function setup() {
   const items = ['one', 'two'];
 
   let props = {
-    dispatch: expect.createSpy(),
+    fetchResource: expect.createSpy(),
     items: items
   };
 

@@ -1,8 +1,26 @@
 {
   "stage": 0,
+  "env": {
+    "development": {
+      "plugins": [
+        "react-transform"
+      ],
+      "extra": {
+        "react-transform": {
+           "transforms": [{
+             "transform": "react-transform-hmr",
+             "imports": ["react"],
+             "locals": ["module"]
+           }, {
+             "transform": "react-transform-catch-errors",
+             "imports": ["react", "redbox-react"]
+           }]
+         }
+      }
+    }
+  },
   "plugins": [
-    "babel-plugin-module-alias",
-    "react-transform"
+    "babel-plugin-module-alias"
   ],
   "extra": {
     "module-alias": [
@@ -10,16 +28,6 @@
       { "src": "./src/config", "expose": "config" },
       { "src": "./src/reducers", "expose": "reducers" },
       { "src": "./src/ui", "expose": "ui" }
-    ],
-    "react-transform": {
-      "transforms": [{
-        "transform": "react-transform-hmr",
-        "imports": ["react"],
-        "locals": ["module"]
-      }, {
-        "transform": "react-transform-catch-errors",
-        "imports": ["react", "redbox-react"]
-      }]
-    }
+    ]
   }
 }
