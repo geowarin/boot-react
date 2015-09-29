@@ -1,4 +1,5 @@
 -u bdd
 --recursive
+--full-trace
 --reporter spec
 --compilers js:babel/register
