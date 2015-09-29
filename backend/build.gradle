@@ -43,7 +43,7 @@ dependencies {
   testCompile 'org.springframework.boot:spring-boot-starter-test'
   testCompile 'org.springframework.security:spring-security-test'
   testCompile 'org.spockframework:spock-spring'
-  testCompile 'com.geowarin:spring-spock-mvc:0.2'
+  testCompile 'com.geowarin:spring-spock-mvc:0.2.1'
 }
 
 
