@@ -1,27 +1,61 @@
-# Spring boot and react hot loader
+# Spring boot and react ultimate starter
 
 image:https://travis-ci.org/geowarin/boot-react.svg?branch=master["Build Status", link="https://travis-ci.org/geowarin/boot-react"]
 
 Be more productive than ever with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
-and https://github.com/gaearon/react-hot-loader[react hot loader].
+and https://github.com/gaearon/babel-plugin-react-transform[react transform] for hot reloading.
 
-Everything from backend to frontend will automatically reload.
+Everything from backend to frontend will automatically hot reload.
 
 See http://geowarin.github.io/spring-boot-and-react-hot.html[my article] for an in-depth explanation.
 
+This project also sets up spring security and http://projects.spring.io/spring-session/[spring-sessions], which will
+automatically store your sessions in Redis, allowing you to scale on multiple servers.
+
+Both the frontend and the backend are fully tested.
+
 ## Developing
 
-The spring boot project is the gradle top-level project.
-The frontend sub-project contains the javascript code.
+The groovy code is available in the `backend` sub-project.
+The `frontend` sub-project contains the javascript code.
 
-Installing the npm dependencies:
+First, install the npm dependencies:
 
 ```
 ./gradlew frontend:npmInstall
 ```
 
-Now you can simply launch the spring boot application with the `dev` profile
-with the flag `--spring.profiles.active=dev`
+If you want to start both the frontend and the backend, the simplest is to use the `webpack` profile with the flag
+`--spring.profiles.active=webpack`. This will automatically start the frontend dev-server along with the spring boot
+application.
+
+You can also run the frontend dev server separately with `./gradlew frontend:start` or with `npm start`.
+
+In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
+will allow you keep track of your application state and undo/redo every action at will.
+
+## Sessions
+
+Sessions are stored in Redis with spring-sessions.
+Spring-sessions allows you to transparently persist the HttpSession on Redis.
+
+Since the application relies on a stateless REST api, the clients will save a token on their local storage and
+send it as an HTTP header (`x-auth-token`).
+
+If you want to use a real redis, you can run it with the `redis` profile.
+On the other hand, if you want to simulate the retrieval of http sessions through headers, use the `fake-redis` profile
+which will save the sessions in a simple map (useful in dev).
+
+If you choose to run the application with neither of those profile, the application will fallback to classical http
+sessions.
+
+## Running the tests
+
+
+The check tasks will run the tests in both the frontend and the backend:
+```
+./gradlew check
+```
 
 ## Shipping
 
