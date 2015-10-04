@@ -49,12 +49,31 @@ which will save the sessions in a simple map (useful in dev).
 If you choose to run the application with neither of those profile, the application will fallback to classic http
 sessions.
 
+## Router push state
+
+The project uses https://github.com/rackt/react-router[react-router] to handle routes.
+You can choose several modes to handles the router history.
+By default, the project uses https://github.com/geowarin/boot-react/blob/master/frontend/src/config/history.js[the browser history],
+which creates the nicest URLs (`/login`, `/private`, etc.).
+
+In development you won't see much complexity since we use a dev server that
+https://github.com/geowarin/boot-react/blob/master/frontend/server.js#L21-L24[proxies] requests to the index.
+However, this leads to a little additional complexity once the frontend is deployed inside the jar.
+
+There is a whole class that you can remove if you decide to choose memory history (no URL change) or hash history
+(`/#/login`, `/#/private`): https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[SinglePageAppConfig]
+
 ## Running the tests
 
 
 The check tasks will run the tests in both the frontend and the backend:
 ```
 ./gradlew check
+```
+
+You can run the backend/frontend tests only with:
+```
+./gradlew backend/frontend:test
 ```
 
 ## Shipping
@@ -73,5 +92,6 @@ java -jar build/libs/boot-react-0.0.1-SNAPSHOT.jar
 
 With spring boot 1.3, you can install the application http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-service[as a linux service]
 
-
+NB: each application can be assembled with the `assemble` task so you can use `frontend:assemble` or `backend:assemble`.
+The backend task depends on the frontend task.
 
