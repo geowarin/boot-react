@@ -72,14 +72,14 @@ import `import {Component} from 'component'` in tests.
 The project uses https://github.com/rackt/react-router[react-router] to handle routes.
 You can choose several modes to handles the router history.
 By default, the project uses https://github.com/geowarin/boot-react/blob/master/frontend/src/config/history.js[the browser history],
-which creates the nicest URLs (`/login`, `/private`, etc.).
+which creates the nicest URLs (**/login**, **/private**, etc.).
 
 In development you won't see much complexity since we use a dev server that
 https://github.com/geowarin/boot-react/blob/master/frontend/server.js#L21-L24[proxies] requests to the index.
 However, this leads to a little additional complexity once the frontend is deployed inside the jar.
 
 There is a whole class that you can remove if you decide to choose memory history (no URL change) or hash history
-(`/#/login`, `/#/private`): https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[SinglePageAppConfig]
+(**/\#/login**, **/#/private**): https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[SinglePageAppConfig]
 
 ## Running the tests
 
