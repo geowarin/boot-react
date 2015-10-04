@@ -34,7 +34,7 @@ You can also run the frontend dev server separately with `./gradlew frontend:sta
 In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
 will allow you keep track of your application state and undo/redo every action at will.
 
-## Sessions
+### Sessions
 
 Sessions are stored in Redis with spring-sessions.
 Spring-sessions allows you to transparently persist the HttpSession on Redis.
@@ -49,7 +49,14 @@ which will save the sessions in a simple map (useful in dev).
 If you choose to run the application with neither of those profile, the application will fallback to classic http
 sessions.
 
-## Redux
+### Security
+
+The application is configured to work with Spring Security.
+It uses an in-memory authentication but you are free use
+http://docs.spring.io/spring-security/site/docs/4.0.2.RELEASE/reference/htmlsingle/#jc-authentication[other implementations]
+or to http://docs.spring.io/spring-security/site/docs/4.0.2.RELEASE/reference/htmlsingle/#core-services[roll your own].
+
+### Redux
 
 This project uses https://github.com/rackt/react-redux[Redux] to handle state and actions.
 It is a simple library with very powerful dev tools.
@@ -67,7 +74,7 @@ non-connected component.
 In the application we can import the connected component with `import Component from 'component'` in the application and
 import `import {Component} from 'component'` in tests.
 
-## Router push state
+### Router push state
 
 The project uses https://github.com/rackt/react-router[react-router] to handle routes.
 You can choose several modes to handles the router history.
@@ -93,6 +100,14 @@ You can run the backend/frontend tests only with:
 ```
 ./gradlew backend/frontend:test
 ```
+
+To test the backend, we use a simple https://github.com/geowarin/spring-spock-mvc[library] that wraps
+spring mvc test. It results in a better api for writing spock tests.
+See the https://github.com/geowarin/boot-react/blob/master/backend/src/test/groovy/react/auth/AuthenticationSpec.groovy[auth-spec]
+for an example.
+
+To test the frontend, we use https://github.com/Legitcode/tests[legit-test] a simple library that
+allows writing fluent tests for React components.
 
 ## Shipping
 
