@@ -83,7 +83,7 @@ which creates the nicest URLs (**/login**, **/private**, etc.).
 
 In development you won't see much complexity since we use a dev server that
 https://github.com/geowarin/boot-react/blob/master/frontend/server.js#L21-L24[proxies] requests to the index.
-However, this leads to a little additional complexity once the frontend is deployed inside the jar.
+However, this leads to additional complexity once the frontend is deployed inside the jar.
 
 There is a whole class that you can remove if you decide to choose memory history (no URL change) or hash history
 (**/\#/login**, **/#/private**): https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[SinglePageAppConfig]
