@@ -14,16 +14,16 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.use('/api', function(req, res) {
-  var url = 'http://localhost:8080/api' + req.url;
-  req.pipe(request(url)).pipe(res);
+app.use('/api', (req, res) => {
+  req.pipe(request('http://localhost:8080/api' + req.url)
+    .on('error', (e) => { console.warn(e.message) }))
+    .pipe(res);
 });
-app.use('*', function(req, res) {
-  var url = 'http://localhost:3000/index.html';
-  req.pipe(request(url)).pipe(res);
+app.use('*', (req, res) => {
+  req.pipe(request('http://localhost:3000/index.html')).pipe(res);
 });
 
-app.listen(3000, 'localhost', function (err) {
+app.listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
     return;
