@@ -68,7 +68,10 @@ task buildDocker(type: Docker) {
   push = false
   applicationName = jar.baseName
   dockerfile = new File(project.projectDir, 'Dockerfile')
-  new File(stageDir, jar.archiveName).bytes = jar.archivePath.bytes
+  addFile {
+    from jar
+    rename {'app.jar'}
+  }
 }
 
 buildDocker.dependsOn(build)
