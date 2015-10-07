@@ -65,13 +65,15 @@ jar {
 jar.dependsOn(':frontend:assemble')
 
 task buildDocker(type: Docker) {
+  baseImage = 'java:8'
   push = false
   applicationName = jar.baseName
-  dockerfile = new File(project.projectDir, 'Dockerfile')
   addFile {
     from jar
     rename {'app.jar'}
   }
+  entryPoint(['java', '-Djava.security.egd=file:/dev/./urandom', '-jar', '/app.jar'])
+  exposePort(8080)
 }
 
 buildDocker.dependsOn(build)
