@@ -1,0 +1,13 @@
+app:
+  image: boot-react/boot-react
+  command: --spring.profiles.active=redis --spring.redis.host=redis
+  links:
+    - redis
+  ports:
+    - "8080:8080"
+
+redis:
+  image: redis
+  hostname: redis
+  ports:
+    - "6379:6379"

@@ -9,6 +9,7 @@ buildscript {
   }
   dependencies {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath "se.transmode.gradle:gradle-docker:1.2"
   }
 }
 
@@ -16,6 +17,7 @@ apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'docker'
 
 jar {
   baseName = 'boot-react'
@@ -61,3 +63,12 @@ jar {
 }
 
 jar.dependsOn(':frontend:assemble')
+
+task buildDocker(type: Docker) {
+  push = false
+  applicationName = jar.baseName
+  dockerfile = new File(project.projectDir, 'Dockerfile')
+  new File(stageDir, jar.archiveName).bytes = jar.archivePath.bytes
+}
+
+buildDocker.dependsOn(build)
