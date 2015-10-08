@@ -65,7 +65,7 @@ jar {
 jar.dependsOn(':frontend:assemble')
 
 task buildDocker(type: Docker) {
-  baseImage = 'java:8'
+  baseImage = 'develar/java:latest'
   push = false
   applicationName = jar.baseName
   addFile {

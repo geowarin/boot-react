@@ -142,8 +142,8 @@ And it will create a docker image named `boot-react/boot-react`.
 
 ```
 > docker images
-REPOSITORY                               TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-boot-react/boot-react                    latest              ccf6cbf01558        19 minutes ago      838.4 MB
+REPOSITORY                               TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+boot-react/boot-react                    latest              5280d39f660f        About a minute ago   138.9 MB
 ```
 
 You can then run it with:
