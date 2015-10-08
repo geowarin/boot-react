@@ -16,17 +16,15 @@ export default class RouterComponent extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        {() =>
-          <Router history={history}>
-            <Route name="app" component={App} path="/">
-              <IndexRoute component={MyComponent}/>
-              <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
-              <Route path="login" component={LoginPage}/>
-              <Route path="logout" onEnter={this.onLogout.bind(this)}/>
-              <Route path="other" component={MyComponent} />
-            </Route>
-          </Router>
-        }
+        <Router history={history}>
+          <Route name="app" component={App} path="/">
+            <IndexRoute component={MyComponent}/>
+            <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
+            <Route path="login" component={LoginPage}/>
+            <Route path="logout" onEnter={this.onLogout.bind(this)}/>
+            <Route path="other" component={MyComponent}/>
+          </Route>
+        </Router>
       </Provider>
     );
   }
@@ -44,6 +42,6 @@ export default class RouterComponent extends Component {
 }
 
 export default connect(
-    state => ({isAuthenticated: state.authentication.isAuthenticated}),
-    dispatch => (bindActionCreators({logout}, dispatch))
+  state => ({isAuthenticated: state.authentication.isAuthenticated}),
+  dispatch => (bindActionCreators({logout}, dispatch))
 )(RouterComponent);

@@ -1,4 +1,4 @@
-import React, { Component, findDOMNode } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -27,8 +27,8 @@ export class LoginPage extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    var username = findDOMNode(this.refs.username).value;
-    var password = findDOMNode(this.refs.password).value;
+    var username = this.refs.username.value;
+    var password = this.refs.password.value;
 
     this.props.login(username, password)
       .then(this.onLogged.bind(this));
