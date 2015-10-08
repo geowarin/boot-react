@@ -1,11 +1,10 @@
 import expect from 'expect';
 import jsdomReact from '../utils/jsdomReact';
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import { MyComponent } from 'ui/Component';
 import { createStore } from 'redux';
 import reducers from 'reducers/index';
-
-const { TestUtils } = React.addons;
 
 function setup() {
   const items = ['one', 'two'];

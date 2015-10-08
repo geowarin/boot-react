@@ -28,6 +28,7 @@
     "mocha": "^2.3.2",
     "mocha-jsdom": "^1.0.0",
     "nock": "^2.10.0",
+    "react-addons-test-utils": "^0.14.0",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.1.0",
