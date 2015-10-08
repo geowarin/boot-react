@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React from 'react';
 import initStore from 'config/store';
 import RouterComponent from 'config/router';
@@ -19,7 +20,7 @@ var render = (session) => {
   const store = initStore(initialState);
   const devTools = isDev ? <DevToolsComponent store={store}/> : null;
 
-  React.render(
+  ReactDOM.render(
     <div>
       {devTools}
       <RouterComponent store={store}/>

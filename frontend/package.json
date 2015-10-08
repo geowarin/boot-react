@@ -39,11 +39,14 @@
   },
   "dependencies": {
     "axios": "^0.5.4",
-    "history": "^1.8.5",
+    "history": "^1.12.3",
+    "deep-equal": "^1.0.1",
     "isdev": "^1.0.1",
-    "react": "^0.13.3",
+    "qs": "^5.2.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
     "react-redux": "^2.1.1",
-    "react-router": "^1.0.0-rc1",
+    "react-router": "^1.0.0-rc2",
     "redux": "^2.0.0",
     "redux-thunk": "^0.1.0"
   }
