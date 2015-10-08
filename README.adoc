@@ -71,7 +71,7 @@ To be able to http://rackt.github.io/redux/docs/recipes/WritingTests.html[write 
 we need to work on the non-wrapped components. That is why we export both the connected component by default and the
 non-connected component.
 
-In the application we can import the connected component with `import Component from 'component'` in the application and
+In the application we can import the connected component with `import Component from 'component'` and
 import `import {Component} from 'component'` in tests.
 
 ### Router push state
@@ -161,7 +161,7 @@ docker run -p 8080:8080 boot-react/boot-react --spring.profiles.active=redis --s
 ## Docker-compose
 
 There is a simple `docker-compose.yml` in the root directory of the project.
-Once you have built this application image with the command above, you can run:
+Once you have built the application image with `./gradlew backend:buildDocker`, you can run:
 
 ```
 docker-compose up -d
