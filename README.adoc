@@ -43,11 +43,21 @@ Since the application relies on a stateless REST api, the clients will save a to
 send it as an HTTP header (`x-auth-token`).
 
 If you want to use a real redis, you can run the application with the `redis` profile.
-On the other hand, if you want to simulate the retrieval of http sessions through headers, use the `fake-redis` profile
-which will save the sessions in a simple map (useful in dev).
+
+If you want to simulate the retrieval of http sessions through headers, use the `fake-redis` profile.
+This will save the sessions in a simple map (useful in dev).
 
 If you choose to run the application with neither of those profile, the application will fallback to classic http
 sessions.
+
+Summary:
+|=== 
+| Profile | description | uses `x-auth-token` headers?
+
+| <none>  | Use classic HTTPSessions | No. You won't be able to use the API with a REST client
+| `redis` | Use a real redis connecting on localhost by default. | Yes
+| `fake-redis` | Uses a map to store sessions | Yes
+|===
 
 ### Security
 
@@ -71,8 +81,8 @@ To be able to http://rackt.github.io/redux/docs/recipes/WritingTests.html[write 
 we need to work on the non-wrapped components. That is why we export both the connected component by default and the
 non-connected component.
 
-In the application we can import the connected component with `import Component from 'component'` and
-import `import {Component} from 'component'` in tests.
+In the application we can import the connected component with `import Component from 'component'`.
+In tests, we can `import {Component} from 'component'`.
 
 ### Router push state
 
