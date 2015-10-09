@@ -64,7 +64,7 @@ It is a simple library with very powerful dev tools.
 I suggest you read the https://github.com/rackt/react-redux/blob/master/docs/quick-start.md[redux quick start] to understand
 how to architecture you application and the difference between smart and dumb components.
 
-Since the starting application is small, every component is connected to redux and can be considered a "smart component".
+Since the application is small, every component is connected to redux and can be considered a "smart component".
 Those are higher-order components, wrapped with the `connect()` method.
 
 To be able to http://rackt.github.io/redux/docs/recipes/WritingTests.html[write tests] on smart components,
