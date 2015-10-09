@@ -38,9 +38,12 @@ will allow you keep track of your application state and undo/redo every action a
 
 Sessions are stored in Redis with spring-sessions.
 Spring-sessions allows you to transparently persist the HttpSession on Redis.
+This allows to distribute the load on multiple servers if you choose to.
 
-Since the application relies on a stateless REST api, the clients will save a token in their local storage and
-send it as an HTTP header (`x-auth-token`).
+The application relies on a stateless REST api.
+When they authenticate, clients will be given a token.
+They will save this token in their local storage and send it as an HTTP header (`x-auth-token`).
+This allows the retrieval of the session data in Redis.
 
 If you want to use a real redis, you can run the application with the `redis` profile.
 
@@ -52,7 +55,7 @@ sessions.
 
 Summary:
 |=== 
-| Profile | description | uses `x-auth-token` headers?
+| Profile | description | uses `x-auth-token` header?
 
 | <none>  | Use classic HTTPSessions | No. You won't be able to use the API with a REST client
 | `redis` | Use a real redis connecting on localhost by default. | Yes
