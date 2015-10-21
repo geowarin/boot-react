@@ -6,10 +6,9 @@ import { devTools, persistState } from 'redux-devtools';
 import isDev from 'isDev';
 
 function configureStore() {
-  let middlewares = [applyMiddleware(thunk)];
-  if (isDev) {
-    middlewares.push(devTools());
-  }
+  const middlewares = isDev ?
+    [applyMiddleware(thunk), devTools()] :
+    [applyMiddleware(thunk)];
   const store = compose(...middlewares)(createStore);
 
   if (module.hot) {
