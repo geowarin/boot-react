@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
+import React from 'react';
+import { createDevTools } from 'redux-devtools';
+import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from 'redux-devtools-dock-monitor';
 
-export default class DevToolsComponent extends Component {
-
-  render() {
-    return (
-      <DebugPanel top right bottom>
-        <DevTools store={this.props.store} monitor={LogMonitor}/>
-      </DebugPanel>
-    );
-  }
-}
+// You can toggle visibility of devTools with ctrl + H
+// and change their position with ctrl + Q
+export default createDevTools(
+  <DockMonitor toggleVisibilityKey="H" changePositionKey="Q">
+    <LogMonitor />
+  </DockMonitor>
+);

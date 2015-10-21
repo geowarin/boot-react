@@ -2,12 +2,12 @@ import React from 'react';
 import reducers from 'reducers';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { devTools, persistState } from 'redux-devtools';
 import isDev from 'isDev';
+import DevTools from 'config/devtools'
 
 function configureStore() {
   const middlewares = isDev ?
-    [applyMiddleware(thunk), devTools()] :
+    [applyMiddleware(thunk), DevTools.instrument()] :
     [applyMiddleware(thunk)];
   const store = compose(...middlewares)(createStore);
 

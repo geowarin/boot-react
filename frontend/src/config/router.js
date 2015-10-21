@@ -10,21 +10,28 @@ import MyComponent from 'ui/Component';
 import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
 import logout from 'actions/logout';
+import isDev from 'isDev';
+import DevTools from 'config/devtools';
 
 export default class RouterComponent extends Component {
 
   render() {
+    const devTools = isDev ? <DevTools /> : null;
+
     return (
       <Provider store={this.props.store}>
-        <Router history={history}>
-          <Route name="app" component={App} path="/">
-            <IndexRoute component={MyComponent}/>
-            <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
-            <Route path="login" component={LoginPage}/>
-            <Route path="logout" onEnter={this.onLogout.bind(this)}/>
-            <Route path="other" component={MyComponent}/>
-          </Route>
-        </Router>
+        <div>
+          {devTools}
+          <Router history={history}>
+            <Route name="app" component={App} path="/">
+              <IndexRoute component={MyComponent}/>
+              <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
+              <Route path="login" component={LoginPage}/>
+              <Route path="logout" onEnter={this.onLogout.bind(this)}/>
+              <Route path="other" component={MyComponent}/>
+            </Route>
+          </Router>
+        </div>
       </Provider>
     );
   }
