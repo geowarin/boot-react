@@ -1,5 +1,5 @@
 app:
-  image: boot-react/boot-react
+  image: geowarin/boot-react
   command: --spring.profiles.active=redis --spring.redis.host=redis
   links:
     - redis

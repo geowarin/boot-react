@@ -67,7 +67,7 @@ jar.dependsOn(':frontend:assemble')
 task buildDocker(type: Docker) {
   baseImage = 'develar/java:latest'
   push = false
-  applicationName = jar.baseName
+  tag = 'geowarin/boot-react'
   addFile {
     from jar
     rename {'app.jar'}
