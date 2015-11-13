@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetchResource from 'actions/fetchResource';
 
-const MyComponent = (props) => {
+export const MyComponent = (props) => {
   var items = props.items;
   var list = items.map((item, index) => <li key={index}>{item}</li>);
 

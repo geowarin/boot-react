@@ -18,7 +18,7 @@ export class LoginPage extends Component {
           <input type="text" ref="username"/>
           <input type="password" ref="password"/>
 
-          <input type="submit" value="Login" onClick={this.onSubmit}/>
+          <input type="submit" value="Login" />
         </form>
       </div>
     );
