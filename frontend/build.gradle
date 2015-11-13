@@ -8,8 +8,8 @@ version '0.0.1'
 buildDir = 'dist'
 
 node {
-  version = '4.1.1'
-  npmVersion = '2.14.4'
+  version = '5.0.0'
+  npmVersion = '3.3.9'
   download = true
 }
 
