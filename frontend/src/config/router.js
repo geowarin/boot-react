@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Router, Route, Redirect, IndexRoute } from 'react-router';
 import history from './history'
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import App from 'ui/App';
@@ -19,20 +19,18 @@ export default class RouterComponent extends Component {
     const devTools = isDev ? <DevTools /> : null;
 
     return (
-      <Provider store={this.props.store}>
-        <div>
-          {devTools}
-          <Router history={history}>
-            <Route name="app" component={App} path="/">
-              <IndexRoute component={MyComponent}/>
-              <Route component={PrivatePage} path="private" onEnter={this.requireAuth.bind(this)}/>
-              <Route path="login" component={LoginPage}/>
-              <Route path="logout" onEnter={this.onLogout.bind(this)}/>
-              <Route path="other" component={MyComponent}/>
-            </Route>
-          </Router>
-        </div>
-      </Provider>
+      <div>
+        {devTools}
+        <Router history={history}>
+          <Route path="/" name="app" component={App}>
+            <IndexRoute component={MyComponent}/>
+            <Route path="private" component={PrivatePage} onEnter={this.requireAuth.bind(this)}/>
+            <Route path="login" component={LoginPage}/>
+            <Route path="logout" onEnter={this.onLogout.bind(this)}/>
+            <Route path="other" component={MyComponent}/>
+          </Route>
+        </Router>
+      </div>
     );
   }
 

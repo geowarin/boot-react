@@ -3,7 +3,7 @@ import reducers from 'reducers';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import isDev from 'isDev';
-import DevTools from 'config/devtools'
+import DevTools from 'config/devtools';
 
 function configureStore() {
   const middlewares = isDev ?

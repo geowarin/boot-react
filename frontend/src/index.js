@@ -1,9 +1,12 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { Provider } from 'react-redux';
 import initStore from 'config/store';
 import RouterComponent from 'config/router';
 import axios from 'axios';
 import axiosConfig from 'config/axios';
+import { syncReduxAndRouter } from 'redux-simple-router';
+import history from 'config/history';
 
 axiosConfig();
 
@@ -16,9 +19,12 @@ var render = (session) => {
     }
   };
   const store = initStore(initialState);
+  syncReduxAndRouter(history, store);
 
   ReactDOM.render(
-    <RouterComponent store={store}/>,
+    <Provider store={store}>
+      <RouterComponent />
+    </Provider>,
     document.getElementById('root')
   );
 };
