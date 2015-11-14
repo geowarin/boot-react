@@ -1,51 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Form, TextInput } from 'react-easy-form';
+import { autobind } from 'core-decorators';
 
 import login from 'actions/login';
 
+const getNextPathName = (location) => {
+  if (location.state && location.state.nextPathname) {
+    return location.state.nextPathname;
+  }
+  return '/';
+};
+
 export class LoginPage extends Component {
-  static propTypes = {
-    login: React.PropTypes.func.isRequired
-  };
 
   render() {
     return (
       <div>
         <h2>Login page</h2>
 
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="username"/>
-          <input type="password" ref="password"/>
+        <Form onSubmit={this.handleSubmit}>
+          <TextInput name="username"/>
+          <TextInput name="password" type="password"/>
 
-          <input type="submit" value="Login" />
-        </form>
+          <input type="submit" value="Login"/>
+        </Form>
       </div>
     );
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    var username = this.refs.username.value;
-    var password = this.refs.password.value;
-
-    this.props.login(username, password)
-      .then(this.onLogged.bind(this));
+  @autobind
+  handleSubmit(formData) {
+    const { username, password } = formData;
+    const { login } = this.props;
+    login(username, password)
+      .then(this.onLogged);
   }
 
+  @autobind
   onLogged() {
-    var { location, history } = this.props;
-
-    let nextPath = '/';
-    if (location.state && location.state.nextPathname) {
-      nextPath = location.state.nextPathname;
-    }
+    const { location, history } = this.props;
+    const nextPath = getNextPathName(location);
     history.replaceState(null, nextPath);
   }
 }
 
 export default connect(
-    state => ({}),
-    dispatch => (bindActionCreators({login}, dispatch))
+  state => ({}),
+  dispatch => (bindActionCreators({login}, dispatch))
 )(LoginPage);
