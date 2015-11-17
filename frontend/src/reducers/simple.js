@@ -1,15 +1,21 @@
-import { createReducer } from './createReducer';
 import { ON_FETCH } from 'actions/fetchResource';
 
 const initialState = {
   items: []
 };
 
-export default createReducer(initialState, {
-  [ON_FETCH] : (state, data) => {
-    return {
-      ...state,
-      items: data
-    };
+const onSimpleFetch = (state, data) => {
+  return {
+    ...state,
+    items: data
+  };
+};
+
+export default function simpleReducer(state = initialState, action) {
+  switch (action.type) {
+    case ON_FETCH:
+      return onSimpleFetch(state, action.payload);
+    default:
+      return state;
   }
-});
+}
