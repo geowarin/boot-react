@@ -9,7 +9,7 @@ import App from 'ui/App';
 import MyComponent from 'ui/Component';
 import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
-import logout from 'actions/logout';
+import { logout } from 'reducers/authentication';
 import isDev from 'isDev';
 import DevTools from 'config/devtools';
 

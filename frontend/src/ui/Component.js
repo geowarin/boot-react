@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import fetchResource from 'actions/fetchResource';
+import { fetchSimple } from 'reducers/simple';
 
 export const MyComponent = (props) => {
   var items = props.items;
@@ -13,7 +13,7 @@ export const MyComponent = (props) => {
       <ul>
         {list}
       </ul>
-      <button onClick={props.fetchResource}>
+      <button onClick={props.fetchSimple}>
         Fetch
       </button>
     </div>
@@ -22,5 +22,5 @@ export const MyComponent = (props) => {
 
 export default connect(
     state => ({items: state.simple.items}),
-    dispatch => (bindActionCreators({ fetchResource }, dispatch))
+    dispatch => (bindActionCreators({ fetchSimple }, dispatch))
 )(MyComponent);

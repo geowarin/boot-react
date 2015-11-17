@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Form, TextInput } from 'react-easy-form';
 import { autobind } from 'core-decorators';
 
-import login from 'actions/login';
+import {login} from 'reducers/authentication';
 
 const getNextPathName = (location) => {
   if (location.state && location.state.nextPathname) {

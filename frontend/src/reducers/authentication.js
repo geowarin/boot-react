@@ -1,11 +1,31 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from 'actions/login';
-import { LOGOUT } from 'actions/logout';
+import axios from 'axios';
+
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+const LOGIN_FAILED = 'LOGIN_FAILED';
+const LOGOUT = 'LOGOUT';
 
 const initialState = {
   isAuthenticated: false,
   token: null,
   username: null
 };
+
+// Reducer
+
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return loginSuccess(state, action.payload);
+    case LOGIN_FAILED:
+      console.warn('Login failed');
+      return logoutUser(state);
+    case LOGOUT:
+      console.log('Logout');
+      return logoutUser(state);
+    default:
+      return state;
+  }
+}
 
 const loginSuccess = (state, data) => {
   localStorage.setItem('auth-token', data.token);
@@ -18,7 +38,7 @@ const loginSuccess = (state, data) => {
   };
 };
 
-const logout = (state) => {
+const logoutUser = (state) => {
   console.log('Logout');
   localStorage.removeItem('auth-token');
   return {
@@ -29,17 +49,23 @@ const logout = (state) => {
   };
 };
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case LOGIN_SUCCESS:
-      return loginSuccess(state, action.payload);
-    case LOGIN_FAILED:
-      console.warn('Login failed');
-      return logout(state);
-    case LOGOUT:
-      console.log('Logout');
-      return logout(state);
-    default:
-      return state;
-  }
+// Actions
+
+export function login(username, password, onLogged) {
+  return dispatch => {
+    return axios.post('/api/session', {
+        username: username,
+        password: password
+      })
+      .then(res => dispatch({type: LOGIN_SUCCESS, payload: res.data}))
+      .catch(res => dispatch({type: LOGIN_FAILED, payload: res.data}))
+  };
+}
+
+export function logout() {
+  return dispatch => {
+    return axios.delete('/api/session')
+      .then(res => dispatch({type: LOGOUT, payload: res.data}))
+      .catch(err => console.error(err));
+  };
 }

@@ -15,7 +15,7 @@ function setup() {
   });
 
   let props = {
-    fetch: expect.createSpy(),
+    fetchSimple: expect.createSpy(),
     store: store
   };
 
