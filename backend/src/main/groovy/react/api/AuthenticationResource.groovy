@@ -21,11 +21,11 @@ class AuthenticationResource {
   @RequestMapping(method = RequestMethod.POST)
   def login(@RequestBody def credentials, HttpSession httpSession) {
     Authentication authentication = new UsernamePasswordAuthenticationToken(credentials.username, credentials.password)
-    authenticationManager.authenticate(authentication)
-    SecurityContextHolder.context.authentication = authentication
+    SecurityContextHolder.context.authentication = authenticationManager.authenticate(authentication)
 
-    httpSession.setAttribute('user', [username: credentials.username, token: httpSession.id, isAuthenticated: true])
-    session(httpSession)
+    def user = [username: credentials.username, token: httpSession.id, isAuthenticated: true]
+    httpSession.setAttribute('user', user)
+    user
   }
 
   @RequestMapping(method = RequestMethod.GET)
