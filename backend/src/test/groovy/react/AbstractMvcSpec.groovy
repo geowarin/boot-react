@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
+import react.config.redis.JWTHeaderHttpSessionStrategy
 import spock.lang.Shared
 import spockmvc.SpockMvcSpec
 
@@ -25,7 +26,7 @@ abstract class AbstractMvcSpec extends SpockMvcSpec {
   @Override
   MockMvc buildMockMvc(WebApplicationContext wac) {
     def sessionFilter = new SessionRepositoryFilter(sessionRepository)
-    sessionFilter.httpSessionStrategy = new HeaderHttpSessionStrategy()
+    sessionFilter.httpSessionStrategy = new JWTHeaderHttpSessionStrategy()
 
     MockMvcBuilders
       .webAppContextSetup(wac)

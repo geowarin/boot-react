@@ -37,6 +37,7 @@ dependencies {
   compile 'org.springframework.boot:spring-boot-starter-security'
   compile 'org.springframework.session:spring-session'
   compile 'org.springframework.boot:spring-boot-starter-redis'
+  compile 'io.jsonwebtoken:jjwt:0.6.0'
 
   testCompile 'org.springframework.boot:spring-boot-starter-test'
   testCompile 'org.springframework.security:spring-security-test'

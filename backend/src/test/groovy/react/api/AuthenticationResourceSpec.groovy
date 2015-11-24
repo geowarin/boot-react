@@ -29,7 +29,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
 
     when:
     def res = post('/api/session', credentials)
-    token = res.json.token
+    token = res.headers['x-auth-token']
 
     then:
     res.status == HttpStatus.OK

@@ -14,7 +14,7 @@ public class EmbeddedSessionConfig {
   @Bean
   SessionRepositoryFilter springSessionRepositoryFilter() {
     SessionRepositoryFilter sessionRepositoryFilter = new SessionRepositoryFilter(new MapSessionRepository())
-    sessionRepositoryFilter.httpSessionStrategy = new HeaderHttpSessionStrategy()
+    sessionRepositoryFilter.httpSessionStrategy = new JWTHeaderHttpSessionStrategy()
     sessionRepositoryFilter
   }
 }

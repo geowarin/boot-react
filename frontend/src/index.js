@@ -10,10 +10,10 @@ import history from 'config/history';
 
 axiosConfig();
 
-var render = (session) => {
+var render = (headers, session) => {
   const initialState = {
     authentication: {
-      token: session.token || null,
+      token: headers['x-auth-token'] || null,
       isAuthenticated: session.isAuthenticated || false,
       username: session.username || null
     }
@@ -30,6 +30,6 @@ var render = (session) => {
 };
 
 axios.get('/api/session')
-  .then(res => render(res.data))
+  .then(res => render(res.headers, res.data))
   .catch(err => render());
 

@@ -23,7 +23,7 @@ class AuthenticationResource {
     Authentication authentication = new UsernamePasswordAuthenticationToken(credentials.username, credentials.password)
     SecurityContextHolder.context.authentication = authenticationManager.authenticate(authentication)
 
-    def user = [username: credentials.username, token: httpSession.id, isAuthenticated: true]
+    def user = [username: credentials.username, isAuthenticated: true]
     httpSession.setAttribute('user', user)
     user
   }
