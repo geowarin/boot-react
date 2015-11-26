@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 
+import java.util.regex.Matcher
+
 @Configuration
 @Profile('webpack')
 class WebpackLauncher {
@@ -17,7 +19,6 @@ class WebpackLauncher {
 
   class WebpackRunner implements InitializingBean, DisposableBean {
     static final String WEBPACK_SERVER_PROPERTY = 'webpack-server-loaded'
-    public static final NODE_VERSION = '4.1.1'
     private Process process
 
     static boolean isWindows() {
@@ -31,20 +32,32 @@ class WebpackLauncher {
       }
     }
 
+    private String findNodeVersion() {
+      println new File('.').list()
+      def matcher = new File(getFrontendDir(), 'build.gradle').text =~ /version = '(.*)'/
+      return matcher[0][1]
+    }
+
     private void startWebpackDevServer() {
       File nodeExecutable = findGradleNode()
       String cmd = isWindows() ? "cmd /c $nodeExecutable server.js" : "$nodeExecutable server.js"
-      process = cmd.execute(null, new File('frontend'))
+      process = cmd.execute(null, getFrontendDir())
       process.consumeProcessOutput(System.out, System.err)
       System.setProperty(WEBPACK_SERVER_PROPERTY, 'true')
     }
 
+    private File getFrontendDir() {
+      def file = new File('frontend')
+      file.exists() ? file : new File('../frontend')
+    }
+
     private File findGradleNode() {
       def nodejs = new File(System.getProperty('user.home'), '.gradle/nodejs')
-      def nodeDir = nodejs.listFiles().find { it.name.contains(NODE_VERSION) }
+      def nodeVersion = findNodeVersion()
+      def nodeDir = nodejs.listFiles().find { it.name.contains(nodeVersion) }
 
       if (!nodeDir) {
-        throw new Error('Could not find node please run "gradlew :frontend:npmInstall"')
+        throw new Error("Could not find node ${nodeVersion} please run \"gradlew :frontend:npmInstall\"")
       }
       new File(nodeDir, 'bin/node')
     }
