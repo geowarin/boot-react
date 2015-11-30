@@ -27,7 +27,8 @@
       { "src": "./src/actions", "expose": "actions" },
       { "src": "./src/config", "expose": "config" },
       { "src": "./src/reducers", "expose": "reducers" },
-      { "src": "./src/ui", "expose": "ui" }
+      { "src": "./src/ui", "expose": "ui" },
+      { "src": "./assets/stylus", "expose": "stylus" }
     ]
   }
 }

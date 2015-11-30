@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var jeet = require('jeet');
+var nib = require('nib');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -35,6 +37,12 @@ module.exports = {
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
+    }, {
+      test: /\.styl$/,
+      loaders: ['style-loader', 'css-loader', 'stylus-loader']
     }]
+  },
+  stylus: {
+    use: [jeet(), nib()]
   }
 };
