@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest
  * Used to handle the router
  */
 @Configuration
-@Profile('!webpack')
 class SinglePageAppConfig extends WebMvcConfigurerAdapter {
 
   @Override

@@ -5,7 +5,7 @@ image:https://travis-ci.org/geowarin/boot-react.svg?branch=master["Build Status"
 Be more productive than ever with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
 and https://github.com/gaearon/babel-plugin-react-transform[react transform] for hot reloading.
 
-Everything from backend to frontend will automatically hot reload.
+Everything: backend, frontend and styles will be hot reloaded automatically.
 
 See http://geowarin.github.io/spring-boot-and-react-hot.html[my article] for an in-depth explanation.
 
@@ -25,11 +25,16 @@ First, install the npm dependencies:
 ./gradlew frontend:npmInstall
 ```
 
-If you want to start both the frontend and the backend, the simplest is to use the `webpack` profile with the flag
-`--spring.profiles.active=webpack`. This will automatically start the frontend dev-server along with the spring boot
-application.
+Run the backend with your IDE, the main method is in the `BootReactApplication` class.
+In IntelliJ you can specify the active profiles in the run configuration.
 
-You can also run the frontend dev server separately with `./gradlew frontend:start` or with `npm start`.
+Alternatively, you can use `./gradlew bootRun`.
+
+Then, run the frontend dev server separately with `./gradlew frontend:start` or with `npm start` (recommended).
+**You will need npm 4.0+ to run the dev server.**
+
+The node version used by the gradle build is specified https://github.com/geowarin/boot-react/blob/master/frontend/build.gradle#L11-L12[here].
+It is recommended that you use the same version in development and in your automated build.
 
 In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
 will allow you keep track of your application state and undo/redo every action at will.
@@ -54,13 +59,23 @@ If you choose to run the application with neither of those profile, the applicat
 sessions.
 
 Summary:
-|=== 
+|===
 | Profile | description | uses `x-auth-token` header?
 
 | <none>  | Use classic HTTPSessions | No. You won't be able to use the API with a REST client
 | `redis` | Use a real redis connecting on localhost by default. | Yes
 | `fake-redis` | Uses a map to store sessions | Yes
 |===
+
+### Active profiles
+
+If your run your project with gradle, the system properties won't be passed on to Spring.
+See https://github.com/spring-projects/spring-boot/issues/832[this issue] for workarounds.
+
+The simplest way to go is to specify active profiles in your IDE.
+
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html[Check out the doc] to learn
+more about profiles in Spring Boot.
 
 ### Security
 
@@ -74,11 +89,16 @@ or to http://docs.spring.io/spring-security/site/docs/4.0.2.RELEASE/reference/ht
 This project uses https://github.com/rackt/react-redux[Redux] to handle state and actions.
 It is a simple library with very powerful dev tools.
 
-I suggest you read the https://github.com/rackt/react-redux/blob/master/docs/quick-start.md[redux quick start] to understand
+Dan Abramov, the author of Redux, published a https://egghead.io/series/getting-started-with-redux[great Redux video tutorial].
+
+I also suggest reading the https://github.com/rackt/react-redux/blob/master/docs/quick-start.md[redux quick start] to understand
 how to architecture you application and the difference between smart and dumb components.
 
-Since the application is small, every component is connected to redux and can be considered a "smart component".
+Since the application is small, most components are connected to redux and can be considered a "smart component".
 Those are higher-order components, wrapped with the `connect()` method.
+
+Small components are written using the https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components[stateless functional components syntax], i.e,
+those component are pure render components and only their props will have an impact on the resulting DOM.
 
 To be able to http://rackt.github.io/redux/docs/recipes/WritingTests.html[write tests] on smart components,
 we need to work on the non-wrapped components. That is why we export both the connected component by default and the
@@ -94,12 +114,27 @@ You can choose several modes to handles the router history.
 By default, the project uses https://github.com/geowarin/boot-react/blob/master/frontend/src/config/history.js[the browser history],
 which creates the nicest URLs (**/login**, **/private**, etc.).
 
-In development you won't see much complexity since we use a dev server that
+In development, we use a dev server that
 https://github.com/geowarin/boot-react/blob/master/frontend/server.js#L21-L24[proxies] requests to the index.
-However, this leads to additional complexity once the frontend is deployed inside the jar.
 
-There is a whole class that you can remove if you choose to use memory history (no URL change) or hash history
-(**/\#/login**, **/#/private**): https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[SinglePageAppConfig]
+In production, we have to use a special https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[resource handler]
+to redirect all non-asset requests to the index.
+
+You can remove it if you choose to use memory history (no URL change) or hash history
+(**/\#/login**, **/#/private**).
+
+### Stylus
+
+We use https://learnboost.github.io/stylus/[stylus] as a css preprocessor.
+We also leverage two stylus modules:
+
+* https://github.com/tj/nib[nib], which provides interesting mixins
+* http://jeet.gs/[jeet], a powerful grid system
+
+See examples of jeet http://codepen.io/collection/eilAH/[here]:
+
+In development, the styles are included by webpack, which enables hot reloading.
+In production, we use the ExtractTextPlugin to extract the css to a separate file.
 
 ## Running the tests
 
@@ -115,7 +150,7 @@ You can run the backend/frontend tests only with:
 ```
 
 To test the backend, we use a simple https://github.com/geowarin/spring-spock-mvc[library] that wraps
-spring mvc test. It results in a better api for writing spock tests.
+spring mvc tests. It results in a better api for writing spock tests.
 See the https://github.com/geowarin/boot-react/blob/master/backend/src/test/groovy/react/auth/AuthenticationSpec.groovy[auth-spec]
 for an example.
 
