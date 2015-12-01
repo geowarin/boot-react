@@ -131,10 +131,10 @@ We also leverage two stylus modules:
 * https://github.com/tj/nib[nib], which provides interesting mixins
 * http://jeet.gs/[jeet], a powerful grid system
 
-See examples of jeet http://codepen.io/collection/eilAH/[here]:
+See examples of jeet http://codepen.io/collection/eilAH/[here].
 
 In development, the styles are included by webpack, which enables hot reloading.
-In production, we use the ExtractTextPlugin to extract the css to a separate file.
+In production, we use the https://github.com/webpack/extract-text-webpack-plugin[Extract Text Plugin] to extract the css to a separate file.
 
 ## Running the tests
 
