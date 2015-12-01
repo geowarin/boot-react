@@ -17,10 +17,8 @@ export default function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return loginSuccess(state, action.payload);
     case LOGIN_FAILED:
-      console.warn('Login failed');
-      return logoutUser(state);
+      return logoutUser(state, action.payload);
     case LOGOUT:
-      console.log('Logout');
       return logoutUser(state);
     default:
       return state;
@@ -29,7 +27,6 @@ export default function reducer(state = initialState, action) {
 
 const loginSuccess = (state, data) => {
   localStorage.setItem('auth-token', data.token);
-  console.log('Login successful');
   return {
     ...state,
     isAuthenticated: data.isAuthenticated,
@@ -38,20 +35,20 @@ const loginSuccess = (state, data) => {
   };
 };
 
-const logoutUser = (state) => {
-  console.log('Logout');
+const logoutUser = (state, data) => {
   localStorage.removeItem('auth-token');
   return {
     ...state,
     isAuthenticated: false,
     token: null,
-    username: null
+    username: null,
+    errorMessage: data ? data.message : null
   };
 };
 
 // Actions
 
-export function login(username, password, onLogged) {
+export function login(username, password) {
   return dispatch => {
     return axios.post('/api/session', {
         username: username,

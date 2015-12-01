@@ -6,7 +6,9 @@ require('stylus/main.styl');
 
 const TopMenu = (props) => {
   const items = props.items.map((item,key) => (
-    <li key={key} className="pure-menu-item"><Link to={item.link} className="pure-menu-link">{item.label}</Link></li>
+    <li key={key} className="pure-menu-item">
+      <Link to={item.link} className="pure-menu-link">{item.label}</Link>
+    </li>
   ));
   return (
     <div className="pure-menu pure-menu-horizontal">

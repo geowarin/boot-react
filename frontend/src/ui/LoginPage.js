@@ -21,9 +21,17 @@ const LabeledInput = (props) => (
   </div>
 );
 
+const ErrorPanel = ({message}) => (
+  <p className="error-panel">
+    {message}
+  </p>
+);
+
 export class LoginPage extends Component {
 
   render() {
+    const {errorMessage} = this.props;
+    const errorPanel = errorMessage ? <ErrorPanel message={errorMessage}/> : null;
     return (
       <div>
         <h2>Login page</h2>
@@ -31,6 +39,8 @@ export class LoginPage extends Component {
         <p>
           Default login and password are 'user' and 'password'
         </p>
+
+        {errorPanel}
 
         <Form onSubmit={this.handleSubmit} className="pure-form pure-form-aligned">
           <LabeledInput label="Login" name="username"/>
@@ -61,6 +71,6 @@ export class LoginPage extends Component {
 }
 
 export default connect(
-  null,
+  state => ({errorMessage: state.authentication.errorMessage}),
   dispatch => (bindActionCreators({login}, dispatch))
 )(LoginPage);
