@@ -2,10 +2,10 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import initStore from 'config/store';
-import RouterComponent from 'config/router';
+import RouterComponent from 'router/router';
 import axios from 'rest/axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
-import history from 'config/history';
+import history from 'router/history';
 
 var render = (session) => {
   const initialState = {

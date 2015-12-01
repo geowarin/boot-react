@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Router, Route, Redirect, IndexRoute } from 'react-router';
-import history from './history'
+import history from 'router/history'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

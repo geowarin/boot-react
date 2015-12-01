@@ -1,5 +1,5 @@
 import axios from 'axios';
-import history from './../config/history';
+import history from 'router/history';
 
 const onRequestSuccess = config => {
   var token = localStorage.getItem('auth-token');
