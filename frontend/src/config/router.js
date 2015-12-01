@@ -27,7 +27,6 @@ export default class RouterComponent extends Component {
             <Route path="private" component={PrivatePage} onEnter={this.requireAuth.bind(this)}/>
             <Route path="login" component={LoginPage}/>
             <Route path="logout" onEnter={this.onLogout.bind(this)}/>
-            <Route path="other" component={MyComponent}/>
           </Route>
         </Router>
       </div>

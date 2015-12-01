@@ -3,12 +3,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import initStore from 'config/store';
 import RouterComponent from 'config/router';
-import axios from 'axios';
-import axiosConfig from 'config/axios';
+import axios from 'rest/axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
 import history from 'config/history';
-
-axiosConfig();
 
 var render = (session) => {
   const initialState = {

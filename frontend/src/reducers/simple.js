@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'rest/axios';
 
 const ON_FETCH = 'ON_FETCH';
 

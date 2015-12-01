@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'rest/axios';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_FAILED = 'LOGIN_FAILED';
