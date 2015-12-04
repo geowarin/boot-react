@@ -1,42 +1,29 @@
-import expect from 'expect';
-import jsdomReact from '../utils/jsdomReact';
+import { describeWithDOM, mount } from 'reagent';
+import { expect, spy } from '../utils/chai';
+
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-import MyComponent from 'ui/Component';
-import { createStore } from 'redux';
-import reducers from 'reducers/index';
+import { MyComponent } from 'ui/Component';
+import { StatelessWrapper } from '../utils/StatelessWrapper';
 
-function setup() {
-  const items = ['one', 'two', 'three'];
-  const store = createStore(reducers, {
-    simple: {
-      items: items
-    }
-  });
+const TestComponent = StatelessWrapper(MyComponent);
 
-  let props = {
-    fetchSimple: expect.createSpy(),
-    store: store
-  };
-
-  const component = TestUtils.renderIntoDocument(<MyComponent {...props} />);
-
-  return {
-    output: component,
-    ul: TestUtils.findRenderedDOMComponentWithTag(component, 'ul')
-  };
-}
+const fetchSimple = spy();
+const items = ['one', 'two', 'three'];
+let props = {fetchSimple, items};
 
 describe('components', () => {
-  jsdomReact();
 
-  describe('MyComponent', () => {
+  describeWithDOM('MyComponent', () => {
 
-    it('should render correctly', () => {
-      const { ul } = setup();
-
-      expect(ul.children.length).toBe(3);
-      expect(ul.children[0].textContent).toBe('one');
+    it('should render three items', () => {
+      const component = mount(<TestComponent {...props} />);
+      expect(component.find('li')).to.have.length(3);
     });
+
+    it('should fetch items on click', () => {
+      const component = mount(<TestComponent {...props} />);
+      component.find('button').simulate('click');
+      expect(fetchSimple).to.have.been.called();
+    })
   });
 });
