@@ -1,42 +1,23 @@
-import expect from 'expect';
-import jsdomReact from '../utils/jsdomReact';
+import { describeWithDOM, mount } from 'reagent';
+import { expect, spy } from '../utils/chai';
+import mockStore from '../utils/store';
+
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import MyComponent from 'ui/Component';
-import { createStore } from 'redux';
-import reducers from 'reducers/index';
 
-function setup() {
-  const items = ['one', 'two', 'three'];
-  const store = createStore(reducers, {
-    simple: {
-      items: items
-    }
-  });
+const items = ['one', 'two', 'three'];
+const store = mockStore({ simple : {items}});
 
-  let props = {
-    fetchSimple: expect.createSpy(),
-    store: store
-  };
-
-  const component = TestUtils.renderIntoDocument(<MyComponent {...props} />);
-
-  return {
-    output: component,
-    ul: TestUtils.findRenderedDOMComponentWithTag(component, 'ul')
-  };
-}
+const fetchSimple = spy(() => {});
+let props = { fetchSimple, store };
 
 describe('components', () => {
-  jsdomReact();
 
-  describe('MyComponent', () => {
+  describeWithDOM('MyComponent', () => {
 
-    it('should render correctly', () => {
-      const { ul } = setup();
-
-      expect(ul.children.length).toBe(3);
-      expect(ul.children[0].textContent).toBe('one');
+    it('should render three items', () => {
+      const component = mount(<MyComponent {...props} />);
+      expect(component.find('li')).to.have.length(3);
     });
   });
 });

@@ -72,5 +72,5 @@ export class LoginPage extends Component {
 
 export default connect(
   state => ({errorMessage: state.authentication.errorMessage}),
-  dispatch => (bindActionCreators({login}, dispatch))
+  {login}
 )(LoginPage);

@@ -22,5 +22,5 @@ export const MyComponent = (props) => {
 
 export default connect(
     state => ({items: state.simple.items}),
-    dispatch => (bindActionCreators({ fetchSimple }, dispatch))
+    { fetchSimple }
 )(MyComponent);
