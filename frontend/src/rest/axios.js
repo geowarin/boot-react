@@ -9,7 +9,7 @@ const setupAxiosInterceptors = () => {
     }
     return config;
   };
-  const identity = (response) => response;
+  const onResponseSucess = (response) => response;
   const onResponseError = (error) => {
     if (error.status == 403) {
       const currentPath = window.location.pathname;
@@ -18,7 +18,7 @@ const setupAxiosInterceptors = () => {
     return Promise.reject(error);
   };
   axios.interceptors.request.use(onRequestSuccess);
-  axios.interceptors.response.use(identity, onResponseError);
+  axios.interceptors.response.use(onResponseSucess, onResponseError);
 };
 
 export {

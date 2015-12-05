@@ -7,7 +7,8 @@ const LOGOUT = 'LOGOUT';
 const initialState = {
   isAuthenticated: false,
   token: null,
-  username: null
+  username: null,
+  errorMessage: null
 };
 
 // Reducer
@@ -31,18 +32,19 @@ const loginSuccess = (state, data) => {
     ...state,
     isAuthenticated: data.isAuthenticated,
     token: data.token,
-    username: data.username
+    username: data.username,
+    errorMessage: null
   };
 };
 
-const logoutUser = (state, data) => {
+const logoutUser = (state, data = {}) => {
   localStorage.removeItem('auth-token');
   return {
     ...state,
     isAuthenticated: false,
     token: null,
     username: null,
-    errorMessage: data ? data.message : null
+    errorMessage: data.message
   };
 };
 
@@ -50,10 +52,7 @@ const logoutUser = (state, data) => {
 
 export function login(username, password) {
   return dispatch => {
-    return axios.post('/api/session', {
-        username: username,
-        password: password
-      })
+    return axios.post('/api/session', {username, password})
       .then(res => dispatch({type: LOGIN_SUCCESS, payload: res.data}))
       .catch(res => dispatch({type: LOGIN_FAILED, payload: res.data}))
   };
