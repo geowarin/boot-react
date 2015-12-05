@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Form, TextInput, Label } from 'react-easy-form';
 import { autobind } from 'core-decorators';
 

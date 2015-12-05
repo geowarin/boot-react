@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-require('stylus/main.styl');
+import 'stylus/main.styl';
 
 const TopMenu = (props) => {
   const items = props.items.map((item,key) => (

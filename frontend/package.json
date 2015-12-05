@@ -31,7 +31,6 @@
     "jeet": "^6.1.2",
     "mocha": "^2.3.3",
     "nib": "^1.1.0",
-    "nock": "^2.18.2",
     "purecss": "^0.6.0",
     "react-addons-test-utils": "^0.14.2",
     "react-transform-catch-errors": "^1.0.0",

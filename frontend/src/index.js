@@ -7,6 +7,10 @@ import {setupAxiosInterceptors} from 'rest/axios';
 import axios from 'axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
 import history from 'router/history';
+import isDev from 'isDev';
+import DevTools from 'config/devtools';
+
+const devTools = isDev ? <DevTools /> : null;
 
 var render = (session = {isAuthenticated: false}) => {
   const initialState = {
@@ -21,7 +25,10 @@ var render = (session = {isAuthenticated: false}) => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <RouterComponent />
+      <div>
+        {devTools}
+        <RouterComponent />
+      </div>
     </Provider>,
     document.getElementById('root')
   );

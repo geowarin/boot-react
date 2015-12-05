@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { fetchSimple } from 'reducers/simple';
 
 export const MyComponent = (props) => {
@@ -21,6 +20,6 @@ export const MyComponent = (props) => {
 };
 
 export default connect(
-    state => ({items: state.simple.items}),
-    { fetchSimple }
+  state => ({items: state.simple.items}),
+  {fetchSimple}
 )(MyComponent);
