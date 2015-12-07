@@ -13,7 +13,7 @@ const setupAxiosInterceptors = () => {
   const onResponseError = (error) => {
     if (error.status == 403) {
       const currentPath = window.location.pathname;
-      history.replaceState({nextPathname: currentPath}, '/login');
+      history.pushState({nextPathname: currentPath}, '/login');
     }
     return Promise.reject(error);
   };

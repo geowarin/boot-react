@@ -53,7 +53,6 @@
     "deep-equal": "^1.0.1",
     "history": "^1.13.0",
     "isdev": "^1.0.1",
-    "qs": "^6.0.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-easy-form": "^1.0.3",

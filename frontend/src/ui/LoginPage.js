@@ -65,7 +65,7 @@ export class LoginPage extends Component {
   onLogged() {
     const { location, history } = this.props;
     const nextPath = getNextPathName(location);
-    history.replaceState(null, nextPath);
+    history.pushState(null, nextPath);
   }
 }
 
