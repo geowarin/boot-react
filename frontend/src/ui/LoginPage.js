@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Form, TextInput, Label } from 'react-easy-form';
 import { autobind } from 'core-decorators';
 
-import {login} from 'reducers/authentication';
+import { login } from 'reducers/authentication';
 
 const getNextPathName = (location) => {
   if (location.state && location.state.nextPathname) {

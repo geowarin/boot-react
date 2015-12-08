@@ -1,7 +1,8 @@
 import axios from 'axios';
 import history from 'router/history';
+import { displayAuthError } from 'reducers/authentication';
 
-const setupAxiosInterceptors = () => {
+const setupAxiosInterceptors = (dispatch) => {
   const onRequestSuccess = config => {
     var token = localStorage.getItem('auth-token');
     if (token) {
@@ -13,6 +14,7 @@ const setupAxiosInterceptors = () => {
   const onResponseError = (error) => {
     if (error.status == 403) {
       const currentPath = window.location.pathname;
+      dispatch(displayAuthError("Please login to access this resource"));
       history.pushState({nextPathname: currentPath}, '/login');
     }
     return Promise.reject(error);

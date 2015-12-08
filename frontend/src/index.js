@@ -22,7 +22,7 @@ var render = (session = {isAuthenticated: false}) => {
   };
   const store = initStore(initialState);
   syncReduxAndRouter(history, store);
-  setupAxiosInterceptors();
+  setupAxiosInterceptors(store.dispatch);
 
   ReactDOM.render(
     <Provider store={store}>

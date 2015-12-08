@@ -8,7 +8,7 @@ import App from 'ui/App';
 import MyComponent from 'ui/Component';
 import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
-import { logout } from 'reducers/authentication';
+import { logout, displayAuthError } from 'reducers/authentication';
 
 export default class RouterComponent extends Component {
 
@@ -27,8 +27,9 @@ export default class RouterComponent extends Component {
 
   @autobind
   requireAuth(nextState, redirectTo) {
-    const isAuthenticated = this.props.isAuthenticated;
+    const {isAuthenticated, displayAuthError} = this.props;
     if (!isAuthenticated) {
+      displayAuthError("Please login before accessing this page");
       redirectTo({nextPathname: nextState.location.pathname}, '/login')
     }
   }
@@ -41,5 +42,5 @@ export default class RouterComponent extends Component {
 
 export default connect(
   state => ({isAuthenticated: state.authentication.isAuthenticated}),
-  {logout}
+  {logout, displayAuthError}
 )(RouterComponent);
