@@ -51,13 +51,13 @@
   "dependencies": {
     "axios": "^0.7.0",
     "deep-equal": "^1.0.1",
-    "history": "^1.13.0",
+    "history": "1.13.0",
     "isdev": "^1.0.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-easy-form": "^1.0.3",
     "react-redux": "^4.0.0",
-    "react-router": "^1.0.0",
+    "react-router": "1.0.0",
     "redux": "^3.0.4",
     "redux-simple-router": "0.0.8",
     "redux-thunk": "^1.0.0"
