@@ -121,7 +121,7 @@ In tests, we can `import {Component} from 'component'`.
 
 The project uses https://github.com/rackt/react-router[react-router] to handle routes.
 You can choose several modes to handles the router history.
-By default, the project uses https://github.com/geowarin/boot-react/blob/master/frontend/src/config/history.js[the browser history],
+By default, the project uses the browser history,
 which creates the nicest URLs (**/login**, **/private**, etc.).
 
 In development, we use a dev server that
@@ -164,7 +164,7 @@ spring mvc tests and makes them a bit nicer to read.
 See the https://github.com/geowarin/boot-react/blob/master/backend/src/test/groovy/react/auth/AuthenticationSpec.groovy[auth-spec]
 for an example.
 
-To test the frontend, we use https://github.com/airbnb/reagent[reagent].
+To test the frontend, we use https://github.com/airbnb/enzyme[enzyme].
 
 ## Shipping
 
