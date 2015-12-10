@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Router, Route, Redirect, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import { pushPath } from 'redux-simple-router';
+import { replacePath } from 'redux-simple-router';
 
 import App from 'ui/App';
 import MyComponent from 'ui/Component';
@@ -27,15 +27,15 @@ export default class RouterComponent extends Component {
 
   @autobind
   requireAuth(nextState) {
-    const {isAuthenticated, displayAuthError, pushPath} = this.props;
+    const {isAuthenticated, displayAuthError, replacePath} = this.props;
     if (!isAuthenticated) {
       displayAuthError('Please login before accessing this page');
-      pushPath('/login', {nextPathname: nextState.location.pathname})
+      replacePath('/login', {nextPathname: nextState.location.pathname})
     }
   }
 }
 
 export default connect(
   state => ({isAuthenticated: state.authentication.isAuthenticated}),
-  {logout, displayAuthError, pushPath}
+  {logout, displayAuthError, replacePath}
 )(RouterComponent);
