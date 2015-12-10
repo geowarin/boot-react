@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Router, Route, Redirect, IndexRoute } from 'react-router';
-import history from 'router/history'
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
@@ -14,7 +13,7 @@ export default class RouterComponent extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router history={this.props.history}>
         <Route path="/" name="app" component={App}>
           <IndexRoute component={MyComponent}/>
           <Route path="private" component={PrivatePage} onEnter={this.requireAuth}/>
@@ -36,7 +35,7 @@ export default class RouterComponent extends Component {
 
   @autobind
   onLogout() {
-    this.props.logout().then(() => history.replaceState(null, '/login'))
+    this.props.logout()
   }
 }
 

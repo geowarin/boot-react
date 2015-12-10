@@ -5,13 +5,6 @@ import { autobind } from 'core-decorators';
 
 import { login } from 'reducers/authentication';
 
-const getNextPathName = (location) => {
-  if (location.state && location.state.nextPathname) {
-    return location.state.nextPathname;
-  }
-  return '/';
-};
-
 const LabeledInput = (props) => (
   <div className="pure-control-group">
     <Label value={props.label} position="before">
@@ -58,14 +51,6 @@ export class LoginPage extends Component {
     const { username, password } = formData;
     const { login } = this.props;
     login(username, password)
-      .then(this.onLogged);
-  }
-
-  @autobind
-  onLogged() {
-    const { location, history } = this.props;
-    const nextPath = getNextPathName(location);
-    history.pushState(null, nextPath);
   }
 }
 

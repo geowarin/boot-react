@@ -6,7 +6,7 @@ import RouterComponent from 'router/router';
 import { setupAxiosInterceptors } from 'rest/axios';
 import axios from 'axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
-import history from 'router/history';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import isDev from 'isDev';
 import DevTools from 'config/devtools';
 
@@ -20,6 +20,7 @@ var render = (session = {isAuthenticated: false}) => {
       username: session.username
     }
   };
+  const history = createBrowserHistory();
   const store = initStore(initialState);
   syncReduxAndRouter(history, store);
   setupAxiosInterceptors(store.dispatch);
@@ -28,7 +29,7 @@ var render = (session = {isAuthenticated: false}) => {
     <Provider store={store}>
       <div>
         {devTools}
-        <RouterComponent />
+        <RouterComponent history={history} />
       </div>
     </Provider>,
     document.getElementById('root')

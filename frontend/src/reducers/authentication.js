@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { pushPath } from 'redux-simple-router';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGOUT = 'LOGOUT';
@@ -71,9 +72,12 @@ export function displayAuthError(message) {
 }
 
 export function login(username, password) {
-  return dispatch => {
-    return axios.post('/api/session', {username, password})
-      .then(res => dispatch(createLoginSuccess(res.data)))
+  return (dispatch, getState) => {
+    axios.post('/api/session', {username, password})
+      .then(res => {
+        dispatch(doLoginSuccess(res.data));
+        dispatch(pushPath(getState().routing.state.nextPathname));
+      })
       .catch(res => {
         dispatch(doLogout());
         dispatch(displayAuthError(res.data.message));
@@ -83,7 +87,10 @@ export function login(username, password) {
 
 export function logout() {
   return dispatch => {
-    return axios.delete('/api/session')
-      .then(res => dispatch(doLogout()));
+    axios.delete('/api/session')
+      .then(res => {
+        dispatch(doLogout());
+        dispatch(pushPath('login'));
+      });
   };
 }

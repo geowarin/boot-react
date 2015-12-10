@@ -30,6 +30,5 @@ export function fetchSimple() {
   return dispatch => {
     return axios.get('/api/simple')
       .then(res => dispatch({type: ON_FETCH, payload: res.data}))
-      .catch(err => console.error(err));
   };
 }
