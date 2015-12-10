@@ -79,7 +79,6 @@ export function login(username, password) {
         dispatch(pushPath(getState().routing.state.nextPathname));
       })
       .catch(res => {
-        dispatch(doLogout());
         dispatch(displayAuthError(res.data.message));
       });
   };

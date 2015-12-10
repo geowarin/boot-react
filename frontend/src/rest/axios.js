@@ -10,7 +10,7 @@ const setupAxiosInterceptors = (dispatch) => {
     }
     return config;
   };
-  const onResponseSucess = (response) => response;
+  const onResponseSuccess = (response) => response;
   const onResponseError = (error) => {
     if (error.status == 403 && error.config.url != '/api/session') {
       const currentPath = window.location.pathname;
@@ -20,7 +20,7 @@ const setupAxiosInterceptors = (dispatch) => {
     return Promise.reject(error);
   };
   axios.interceptors.request.use(onRequestSuccess);
-  axios.interceptors.response.use(onResponseSucess, onResponseError);
+  axios.interceptors.response.use(onResponseSuccess, onResponseError);
 };
 
 export {
