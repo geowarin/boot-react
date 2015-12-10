@@ -88,7 +88,7 @@ export function login(username, password) {
 export function logout() {
   return dispatch => {
     axios.delete('/api/session')
-      .then(res => {
+      .then(() => {
         dispatch(doLogout());
         dispatch(pushPath('login'));
       });
