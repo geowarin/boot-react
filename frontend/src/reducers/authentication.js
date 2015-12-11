@@ -7,7 +7,6 @@ const AUTH_ERROR_MESSAGE = 'AUTH_ERROR_MESSAGE';
 
 const initialState = {
   isAuthenticated: false,
-  token: null,
   username: null,
   errorMessage: null
 };
@@ -28,11 +27,9 @@ export default function reducer(state = initialState, action) {
 }
 
 const loggedInReducer = (state, data) => {
-  localStorage.setItem('auth-token', data.token);
   return {
     ...state,
     isAuthenticated: data.isAuthenticated,
-    token: data.token,
     username: data.username,
     errorMessage: null
   };
@@ -46,11 +43,9 @@ const displayErrorReducer = (state, message) => {
 };
 
 const loggedOutReducer = (state) => {
-  localStorage.removeItem('auth-token');
   return {
     ...state,
     isAuthenticated: false,
-    token: null,
     username: null
   };
 };
@@ -76,10 +71,11 @@ export function login(username, password) {
     axios.post('/api/session', {username, password})
       .then(res => {
         dispatch(doLoginSuccess(res.data));
-        dispatch(pushPath(getState().routing.state.nextPathname));
+        const routingState = getState().routing.state || {};
+        dispatch(pushPath(routingState.nextPathname));
       })
-      .catch(res => {
-        dispatch(displayAuthError(res.data.message));
+      .catch(err => {
+        dispatch(displayAuthError(err.data.message));
       });
   };
 }
@@ -88,7 +84,10 @@ export function recoverSession() {
   return (dispatch) => {
     axios.get('/api/session')
       .then(res => dispatch(doLoginSuccess(res.data)))
-      .catch(() => dispatch(doLogout()))
+      .catch(() => {
+        localStorage.removeItem('auth-token');
+        dispatch(doLogout());
+      })
   };
 }
 
@@ -96,6 +95,7 @@ export function logout() {
   return dispatch => {
     axios.delete('/api/session')
       .then(() => {
+        localStorage.removeItem('auth-token');
         dispatch(doLogout());
         dispatch(pushPath('login'));
       });
