@@ -10,7 +10,7 @@ const middlewares = isDev ?
   [applyMiddleware(thunk)];
 const finalCreateStore = compose(...middlewares)(createStore);
 
-var initialize = (initialState) => {
+var initialize = (initialState = {}) => {
   const store = finalCreateStore(reducer, initialState);
 
   if (module.hot) {

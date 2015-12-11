@@ -8,6 +8,7 @@ const setupAxiosInterceptors = dispatch => {
     if (token) {
       config.headers['X-Auth-Token'] = token;
     }
+    config.timeout = 10000;
     return config;
   };
   const onResponseSuccess = response => response;

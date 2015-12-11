@@ -12,31 +12,17 @@ import DevTools from 'config/devtools';
 
 const devTools = isDev ? <DevTools /> : null;
 
-var render = (session = {isAuthenticated: false}) => {
-  const initialState = {
-    authentication: {
-      token: session.token,
-      isAuthenticated: session.isAuthenticated,
-      username: session.username
-    }
-  };
-  const history = createHistory();
-  const store = initStore(initialState);
-  syncReduxAndRouter(history, store);
-  setupAxiosInterceptors(store.dispatch);
+const history = createHistory();
+const store = initStore();
+syncReduxAndRouter(history, store);
+setupAxiosInterceptors(store.dispatch);
 
-  ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        {devTools}
-        <RouterComponent history={history} />
-      </div>
-    </Provider>,
-    document.getElementById('root')
-  );
-};
-
-axios.get('/api/session')
-  .then(res => render(res.data))
-  .catch(err => render());
-
+ReactDOM.render(
+  <Provider store={store}>
+    <div>
+      {devTools}
+      <RouterComponent history={history}/>
+    </div>
+  </Provider>,
+  document.getElementById('root')
+);

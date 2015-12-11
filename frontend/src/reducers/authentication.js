@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { pushPath } from 'redux-simple-router';
 
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+const LOGGED = 'LOGGED';
 const LOGOUT = 'LOGOUT';
 const AUTH_ERROR_MESSAGE = 'AUTH_ERROR_MESSAGE';
 
@@ -16,10 +16,10 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      return loginSuccessReducer(state, action.payload);
+    case LOGGED:
+      return loggedInReducer(state, action.payload);
     case LOGOUT:
-      return logoutReducer(state);
+      return loggedOutReducer(state);
     case AUTH_ERROR_MESSAGE:
       return displayErrorReducer(state, action.payload.message);
     default:
@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-const loginSuccessReducer = (state, data) => {
+const loggedInReducer = (state, data) => {
   localStorage.setItem('auth-token', data.token);
   return {
     ...state,
@@ -45,7 +45,7 @@ const displayErrorReducer = (state, message) => {
   }
 };
 
-const logoutReducer = (state) => {
+const loggedOutReducer = (state) => {
   localStorage.removeItem('auth-token');
   return {
     ...state,
@@ -58,7 +58,7 @@ const logoutReducer = (state) => {
 // Action creators
 
 function doLoginSuccess(data) {
-  return {type: LOGIN_SUCCESS, payload: data};
+  return {type: LOGGED, payload: data};
 }
 
 function doLogout() {
@@ -81,6 +81,14 @@ export function login(username, password) {
       .catch(res => {
         dispatch(displayAuthError(res.data.message));
       });
+  };
+}
+
+export function recoverSession() {
+  return (dispatch) => {
+    axios.get('/api/session')
+      .then(res => dispatch(doLoginSuccess(res.data)))
+      .catch(() => dispatch(doLogout()))
   };
 }
 
