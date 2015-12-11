@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Profile
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 
-@Profile('redis')
 @EnableRedisHttpSession
 @Configuration
+@Profile('redis')
 public class ExternalRedisConfig {
   @Bean
   HeaderHttpSessionStrategy sessionStrategy() {

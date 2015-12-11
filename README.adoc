@@ -59,19 +59,16 @@ This allows the retrieval of the session data in Redis.
 
 If you want to use a real redis, you can run the application with the `redis` profile.
 
-If you want to simulate the retrieval of http sessions through headers, use the `fake-redis` profile.
-This will save the sessions in a simple map (useful in dev).
-
-If you choose to run the application with neither of those profile, the application will fallback to classic http
-sessions and use cookies.
+If the `redis` profile is not active, your session will be stored in a map.
+See: [EmbeddedSessionConfig](https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/redis/EmbeddedSessionConfig.groovy).
+This is great in development but you should avoid it in production.
 
 Summary:
 |===
 | Profile | description | uses `x-auth-token` header?
 
-| <none>  | Use classic HTTPSessions | No. You won't be able to use the API with a REST client
 | `redis` | Use a real redis connecting on localhost by default. | Yes
-| `fake-redis` | Uses a map to store sessions | Yes
+| <none> (`!redis`) | Uses a map to store sessions | Yes
 |===
 
 ### Active profiles
@@ -83,6 +80,12 @@ The simplest way to go is to specify active profiles in your IDE.
 
 http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html[Check out the doc] to learn
 more about profiles in Spring Boot.
+
+To run the jar in production mode use the following command:
+
+```
+java -jar boot-react-0.0.1-SNAPSHOT.jar --spring.profiles.active=production                                                       16:57:01
+```
 
 ### Security
 
