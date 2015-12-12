@@ -6,7 +6,7 @@ export default function promiseMiddleware({ dispatch, getState }) {
     if (typeof action === 'function') {
       return action(dispatch, getState);
     }
-    const { promise, types, ...rest } = action; // eslint-disable-line no-redeclare
+    const { promise, types, afterSuccess, ...rest } = action; // eslint-disable-line no-redeclare
     if (!action.promise) {
       return next(action);
     }
@@ -14,9 +14,16 @@ export default function promiseMiddleware({ dispatch, getState }) {
     const [REQUEST, SUCCESS, FAILURE] = types;
     next({...rest, type: REQUEST});
     return promise(axios).then(
-      (result) => next({...rest, result, type: SUCCESS}),
-      (error) => next({...rest, error, type: FAILURE})
-    ).catch((error)=> {
+      (result) => {
+        next({...rest, result, type: SUCCESS});
+        if (afterSuccess) {
+          afterSuccess(getState, dispatch);
+        }
+      },
+      (error) => {
+        next({...rest, error, type: FAILURE})
+      }
+    ).catch((error) => {
       console.error('MIDDLEWARE ERROR:', error);
       next({...rest, error, type: FAILURE});
     });

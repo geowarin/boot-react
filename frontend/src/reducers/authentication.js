@@ -96,16 +96,21 @@ export function displayAuthError(message) {
 export function login(username, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/api/session', {username, password})
-    // todo: const routingState = getState().routing.state || {}; dispatch(pushPath(routingState.nextPathname));
+    promise: (client) => client.post('/api/session', {username, password}),
+    afterSuccess: (getState, dispatch) => {
+      const routingState = getState().routing.state || {};
+      dispatch(pushPath(routingState.nextPathname));
+    }
   };
 }
 
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: (client) => client.delete('/api/session')
-    // todo: redirect to login
+    promise: (client) => client.delete('/api/session'),
+    afterSuccess: (getState, dispatch) => {
+      dispatch(pushPath('login'));
+    }
   };
 }
 
@@ -113,6 +118,5 @@ export function getSession() {
   return {
     types: [GET_SESSION, GET_SESSION_SUCCESS, GET_SESSION_FAIL],
     promise: (client) => client.get('/api/session')
-    // todo: redirect to login
   };
 }
