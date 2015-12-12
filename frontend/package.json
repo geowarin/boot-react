@@ -51,7 +51,8 @@
   "dependencies": {
     "axios": "^0.7.0",
     "deep-equal": "^1.0.1",
-    "history": "1.13.0",
+    "halogen": "^0.1.10",
+    "history": "1.16.0",
     "isdev": "^1.0.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",

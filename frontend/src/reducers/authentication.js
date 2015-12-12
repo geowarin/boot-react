@@ -15,8 +15,7 @@ const GET_SESSION_FAIL = 'authentication/LOGOUT_FAIL';
 const initialState = {
   isAuthenticated: false,
   username: null,
-  errorMessage: null,
-  loading: false
+  errorMessage: null
 };
 
 // Reducer
