@@ -4,13 +4,11 @@ import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import initStore from 'config/store';
 import { setupAxiosInterceptors } from 'rest/axios';
-import axios from 'axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
-import {createHistory} from 'history';
+import { createHistory } from 'history';
 import isDev from 'isDev';
 import DevTools from 'config/devtools';
-import { logout, displayAuthError } from 'reducers/authentication';
-import { replacePath, pushPath } from 'redux-simple-router';
+import { pushToLoginWithMessage, logout } from 'reducers/authentication';
 
 import { Router } from 'react-router';
 import getRoutes from 'router/router';
@@ -21,8 +19,8 @@ const history = createHistory();
 const store = initStore();
 syncReduxAndRouter(history, store);
 
-const actions = bindActionCreators({displayAuthError, replacePath, pushPath, logout}, store.dispatch);
-setupAxiosInterceptors(actions);
+const actions = bindActionCreators({pushToLoginWithMessage, logout}, store.dispatch);
+setupAxiosInterceptors(actions.pushToLoginWithMessage);
 
 ReactDOM.render(
   <Provider store={store}>

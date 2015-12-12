@@ -1,5 +1,5 @@
 import React from 'react';
-import { replacePath } from 'redux-simple-router';
+import { redirectToLoginWithMessage } from 'reducers/authentication';
 import { ScaleLoader } from 'halogen';
 
 const privateRoute = (Wrapped, store) => class extends React.Component {
@@ -14,8 +14,9 @@ const privateRoute = (Wrapped, store) => class extends React.Component {
     const authentication = state.authentication;
     if (!this.redirected && authentication.loading === false && !authentication.isAuthenticated) {
       this.redirected = true;
-      store.dispatch(replacePath('login', {nextPathname: state.routing.path}));
+      store.dispatch(redirectToLoginWithMessage('Please login to access this page'));
     }
+    this.setState({authentication});
   }
 
   componentWillUnmount() {

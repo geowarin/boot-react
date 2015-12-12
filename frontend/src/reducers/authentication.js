@@ -1,16 +1,18 @@
-import { pushPath } from 'redux-simple-router';
-
-const AUTH_ERROR_MESSAGE = 'AUTH_ERROR_MESSAGE';
+import { pushPath, replacePath } from 'redux-simple-router';
 
 const LOGIN = 'authentication/LOGIN';
 const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
 const LOGIN_FAIL = 'authentication/LOGIN_FAIL';
+
 const LOGOUT = 'authentication/LOGOUT';
 const LOGOUT_SUCCESS = 'authentication/LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'authentication/LOGOUT_FAIL';
+
 const GET_SESSION = 'authentication/GET_SESSION';
 const GET_SESSION_SUCCESS = 'authentication/GET_SESSION_SUCCESS';
 const GET_SESSION_FAIL = 'authentication/LOGOUT_FAIL';
+
+const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 
 const initialState = {
   isAuthenticated: false,
@@ -51,6 +53,7 @@ export default function reducer(state = initialState, action) {
     case LOGOUT_SUCCESS:
       return {
         ...state,
+        loggingOut: false,
         isAuthenticated: false,
         username: null
       };
@@ -79,7 +82,12 @@ export default function reducer(state = initialState, action) {
         isAuthenticated: false,
         username: null,
         loading: false,
-        logoutError: action.error
+        getSessionError: action.error
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.message
       };
     default:
       return state;
@@ -89,7 +97,7 @@ export default function reducer(state = initialState, action) {
 // Public action creators and async actions
 
 export function displayAuthError(message) {
-  return {type: AUTH_ERROR_MESSAGE, payload: {message}};
+  return {type: ERROR_MESSAGE, message};
 }
 
 export function login(username, password) {
@@ -118,4 +126,19 @@ export function getSession() {
     types: [GET_SESSION, GET_SESSION_SUCCESS, GET_SESSION_FAIL],
     promise: (client) => client.get('/api/session')
   };
+}
+
+export function pushToLoginWithMessage(message) {
+  return dispatch => {
+    dispatch(displayAuthError(message));
+    dispatch(pushPath('/login'));
+  }
+}
+
+export function redirectToLoginWithMessage(message) {
+  return (dispatch, getState) => {
+    const currentPath = getState().routing.path;
+    dispatch(displayAuthError(message));
+    dispatch(replacePath('/login', {nextPathname: currentPath}));
+  }
 }
