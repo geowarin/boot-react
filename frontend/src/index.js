@@ -24,20 +24,11 @@ syncReduxAndRouter(history, store);
 const actions = bindActionCreators({displayAuthError, replacePath, pushPath, logout}, store.dispatch);
 setupAxiosInterceptors(actions);
 
-const requireAuth = (nextState, replaceState) => {
-  const state = store.getState();
-  if (!state.authentication.isAuthenticated) {
-    actions.displayAuthError('Please login before accessing this page');
-    replaceState({nextPathname: nextState.location.pathname}, 'login');
-    //actions.replacePath('/login', {nextPathname: nextState.location.pathname});
-  }
-};
-
 ReactDOM.render(
   <Provider store={store}>
     <div>
       {devTools}
-      <Router history={history} routes={getRoutes(requireAuth, actions.logout)}/>
+      <Router history={history} routes={getRoutes(actions.logout)}/>
     </div>
   </Provider>,
   document.getElementById('root')

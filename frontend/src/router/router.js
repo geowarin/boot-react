@@ -6,10 +6,10 @@ import MyComponent from 'ui/Component';
 import PrivatePage from 'ui/PrivatePage';
 import LoginPage from 'ui/LoginPage';
 
-export default (requireAuth, onLogout) => (
+export default (onLogout) => (
   <Route path="/" name="app" component={App}>
     <IndexRoute component={MyComponent}/>
-    <Route path="private" component={PrivatePage} onEnter={requireAuth}/>
+    <Route path="private" component={PrivatePage} />
     <Route path="login" component={LoginPage}/>
     <Route path="logout" onEnter={onLogout}/>
   </Route>

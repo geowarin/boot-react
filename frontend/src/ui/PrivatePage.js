@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { replacePath } from 'redux-simple-router';
 
-export const PrivatePage = ({username}) => (
-  <div>
-    <h2>Private page</h2>
+export const PrivatePage = (props) => {
+  const {authentication} = props;
+  if (authentication.loading) {
+    return (<div>Loading...</div>)
+  }
 
-    <p>
-      Hello, {username}
-    </p>
-  </div>
-);
+  if (!authentication.isAuthenticated) {
+    props.replacePath('login');
+    return <div></div>
+  }
+
+  return (
+    <div>
+      <h2>Private page</h2>
+
+      <p>
+        Hello, {authentication.username}
+      </p>
+    </div>
+  )
+};
 
 export default connect(
-  state => ({username: state.authentication.username})
+  state => ({authentication: state.authentication}),
+  {replacePath}
 )(PrivatePage);
