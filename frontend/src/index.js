@@ -1,42 +1,33 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import initStore from 'config/store';
-import RouterComponent from 'router/router';
 import { setupAxiosInterceptors } from 'rest/axios';
-import axios from 'axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
-import {createHistory} from 'history';
+import { createHistory } from 'history';
 import isDev from 'isDev';
 import DevTools from 'config/devtools';
+import { pushToLoginWithMessage, logout } from 'reducers/authentication';
+
+import { Router } from 'react-router';
+import getRoutes from 'router/router';
 
 const devTools = isDev ? <DevTools /> : null;
 
-var render = (session = {isAuthenticated: false}) => {
-  const initialState = {
-    authentication: {
-      token: session.token,
-      isAuthenticated: session.isAuthenticated,
-      username: session.username
-    }
-  };
-  const history = createHistory();
-  const store = initStore(initialState);
-  syncReduxAndRouter(history, store);
-  setupAxiosInterceptors(store.dispatch);
+const history = createHistory();
+const store = initStore();
+syncReduxAndRouter(history, store);
 
-  ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        {devTools}
-        <RouterComponent history={history} />
-      </div>
-    </Provider>,
-    document.getElementById('root')
-  );
-};
+const actions = bindActionCreators({pushToLoginWithMessage, logout}, store.dispatch);
+setupAxiosInterceptors(actions.pushToLoginWithMessage);
 
-axios.get('/api/session')
-  .then(res => render(res.data))
-  .catch(err => render());
-
+ReactDOM.render(
+  <Provider store={store}>
+    <div>
+      {devTools}
+      <Router history={history} routes={getRoutes(actions.logout)}/>
+    </div>
+  </Provider>,
+  document.getElementById('root')
+);

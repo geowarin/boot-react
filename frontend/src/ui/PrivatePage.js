@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export const PrivatePage = ({username}) => (
+export const PrivatePage = (props) => (
   <div>
     <h2>Private page</h2>
 
     <p>
-      Hello, {username}
+      Hello, {props.username}
     </p>
   </div>
 );

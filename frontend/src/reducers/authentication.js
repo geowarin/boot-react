@@ -1,13 +1,21 @@
-import axios from 'axios';
-import { pushPath } from 'redux-simple-router';
+import { pushPath, replacePath } from 'redux-simple-router';
 
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGOUT = 'LOGOUT';
-const AUTH_ERROR_MESSAGE = 'AUTH_ERROR_MESSAGE';
+const LOGIN = 'authentication/LOGIN';
+const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
+const LOGIN_FAIL = 'authentication/LOGIN_FAIL';
+
+const LOGOUT = 'authentication/LOGOUT';
+const LOGOUT_SUCCESS = 'authentication/LOGOUT_SUCCESS';
+const LOGOUT_FAIL = 'authentication/LOGOUT_FAIL';
+
+const GET_SESSION = 'authentication/GET_SESSION';
+const GET_SESSION_SUCCESS = 'authentication/GET_SESSION_SUCCESS';
+const GET_SESSION_FAIL = 'authentication/LOGOUT_FAIL';
+
+const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 
 const initialState = {
   isAuthenticated: false,
-  token: null,
   username: null,
   errorMessage: null
 };
@@ -16,80 +24,121 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case LOGIN:
+      return {
+        ...state,
+        loginIn: true
+      };
     case LOGIN_SUCCESS:
-      return loginSuccessReducer(state, action.payload);
+      return {
+        ...state,
+        isAuthenticated: action.result.data.isAuthenticated,
+        username: action.result.data.username,
+        errorMessage: null,
+        loginIn: false
+      };
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        username: null,
+        errorMessage: action.error.data.message,
+        loginIn: false
+      };
     case LOGOUT:
-      return logoutReducer(state);
-    case AUTH_ERROR_MESSAGE:
-      return displayErrorReducer(state, action.payload.message);
+      return {
+        ...state,
+        loggingOut: true
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loggingOut: false,
+        isAuthenticated: false,
+        username: null
+      };
+    case LOGOUT_FAIL:
+      return {
+        ...state,
+        loggingOut: false,
+        logoutError: action.error
+      };
+    case GET_SESSION:
+      return {
+        ...state,
+        loading: true
+      };
+    case GET_SESSION_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: action.result.data.isAuthenticated || false,
+        username: action.result.data.username,
+        errorMessage: null,
+        loading: false
+      };
+    case GET_SESSION_FAIL:
+      return {
+        ...state,
+        isAuthenticated: false,
+        username: null,
+        loading: false,
+        getSessionError: action.error
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.message
+      };
     default:
       return state;
   }
 }
 
-const loginSuccessReducer = (state, data) => {
-  localStorage.setItem('auth-token', data.token);
-  return {
-    ...state,
-    isAuthenticated: data.isAuthenticated,
-    token: data.token,
-    username: data.username,
-    errorMessage: null
-  };
-};
-
-const displayErrorReducer = (state, message) => {
-  return {
-    ...state,
-    errorMessage: message
-  }
-};
-
-const logoutReducer = (state) => {
-  localStorage.removeItem('auth-token');
-  return {
-    ...state,
-    isAuthenticated: false,
-    token: null,
-    username: null
-  };
-};
-
-// Action creators
-
-function doLoginSuccess(data) {
-  return {type: LOGIN_SUCCESS, payload: data};
-}
-
-function doLogout() {
-  return {type: LOGOUT};
-}
-
 // Public action creators and async actions
 
 export function displayAuthError(message) {
-  return {type: AUTH_ERROR_MESSAGE, payload: {message}};
+  return {type: ERROR_MESSAGE, message};
 }
 
 export function login(username, password) {
-  return (dispatch, getState) => {
-    axios.post('/api/session', {username, password})
-      .then(res => {
-        dispatch(doLoginSuccess(res.data));
-        dispatch(pushPath(getState().routing.state.nextPathname));
-      })
-      .catch(res => {
-        dispatch(displayAuthError(res.data.message));
-      });
+  return {
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: (client) => client.post('/api/session', {username, password}),
+    afterSuccess: (getState, dispatch) => {
+      const routingState = getState().routing.state || {};
+      dispatch(pushPath(routingState.nextPathname));
+    }
   };
 }
 
 export function logout() {
-  return dispatch => {
-    axios.delete('/api/session')
-      .then(() => {
-        dispatch(doLogout());
-        dispatch(pushPath('login'));
-      });
+  return {
+    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+    promise: (client) => client.delete('/api/session'),
+    afterSuccess: (getState, dispatch) => {
+      dispatch(pushPath('login'));
+    }
   };
+}
+
+export function getSession() {
+  return {
+    types: [GET_SESSION, GET_SESSION_SUCCESS, GET_SESSION_FAIL],
+    promise: (client) => client.get('/api/session')
+  };
+}
+
+export function pushToLoginWithMessage(message) {
+  return dispatch => {
+    dispatch(displayAuthError(message));
+    dispatch(pushPath('/login'));
+  }
+}
+
+export function redirectToLoginWithMessage(message) {
+  return (dispatch, getState) => {
+    const currentPath = getState().routing.path;
+    dispatch(displayAuthError(message));
+    dispatch(replacePath('/login', {nextPathname: currentPath}));
+  }
 }

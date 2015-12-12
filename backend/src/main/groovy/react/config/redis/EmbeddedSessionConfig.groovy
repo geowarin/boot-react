@@ -7,8 +7,8 @@ import org.springframework.session.MapSessionRepository
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.session.web.http.SessionRepositoryFilter
 
-@Profile('fake-redis')
 @Configuration
+@Profile('!redis')
 public class EmbeddedSessionConfig {
 
   @Bean

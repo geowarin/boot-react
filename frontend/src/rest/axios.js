@@ -2,20 +2,26 @@ import axios from 'axios';
 import { displayAuthError } from 'reducers/authentication';
 import { pushPath } from 'redux-simple-router';
 
-const setupAxiosInterceptors = dispatch => {
+const setupAxiosInterceptors = pushToLoginWithMessage => {
   const onRequestSuccess = config => {
     var token = localStorage.getItem('auth-token');
     if (token) {
-      config.headers['X-Auth-Token'] = token;
+      config.headers['x-auth-token'] = token;
     }
+    config.timeout = 10000;
     return config;
   };
-  const onResponseSuccess = response => response;
+  const onResponseSuccess = (response) => {
+    const token = response.headers['x-auth-token'];
+    if (token) {
+      localStorage.setItem('auth-token', token);
+    }
+    return response;
+  };
   const onResponseError = error => {
     if (error.status == 403 && error.config.url != '/api/session') {
-      const currentPath = window.location.pathname;
-      dispatch(displayAuthError('Please login to access this resource'));
-      dispatch(pushPath('/login', {nextPathname: currentPath}));
+      localStorage.removeItem('auth-token');
+      pushToLoginWithMessage('Please login to access this resource');
     }
     return Promise.reject(error);
   };

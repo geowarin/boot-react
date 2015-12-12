@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { getSession } from 'reducers/authentication';
 
 import 'stylus/main.styl';
 
@@ -19,22 +20,29 @@ const TopMenu = (props) => {
   );
 };
 
-export const App = (props) => {
+export class App extends Component {
 
-  const menuItems = [
-    {label: 'Home', link: '/'},
-    props.isAuthenticated ? {label: 'Logout', link: '/logout'} : {label: 'Login', link: '/login'},
-    {label: 'Private page', link: '/private'}
-  ];
+  componentDidMount() {
+    this.props.getSession();
+  }
 
-  return (
-    <div id="application">
-      <TopMenu items={menuItems} />
-      {props.children}
-    </div>
-  );
-};
+  render() {
+    const menuItems = [
+      {label: 'Home', link: '/'},
+      this.props.isAuthenticated ? {label: 'Logout', link: '/logout'} : {label: 'Login', link: '/login'},
+      {label: 'Private page', link: '/private'}
+    ];
+
+    return (
+      <div id="application">
+        <TopMenu items={menuItems} />
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
 export default connect(
-  state => ({isAuthenticated: state.authentication.isAuthenticated})
+  state => ({isAuthenticated: state.authentication.isAuthenticated}),
+  {getSession}
 )(App);
