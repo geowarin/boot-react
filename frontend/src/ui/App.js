@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { recoverSession } from 'reducers/authentication';
+import { getSession } from 'reducers/authentication';
 
 import 'stylus/main.styl';
 
@@ -23,7 +23,7 @@ const TopMenu = (props) => {
 export class App extends Component {
 
   componentDidMount() {
-    this.props.recoverSession();
+    this.props.getSession();
   }
 
   render() {
@@ -44,5 +44,5 @@ export class App extends Component {
 
 export default connect(
   state => ({isAuthenticated: state.authentication.isAuthenticated}),
-  {recoverSession}
+  {getSession}
 )(App);

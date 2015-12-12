@@ -1,13 +1,13 @@
 import React from 'react';
 import reducer from 'reducers';
-import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import isDev from 'isDev';
 import DevTools from 'config/devtools';
+import promiseMiddleware from 'config/promiseMiddleware';
 
 const middlewares = isDev ?
-  [applyMiddleware(thunk), DevTools.instrument()] :
-  [applyMiddleware(thunk)];
+  [applyMiddleware(promiseMiddleware), DevTools.instrument()] :
+  [applyMiddleware(promiseMiddleware)];
 const finalCreateStore = compose(...middlewares)(createStore);
 
 var initialize = (initialState = {}) => {

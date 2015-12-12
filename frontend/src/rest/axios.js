@@ -2,7 +2,7 @@ import axios from 'axios';
 import { displayAuthError } from 'reducers/authentication';
 import { pushPath } from 'redux-simple-router';
 
-const setupAxiosInterceptors = dispatch => {
+const setupAxiosInterceptors = actions => {
   const onRequestSuccess = config => {
     var token = localStorage.getItem('auth-token');
     if (token) {
@@ -22,8 +22,8 @@ const setupAxiosInterceptors = dispatch => {
     if (error.status == 403 && error.config.url != '/api/session') {
       localStorage.removeItem('auth-token');
       const currentPath = window.location.pathname;
-      dispatch(displayAuthError('Please login to access this resource'));
-      dispatch(pushPath('/login', {nextPathname: currentPath}));
+      actions.displayAuthError('Please login to access this resource');
+      actions.pushPath('/login', {nextPathname: currentPath});
     }
     return Promise.reject(error);
   };
