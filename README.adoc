@@ -60,7 +60,7 @@ This allows the retrieval of the session data in Redis.
 If you want to use a real redis, you can run the application with the `redis` profile.
 
 If the `redis` profile is not active, your session will be stored in a map.
-See: [EmbeddedSessionConfig](https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/redis/EmbeddedSessionConfig.groovy).
+See: https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/redis/EmbeddedSessionConfig.groovy[EmbeddedSessionConfig].
 This is great in development but you should avoid it in production.
 
 Summary:

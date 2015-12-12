@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, TextInput, Label } from 'react-easy-form';
-import { autobind } from 'core-decorators';
 
 import { login } from 'reducers/authentication';
 
@@ -34,7 +33,7 @@ export class LoginPage extends Component {
 
         {errorPanel}
 
-        <Form onSubmit={this.handleSubmit} className="pure-form pure-form-aligned">
+        <Form onSubmit={(formData) => this.handleSubmit(formData)} className="pure-form pure-form-aligned">
           <LabeledInput label="Login" name="username"/>
           <LabeledInput label="Password" name="password" type="password"/>
 
@@ -46,7 +45,6 @@ export class LoginPage extends Component {
     );
   }
 
-  @autobind
   handleSubmit(formData) {
     const { username, password } = formData;
     const { login } = this.props;
