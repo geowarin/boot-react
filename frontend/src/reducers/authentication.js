@@ -71,7 +71,7 @@ export default function reducer(state = initialState, action) {
     case GET_SESSION_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.result.data.isAuthenticated,
+        isAuthenticated: action.result.data.isAuthenticated || false,
         username: action.result.data.username,
         errorMessage: null,
         loading: false

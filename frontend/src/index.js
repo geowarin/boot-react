@@ -26,7 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       {devTools}
-      <Router history={history} routes={getRoutes(actions.logout, store)}/>
+      <Router history={history} routes={getRoutes(actions.logout)}/>
     </div>
   </Provider>,
   document.getElementById('root')
