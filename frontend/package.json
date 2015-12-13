@@ -4,7 +4,7 @@
   "description": "Spring boot and react frontend",
   "scripts": {
     "start": "node server.js",
-    "bundle": "NODE_ENV=production webpack -p --optimize-dedupe",
+    "bundle": "NODE_ENV=production webpack -p --optimize-dedupe --progress",
     "test": "NODE_ENV=test mocha"
   },
   "keywords": [
@@ -30,6 +30,7 @@
     "enzyme": "^1.2.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.5",
     "html-webpack-plugin": "^1.7.0",
     "jeet": "^6.1.2",
     "mocha": "^2.3.4",
@@ -46,6 +47,7 @@
     "stripcomment-loader": "^0.1.0",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.4.2",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"

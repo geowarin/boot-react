@@ -49,6 +49,9 @@ module.exports = {
     }, {
       test: /\.styl$/,
       loader: ExtractTextPlugin.extract('css-loader!stylus-loader')
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192'
     }]
   },
   stylus: {

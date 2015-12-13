@@ -13,6 +13,7 @@ const TopMenu = (props) => {
   ));
   return (
     <div className="pure-menu pure-menu-horizontal">
+      <img src={require("react-logo.png")}/>
       <ul className="pure-menu-list">
         {items}
       </ul>

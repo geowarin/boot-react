@@ -40,6 +40,9 @@ module.exports = {
     }, {
       test: /\.styl$/,
       loaders: ['style-loader', 'css-loader', 'stylus-loader']
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192'
     }]
   },
   stylus: {
