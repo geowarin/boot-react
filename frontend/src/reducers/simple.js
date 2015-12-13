@@ -1,6 +1,6 @@
-import axios from 'axios';
-
-const ON_FETCH = 'ON_FETCH';
+const FETCH = 'simple/FETCH';
+const FETCH_SUCCESS = 'simple/FETCH_SUCCESS';
+const FETCH_FAIL = 'simple/FETCH_FAIL';
 
 const initialState = {
   items: []
@@ -10,25 +10,21 @@ const initialState = {
 
 export default function simpleReducer(state = initialState, action) {
   switch (action.type) {
-    case ON_FETCH:
-      return onSimpleFetch(state, action.payload);
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        items: action.result.data
+      };
     default:
       return state;
   }
 }
 
-const onSimpleFetch = (state, data) => {
-  return {
-    ...state,
-    items: data
-  };
-};
-
 // Actions
 
 export function fetchSimple() {
-  return dispatch => {
-    return axios.get('/api/simple')
-      .then(res => dispatch({type: ON_FETCH, payload: res.data}))
+  return  {
+    types: [FETCH, FETCH_SUCCESS, FETCH_FAIL],
+    promise: client => client.get('/api/simple')
   };
 }

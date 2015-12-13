@@ -25,43 +25,33 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
-      return {
-        ...state,
-        loginIn: true
-      };
+      return state;
     case LOGIN_SUCCESS:
       return {
         ...state,
         isAuthenticated: action.result.data.isAuthenticated,
         username: action.result.data.username,
-        errorMessage: null,
-        loginIn: false
+        errorMessage: null
       };
     case LOGIN_FAIL:
       return {
         ...state,
         isAuthenticated: false,
         username: null,
-        errorMessage: action.error.data.message,
-        loginIn: false
+        errorMessage: action.error.data.message
       };
     case LOGOUT:
-      return {
-        ...state,
-        loggingOut: true
-      };
+      return state;
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        loggingOut: false,
         isAuthenticated: false,
         username: null
       };
     case LOGOUT_FAIL:
       return {
         ...state,
-        loggingOut: false,
-        logoutError: action.error
+        debugError: action.error
       };
     case GET_SESSION:
       return {
@@ -81,8 +71,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         isAuthenticated: false,
         username: null,
-        loading: false,
-        getSessionError: action.error
+        debugError: action.error,
+        loading: false
       };
     case ERROR_MESSAGE:
       return {
@@ -104,7 +94,7 @@ export function login(username, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (client) => client.post('/api/session', {username, password}),
-    afterSuccess: (getState, dispatch) => {
+    afterSuccess: (dispatch, getState) => {
       const routingState = getState().routing.state || {};
       dispatch(pushPath(routingState.nextPathname));
     }
@@ -115,7 +105,7 @@ export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: (client) => client.delete('/api/session'),
-    afterSuccess: (getState, dispatch) => {
+    afterSuccess: (dispatch) => {
       dispatch(pushPath('login'));
     }
   };
