@@ -10,7 +10,7 @@ const LOGOUT_FAIL = 'authentication/LOGOUT_FAIL';
 
 const GET_SESSION = 'authentication/GET_SESSION';
 const GET_SESSION_SUCCESS = 'authentication/GET_SESSION_SUCCESS';
-const GET_SESSION_FAIL = 'authentication/LOGOUT_FAIL';
+const GET_SESSION_FAIL = 'authentication/GET_SESSION_FAIL';
 
 const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 
