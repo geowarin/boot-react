@@ -33,7 +33,7 @@ export class LoginPage extends Component {
 
         {errorPanel}
 
-        <Form onSubmit={(formData) => this.handleSubmit(formData)} className="pure-form pure-form-aligned">
+        <Form ref="form" initialData={{}} onSubmit={(formData) => this.handleSubmit(formData)} className="pure-form pure-form-aligned">
           <LabeledInput label="Login" name="username"/>
           <LabeledInput label="Password" name="password" type="password"/>
 
@@ -48,7 +48,7 @@ export class LoginPage extends Component {
   handleSubmit(formData) {
     const { username, password } = formData;
     const { login } = this.props;
-    login(username, password)
+    login(username, password);
   }
 }
 
