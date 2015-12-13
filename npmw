@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # https://github.com/srs/gradle-node-plugin/issues/24
 
+die() { echo "$@" 1>&2 ; exit 1; }
+
 GRADLE_USER_HOME="${GRADLE_USER_HOME:-${HOME}/.gradle}"
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # This should match the "workDir" setting in build.gradle
