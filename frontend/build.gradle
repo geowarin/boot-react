@@ -8,22 +8,18 @@ version '0.0.1'
 buildDir = 'dist'
 
 node {
-  version = '5.0.0'
-  npmVersion = '3.3.9'
+  version = '5.2.0'
+  npmVersion = '3.3.12'
   download = true
 }
 
 task bundle(type: NpmTask) {
     args = ['run', 'bundle']
 }
-task start(type: NpmTask) {
-    args = ['start']
-}
 task test(type: NpmTask) {
     args = ['test']
 }
 
 check.dependsOn(test)
-start.dependsOn(npm_install)
 bundle.dependsOn(npm_install)
 assemble.dependsOn(bundle)

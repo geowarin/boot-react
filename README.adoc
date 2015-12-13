@@ -19,25 +19,37 @@ Both the frontend and the backend are fully tested.
 The groovy code is available in the `backend` sub-project.
 The `frontend` sub-project contains the javascript code.
 
-First, install the npm dependencies:
-
-```
-./gradlew frontend:npmInstall
-```
-
-Run the backend with your IDE, the main method is in the `BootReactApplication` class.
-In IntelliJ you can specify the active profiles in the run configuration.
-
-Alternatively, you can use `./gradlew bootRun`.
-
-Then, run the frontend dev server separately with `./gradlew frontend:start` or with `npm start` (recommended).
-**You will need node 4.0+ to run the dev server.**
-
-The node version used by the gradle build is specified https://github.com/geowarin/boot-react/blob/master/frontend/build.gradle#L11-L12[here].
-It is recommended that you use the same version in development and in your automated build.
-
 In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
 will allow you keep track of your application state and undo/redo every action at will.
+
+### Running the backend (recommended)
+
+The recommended way to launch the server is to use your favorite java IDE.
+The main method of the application is in the `BootReactApplication` class.
+
+### Running the frontend (recommended)
+
+For the frontend, a small wrapper script for UNIX systems can be found at the root of the project.
+It will ensure that you use the same version of npm as the gradle build.
+
+Simply run `./npmw start` to start the frontend.
+
+It will automatically run `npm install` on the first run.
+
+If you change the node dependencies in `package.json`, delete the `node_modules` dir or
+run `./gradlew frontend:npmInstall`
+
+### Alternatives for running the projects
+
+There is also a gradle task to run the spring server: `./gradlew bootRun`.
+
+The node version used by the gradle build is specified https://github.com/geowarin/boot-react/blob/master/frontend/build.gradle#L11-L12[here].
+If you have an equivalent version of npm installed on your system, you can use it to start the frontend.
+
+Go in the `frontend` directory and type `npm install` to install the dependencies.
+Then, use `npm start` to start the dev server.
+
+**You will need node 4.0+ to run the dev server.**
 
 ### Hot reloading
 
