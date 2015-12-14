@@ -11,13 +11,7 @@ const setupAxiosInterceptors = pushToLoginWithMessage => {
     config.timeout = 10000;
     return config;
   };
-  const onResponseSuccess = (response) => {
-    const token = response.headers['x-auth-token'];
-    if (token) {
-      localStorage.setItem('auth-token', token);
-    }
-    return response;
-  };
+  const onResponseSuccess = (response) => response;
   const onResponseError = error => {
     if (error.status == 403 && error.config.url != '/api/session') {
       localStorage.removeItem('auth-token');

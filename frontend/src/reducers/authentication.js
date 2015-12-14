@@ -94,7 +94,8 @@ export function login(username, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (client) => client.post('/api/session', {username, password}),
-    afterSuccess: (dispatch, getState) => {
+    afterSuccess: (dispatch, getState, response) => {
+      localStorage.setItem('auth-token', response.headers['x-auth-token']);
       const routingState = getState().routing.state || {};
       dispatch(pushPath(routingState.nextPathname));
     }

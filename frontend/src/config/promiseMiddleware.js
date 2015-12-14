@@ -17,7 +17,7 @@ export default function promiseMiddleware({ dispatch, getState }) {
     const onFulfilled = result => {
       next({...rest, result, type: SUCCESS});
       if (afterSuccess) {
-        afterSuccess(dispatch, getState);
+        afterSuccess(dispatch, getState, result);
       }
     };
     const onRejected = (error) => {
