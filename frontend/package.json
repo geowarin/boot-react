@@ -39,9 +39,9 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.2.0",
-    "redux-devtools": "^3.0.0-beta-3",
-    "redux-devtools-dock-monitor": "^1.0.0-beta-3",
-    "redux-devtools-log-monitor": "^1.0.0-beta-3",
+    "redux-devtools": "^3.0.0",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
     "request": "^2.67.0",
     "stripcomment-loader": "^0.1.0",
     "style-loader": "^0.13.0",
@@ -62,7 +62,6 @@
     "react-redux": "^4.0.1",
     "react-router": "1.0.2",
     "redux": "^3.0.5",
-    "redux-simple-router": "^1.0.0",
-    "redux-thunk": "^1.0.0"
+    "redux-simple-router": "^1.0.0"
   }
 }

@@ -6,7 +6,7 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 // You can toggle visibility of devTools with ctrl + H
 // and change their position with ctrl + Q
 export default createDevTools(
-  <DockMonitor toggleVisibilityKey="H" changePositionKey="Q">
+  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
     <LogMonitor />
   </DockMonitor>
 );
