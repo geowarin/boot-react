@@ -6,7 +6,7 @@ import initStore from 'config/store';
 import { setupAxiosInterceptors } from 'rest/axios';
 import { syncReduxAndRouter } from 'redux-simple-router';
 import { createHistory } from 'history';
-import isDev from 'isDev';
+import isDev from 'isdev';
 import DevTools from 'config/devtools';
 import { pushToLoginWithMessage, logout } from 'reducers/authentication';
 
