@@ -8,14 +8,11 @@ import { syncReduxAndRouter } from 'redux-simple-router';
 import { createHistory } from 'history';
 import isDev from 'isdev';
 import DevTools from 'config/devtools';
-import { pushToLoginWithMessage, logout } from 'reducers/authentication';
+import { redirectToLoginWithMessage, logout } from 'reducers/authentication';
 
 import { Router } from 'react-router';
 import getRoutes from 'router/router';
-
-import counterpart from 'counterpart';
-counterpart.registerTranslations('en', require('lang/en.json'));
-counterpart.registerTranslations('fr', require('lang/fr.json'));
+import translations from 'config/translation';
 
 const devTools = isDev ? <DevTools /> : null;
 
@@ -23,8 +20,8 @@ const history = createHistory();
 const store = initStore();
 syncReduxAndRouter(history, store);
 
-const actions = bindActionCreators({pushToLoginWithMessage, logout}, store.dispatch);
-setupAxiosInterceptors(actions.pushToLoginWithMessage);
+const actions = bindActionCreators({redirectToLoginWithMessage, logout}, store.dispatch);
+setupAxiosInterceptors(actions.redirectToLoginWithMessage);
 
 ReactDOM.render(
   <Provider store={store}>

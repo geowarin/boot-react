@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, TextInput, Label } from 'react-easy-form';
+import Translate from 'react-translate-component';
 
 import { login } from 'reducers/authentication';
 
@@ -12,9 +13,9 @@ const LabeledInput = (props) => (
   </div>
 );
 
-const ErrorPanel = ({message}) => (
+const ErrorPanel = ({messageKey}) => (
   <p className="error-panel">
-    {message}
+    <Translate content={messageKey} />
   </p>
 );
 
@@ -22,14 +23,12 @@ export class LoginPage extends Component {
 
   render() {
     const {errorMessage} = this.props;
-    const errorPanel = errorMessage ? <ErrorPanel message={errorMessage}/> : null;
+    const errorPanel = errorMessage ? <ErrorPanel messageKey={errorMessage}/> : null;
     return (
       <div>
-        <h2>Login page</h2>
+        <Translate component="h2" content="login.title" />
 
-        <p>
-          Default login and password are 'user' and 'password'
-        </p>
+        <Translate component="p" content="login.hint" />
 
         {errorPanel}
 

@@ -24,7 +24,7 @@ const privateRoute = (Wrapped) => connect(mapStateToProps, mapDispatchToProps)(c
   redirectIfNotLogged(props) {
     const {loading, isAuthenticated} = props;
     if (loading === false && !isAuthenticated) {
-      this.props.redirectToLoginWithMessage('Please login to access this page');
+      this.props.redirectToLoginWithMessage('login.error.private');
     }
   }
 

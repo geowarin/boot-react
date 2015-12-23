@@ -5,10 +5,9 @@ import Translate from 'react-translate-component';
 
 export const PrivatePage = ({username}) => (
   <div>
-    <h2>Private page</h2>
-    <p>
-      <Translate content="example.greeting" name={username} />
-    </p>
+    <Translate component="h2" content="private.title" />
+
+    <Translate component="p" content="private.greeting" name={username} />
   </div>
 );
 

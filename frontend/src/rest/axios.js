@@ -2,7 +2,7 @@ import axios from 'axios';
 import { displayAuthError } from 'reducers/authentication';
 import { pushPath } from 'redux-simple-router';
 
-const setupAxiosInterceptors = pushToLoginWithMessage => {
+const setupAxiosInterceptors = redirectToLoginWithMessage => {
   const onRequestSuccess = config => {
     var token = localStorage.getItem('auth-token');
     if (token) {
@@ -15,7 +15,7 @@ const setupAxiosInterceptors = pushToLoginWithMessage => {
   const onResponseError = error => {
     if (error.status == 403 && error.config.url != '/api/session') {
       localStorage.removeItem('auth-token');
-      pushToLoginWithMessage('Please login to access this resource');
+      redirectToLoginWithMessage('login.error.unauthorized');
     }
     return Promise.reject(error);
   };
