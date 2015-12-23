@@ -13,6 +13,10 @@ import { pushToLoginWithMessage, logout } from 'reducers/authentication';
 import { Router } from 'react-router';
 import getRoutes from 'router/router';
 
+import counterpart from 'counterpart';
+counterpart.registerTranslations('en', require('lang/en.json'));
+counterpart.registerTranslations('fr', require('lang/fr.json'));
+
 const devTools = isDev ? <DevTools /> : null;
 
 const history = createHistory();

@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export const PrivatePage = (props) => (
+import Translate from 'react-translate-component';
+
+export const PrivatePage = ({username}) => (
   <div>
     <h2>Private page</h2>
-
     <p>
-      Hello, {props.username}
+      <Translate content="example.greeting" name={username} />
     </p>
   </div>
 );
 
 export default connect(
-  state => ({username: state.authentication.username})
+  ({authentication}) => ({username: authentication.username})
 )(PrivatePage);

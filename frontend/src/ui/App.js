@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getSession } from 'reducers/authentication';
+import counterpart from 'counterpart';
 
 import 'stylus/main.styl';
 
+var LocaleSwitcher = () => (
+  <select defaultValue={counterpart.getLocale()} onChange={(e) => counterpart.setLocale(e.target.value)}>
+    <option>en</option>
+    <option>fr</option>
+  </select>
+);
+
 const TopMenu = (props) => {
-  const items = props.items.map((item,key) => (
+  const items = props.items.map((item, key) => (
     <li key={key} className="pure-menu-item">
       <Link to={item.link} className="pure-menu-link">{item.label}</Link>
     </li>
@@ -16,6 +24,7 @@ const TopMenu = (props) => {
       <ul className="pure-menu-list">
         {items}
       </ul>
+      <LocaleSwitcher />
     </div>
   );
 };
@@ -35,7 +44,7 @@ export class App extends Component {
 
     return (
       <div id="application">
-        <TopMenu items={menuItems} />
+        <TopMenu items={menuItems}/>
         {this.props.children}
       </div>
     );

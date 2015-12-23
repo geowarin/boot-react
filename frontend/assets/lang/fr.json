@@ -1,0 +1,5 @@
+{
+  "example": {
+    "greeting": "Bonjour %(name)s! Comment allez-vous aujourd'hui?"
+  }
+}
