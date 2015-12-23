@@ -20,7 +20,7 @@ class AuthenticationResourceSpec extends AbstractMvcSpec {
     def res = post('/api/session', credentials)
 
     then:
-    res.status == HttpStatus.FORBIDDEN
+    res.status == HttpStatus.UNAUTHORIZED
   }
 
   def "good authentication"() {
