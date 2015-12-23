@@ -40,6 +40,9 @@ module.exports = {
     }, {
       test: /\.styl$/,
       loaders: ['style-loader', 'css-loader', 'stylus-loader']
+    }, {
+      test: /\.json/,
+      loaders: ['json-loader']
     }]
   },
   stylus: {

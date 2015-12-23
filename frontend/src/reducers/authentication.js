@@ -24,8 +24,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
-      return state;
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -38,20 +36,13 @@ export default function reducer(state = initialState, action) {
         ...state,
         isAuthenticated: false,
         username: null,
-        errorMessage: action.error.data.message
+        errorMessage: action.error.data.messageKey
       };
-    case LOGOUT:
-      return state;
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
         username: null
-      };
-    case LOGOUT_FAIL:
-      return {
-        ...state,
-        debugError: action.error
       };
     case GET_SESSION:
       return {
@@ -119,17 +110,10 @@ export function getSession() {
   };
 }
 
-export function pushToLoginWithMessage(message) {
-  return dispatch => {
-    dispatch(displayAuthError(message));
-    dispatch(pushPath('/login'));
-  }
-}
-
-export function redirectToLoginWithMessage(message) {
+export function redirectToLoginWithMessage(messageKey) {
   return (dispatch, getState) => {
     const currentPath = getState().routing.path;
-    dispatch(displayAuthError(message));
+    dispatch(displayAuthError(messageKey));
     dispatch(replacePath('/login', {nextPathname: currentPath}));
   }
 }

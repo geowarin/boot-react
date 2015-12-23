@@ -1,0 +1,15 @@
+{
+  "private": {
+    "title": "Page privée",
+    "greeting": "Bonjour %(name)s! Comment allez-vous aujourd'hui?"
+  },
+  "login": {
+    "title": "Page de login",
+    "hint": "L'utilisateur et le mot de passe par défaut sont 'user' et 'password'",
+    "error": {
+      "private": "Veuillez vous authentifier pour accéder à cette page",
+      "unauthorized": "Veuillez vous authentifier pour accéder à cette resource",
+      "badLogin": "Login et mot de passe incorrects"
+    }
+  }
+}
