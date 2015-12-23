@@ -4,6 +4,22 @@ const translations = {
   fr: require('lang/fr.json')
 };
 
-Object.keys(translations).forEach(key => {
+const langs = Object.keys(translations);
+
+const changeLocale = lang => {
+  localStorage.setItem('locale', lang);
+  counterpart.setLocale(lang);
+};
+
+langs.forEach(key => {
   counterpart.registerTranslations(key, translations[key]);
 });
+
+const currentLocale = localStorage.getItem('locale') || 'en';
+counterpart.setLocale(currentLocale);
+
+export {
+  langs,
+  changeLocale,
+  currentLocale
+}

@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getSession } from 'reducers/authentication';
-import counterpart from 'counterpart';
+import {changeLocale, langs, currentLocale} from 'config/translation';
 
 import 'stylus/main.styl';
 
 var LocaleSwitcher = () => (
-  <select defaultValue={counterpart.getLocale()} onChange={(e) => counterpart.setLocale(e.target.value)}>
-    <option>en</option>
-    <option>fr</option>
+  <select value={currentLocale} onChange={e => changeLocale(e.target.value)}>
+    {langs.map(lang => <option key={lang} value={lang}>{lang}</option>)}
   </select>
 );
 
