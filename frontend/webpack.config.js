@@ -49,6 +49,9 @@ module.exports = {
     }, {
       test: /\.styl$/,
       loader: ExtractTextPlugin.extract('css-loader!stylus-loader')
+    }, {
+      test: /\.json/,
+      loaders: ['json-loader']
     }]
   },
   stylus: {
