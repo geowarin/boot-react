@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getSession } from 'reducers/authentication';
-import {changeLocale, langs, currentLocale} from 'config/translation';
+import { setLocale } from 'reducers/locale';
+import counterpart from 'counterpart';
+import { locales } from 'config/translation';
 
 import 'stylus/main.styl';
 
-var LocaleSwitcher = () => (
-  <select value={currentLocale} onChange={e => changeLocale(e.target.value)}>
-    {langs.map(lang => <option key={lang} value={lang}>{lang}</option>)}
+var LocaleSwitcher = ({currentLocale, onLocaleChange}) => (
+  <select value={currentLocale} onChange={e => onLocaleChange(e.target.value)}>
+    {locales.map(lang => <option key={lang} value={lang}>{lang}</option>)}
   </select>
 );
 
@@ -23,7 +25,7 @@ const TopMenu = (props) => {
       <ul className="pure-menu-list">
         {items}
       </ul>
-      <LocaleSwitcher />
+      <LocaleSwitcher currentLocale={props.currentLocale} onLocaleChange={props.setLocale} />
     </div>
   );
 };
@@ -35,6 +37,7 @@ export class App extends Component {
   }
 
   render() {
+    const {currentLocale, setLocale} = this.props;
     const menuItems = [
       {label: 'Home', link: '/'},
       this.props.isAuthenticated ? {label: 'Logout', link: '/logout'} : {label: 'Login', link: '/login'},
@@ -43,7 +46,7 @@ export class App extends Component {
 
     return (
       <div id="application">
-        <TopMenu items={menuItems}/>
+        <TopMenu items={menuItems} currentLocale={currentLocale} setLocale={setLocale}/>
         {this.props.children}
       </div>
     );
@@ -51,6 +54,6 @@ export class App extends Component {
 }
 
 export default connect(
-  state => ({isAuthenticated: state.authentication.isAuthenticated}),
-  {getSession}
+  state => ({isAuthenticated: state.authentication.isAuthenticated, currentLocale: state.locale.currentLocale}),
+  {getSession, setLocale}
 )(App);
