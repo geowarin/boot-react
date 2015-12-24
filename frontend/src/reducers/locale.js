@@ -1,10 +1,6 @@
 const SET_LOCALE = 'locale/SET_LOCALE';
 import counterpart from 'counterpart';
 
-const initialState = {
-  currentLocale: 'en'
-};
-
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case SET_LOCALE:
