@@ -13,10 +13,9 @@ import { setLocale } from 'reducers/locale';
 
 import { Router } from 'react-router';
 import getRoutes from 'router/router';
-import {registerLocales} from 'config/translation';
+import { registerLocales } from 'config/translation';
 
 const devTools = isDev ? <DevTools /> : null;
-
 
 const history = createHistory();
 const store = initStore();
@@ -24,7 +23,7 @@ registerLocales(store);
 syncReduxAndRouter(history, store);
 
 const actions = bindActionCreators({redirectToLoginWithMessage, logout}, store.dispatch);
-setupAxiosInterceptors(actions.redirectToLoginWithMessage);
+setupAxiosInterceptors(() => actions.redirectToLoginWithMessage('login.error.unauthorized'));
 
 ReactDOM.render(
   <Provider store={store}>

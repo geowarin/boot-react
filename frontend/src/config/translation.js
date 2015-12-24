@@ -7,7 +7,8 @@ const translations = {
 
 const locales = Object.keys(translations);
 
-let currentLocale = localStorage.getItem('locale') || 'en';
+let currentLocale;
+let savedLocale = localStorage.getItem('locale') || 'en';
 const registerLocales = (store) => {
   locales.forEach(key => {
     counterpart.registerTranslations(key, translations[key]);
@@ -20,8 +21,8 @@ const registerLocales = (store) => {
       counterpart.setLocale(currentLocale);
     }
   });
-  store.dispatch(setLocale(currentLocale));
-  return currentLocale;
+  store.dispatch(setLocale(savedLocale));
+  return savedLocale;
 };
 
 export {
