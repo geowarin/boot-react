@@ -4,8 +4,8 @@
   "description": "Spring boot and react frontend",
   "scripts": {
     "start": "node server.js",
-    "bundle": "NODE_ENV=production webpack -p --optimize-dedupe",
-    "test": "NODE_ENV=test mocha"
+    "bundle": "cross-env NODE_ENV=production webpack -p --optimize-dedupe",
+    "test": "cross-env NODE_ENV=test mocha"
   },
   "keywords": [
     "react",
@@ -26,6 +26,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "chai": "^3.4.1",
     "chai-spies": "^0.7.1",
+    "cross-env": "^1.0.5",
     "css-loader": "^0.23.0",
     "enzyme": "^1.2.0",
     "express": "^4.13.3",
