@@ -54,7 +54,6 @@
     "axios": "^0.8.1",
     "counterpart": "^0.17.1",
     "deep-equal": "^1.0.1",
-    "halogen": "^0.1.10",
     "history": "1.17.0",
     "isdev": "^1.0.1",
     "react": "^0.14.3",

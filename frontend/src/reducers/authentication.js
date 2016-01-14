@@ -17,7 +17,8 @@ const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 const initialState = {
   isAuthenticated: false,
   username: null,
-  errorMessage: null
+  errorMessage: null,
+  loading: false,
 };
 
 // Reducer
