@@ -1,6 +1,5 @@
 import React from 'react';
 import { redirectToLoginWithMessage } from 'reducers/authentication';
-import { ScaleLoader } from 'halogen';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -32,8 +31,8 @@ const privateRoute = (Wrapped) => connect(mapStateToProps, mapDispatchToProps)(c
     const {loading, isAuthenticated} = this.props;
     if (loading || !isAuthenticated) {
       return (
-        <div className="center">
-          <ScaleLoader color="#000" size="24px"/>
+        <div className="center loader">
+          <div>Loading...</div>
         </div>
       );
     }
