@@ -8,10 +8,9 @@ import promiseMiddleware from 'config/promiseMiddleware';
 const middlewares = isDev ?
   [applyMiddleware(promiseMiddleware), DevTools.instrument()] :
   [applyMiddleware(promiseMiddleware)];
-const finalCreateStore = compose(...middlewares)(createStore);
 
 var initialize = (initialState = {}) => {
-  const store = finalCreateStore(reducer, initialState);
+  const store = createStore(reducer, initialState, compose(...middlewares));
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

@@ -62,7 +62,7 @@
     "react-redux": "^4.0.5",
     "react-router": "1.0.3",
     "react-translate-component": "^0.10.0",
-    "redux": "^3.0.5",
+    "redux": "^3.1.6",
     "redux-simple-router": "^1.0.2"
   }
 }

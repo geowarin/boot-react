@@ -1,5 +1,5 @@
 import counterpart from 'counterpart';
-import { setLocale } from 'reducers/locale';
+import {setLocale} from 'reducers/locale';
 const translations = {
   en: require('lang/en.json'),
   fr: require('lang/fr.json')
@@ -8,7 +8,7 @@ const translations = {
 const locales = Object.keys(translations);
 
 let currentLocale;
-let savedLocale = localStorage.getItem('locale') || 'en';
+let savedLocale = localStorage.getItem('locale') || 'en';
 const registerLocales = (store) => {
   locales.forEach(key => {
     counterpart.registerTranslations(key, translations[key]);
