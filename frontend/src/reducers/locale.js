@@ -1,5 +1,4 @@
 const SET_LOCALE = 'locale/SET_LOCALE';
-import counterpart from 'counterpart';
 
 export default function reducer(state = {}, action) {
   switch (action.type) {

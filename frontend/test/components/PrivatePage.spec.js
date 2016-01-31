@@ -3,7 +3,7 @@ import expect from 'expect';
 
 import React from 'react';
 import privateRoute from 'router/privateRoute';
-import { PrivatePage } from 'ui/PrivatePage';
+import { PrivatePage } from 'container/PrivatePage';
 
 import initStore from 'config/store';
 

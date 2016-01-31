@@ -7,7 +7,8 @@
       { "src": "./src/rest", "expose": "rest" },
       { "src": "./src/router", "expose": "router" },
       { "src": "./src/reducers", "expose": "reducers" },
-      { "src": "./src/ui", "expose": "ui" },
+      { "src": "./src/ui/component", "expose": "component" },
+      { "src": "./src/ui/container", "expose": "container" },
       { "src": "./assets/stylus", "expose": "stylus" },
       { "src": "./assets/lang", "expose": "lang" }
     ]]
