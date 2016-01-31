@@ -1,5 +1,5 @@
 import { describeWithDOM, mount } from 'enzyme';
-import { expect } from '../utils/chai';
+import expect from 'expect';
 
 import React from 'react';
 import privateRoute from 'router/privateRoute';
@@ -14,8 +14,8 @@ describeWithDOM('PrivatePage', () => {
     const store = initStore();
     const component = mount(<WrappedRoute store={store} />);
 
-    expect(store.getState().routing.path).to.be.equal('/login');
-    expect(component.find('.loader')).to.have.length(1);
+    expect(store.getState().routing.path).toEqual('/login');
+    expect(component.find('.loader').length).toEqual(1);
   });
 
   it('should render the page when authenticated', () => {
@@ -23,7 +23,7 @@ describeWithDOM('PrivatePage', () => {
     const store = initStore({authentication: {isAuthenticated: true}});
     const component = mount(<WrappedRoute store={store} />);
 
-    expect(component.find('.loader')).to.have.length(0);
+    expect(component.find('.loader').length).toEqual(0);
   });
 
 });

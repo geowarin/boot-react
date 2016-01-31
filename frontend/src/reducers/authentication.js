@@ -18,7 +18,7 @@ const initialState = {
   isAuthenticated: false,
   username: null,
   errorMessage: null,
-  loading: false,
+  loading: false
 };
 
 // Reducer
