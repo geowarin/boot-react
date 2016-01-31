@@ -83,7 +83,7 @@ This allows the retrieval of the session data in Redis.
 If you want to use a real redis, you can run the application with the `redis` profile.
 
 If the `redis` profile is not active, your session will be stored in a map.
-See: https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/redis/EmbeddedSessionConfig.groovy[EmbeddedSessionConfig].
+See: https://github.com/geowarin/boot-react/blob/master/backend/src/main/java/react/config/redis/EmbeddedSessionConfig.java[EmbeddedSessionConfig].
 This is great in development but you should avoid it in production.
 
 Summary:
@@ -151,7 +151,7 @@ which creates the nicest URLs (**/login**, **/private**, etc.).
 In development, we use a dev server that
 https://github.com/geowarin/boot-react/blob/master/frontend/server.js#L21-L24[proxies] requests to the index.
 
-In production, we have to use a special https://github.com/geowarin/boot-react/blob/master/backend/src/main/groovy/react/config/SinglePageAppConfig.groovy[resource handler]
+In production, we have to use a special https://github.com/geowarin/boot-react/blob/master/backend/src/main/java/react/config/SinglePageAppConfig.java[resource handler]
 to redirect all non-asset requests to the index.
 
 You can remove it if you choose to use memory history (no URL change) or hash history
