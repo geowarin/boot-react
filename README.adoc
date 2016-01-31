@@ -114,23 +114,21 @@ It is a simple library with very powerful dev tools.
 Dan Abramov, the author of Redux, published a https://egghead.io/series/getting-started-with-redux[great Redux video tutorial].
 
 I also suggest reading the https://github.com/rackt/react-redux/blob/master/docs/quick-start.md[redux quick start] to understand
-how to architecture you application and the difference between "smart" and "dumb" components.
+how to architecture you application and the difference between containers and components.
 
-Since the application is small, most components are connected to redux and can be considered a "smart component".
-Those are higher-order components, wrapped with the `connect()` method.
+Components are simple display elements that receive everything they need (state and actions) via props.
+
+Containers are connected to Redux and as such, they can pull whatever properties they are interested in from the state
+and bind actions to dispatch.
+Those containers are only connecting simple components to Redux.
 
 Small components are written using the https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components[stateless functional components syntax], i.e,
 those component are pure render components and only their props will have an impact on the DOM.
 
+Beware, hot reloading is not supported on functional components yet (see [this issue](https://github.com/geowarin/boot-react/issues/13)) unless they are wrapped in a real Component.
+
 We can http://rackt.github.io/redux/docs/recipes/WritingTests.html[write tests] on connected components,
-but it is more effective to test it in isolation from Redux.
-
-To do so, you will notice that every component is exported twice.
-The "connected" component is be exported by default.
-The component itself is also exported and can be imported by its name.
-
-In the application we can import the connected component with `import Component from 'component'`.
-In tests, we can `import {Component} from 'component'`.
+but it is more effective to test them in isolation from Redux.
 
 ### Router push state
 
@@ -160,6 +158,13 @@ See examples of jeet http://codepen.io/collection/eilAH/[here].
 
 In development, the styles are included by webpack, which enables hot reloading.
 In production, we use the https://github.com/webpack/extract-text-webpack-plugin[Extract Text Plugin] to extract the css to a separate file.
+
+## Static assets
+
+If you want to include static assets like images in the project, please see [this issue](https://github.com/geowarin/boot-react/issues/16),
+which explains how to use the URL loader.
+
+I'm real bad at creating logos but if you have time, I would be happy to include this by default in the project.
 
 ## Running the tests
 
