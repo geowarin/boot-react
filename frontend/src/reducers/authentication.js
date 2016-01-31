@@ -18,7 +18,7 @@ const initialState = {
   isAuthenticated: false,
   username: null,
   errorMessage: null,
-  loading: false
+  loading: true
 };
 
 // Reducer
@@ -28,8 +28,8 @@ export default function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.result.data.isAuthenticated,
-        username: action.result.data.username,
+        isAuthenticated: action.result.data.authenticated,
+        username: action.result.data.userName,
         errorMessage: null
       };
     case LOGIN_FAIL:
@@ -53,8 +53,8 @@ export default function reducer(state = initialState, action) {
     case GET_SESSION_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.result.data.isAuthenticated || false,
-        username: action.result.data.username,
+        isAuthenticated: action.result.data.authenticated || false,
+        username: action.result.data.userName,
         errorMessage: null,
         loading: false
       };

@@ -16,11 +16,22 @@ Both the frontend and the backend are fully tested.
 
 ## Developing
 
-The groovy code is available in the `backend` sub-project.
+The Java code is available in the `backend` sub-project.
 The `frontend` sub-project contains the javascript code.
 
 In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
 will allow you keep track of your application state and undo/redo every action at will.
+
+## But... I love Groovy :'(
+
+Me too pal...
+
+The project used to be coded in Groovy but since most of us use Java at work, I figured it would be more useful for a lot
+of people if the backend code was written in Java.
+
+There is a https://github.com/geowarin/boot-react/tree/groovy[groovy branch] that should be up to date.
+
+The tests are still http://geowarin.github.io/test-java-with-groovy.html[written in groovy].
 
 ### Running the backend (recommended)
 
@@ -125,7 +136,7 @@ Those containers are only connecting simple components to Redux.
 Small components are written using the https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components[stateless functional components syntax], i.e,
 those component are pure render components and only their props will have an impact on the DOM.
 
-Beware, hot reloading is not supported on functional components yet (see [this issue](https://github.com/geowarin/boot-react/issues/13)) unless they are wrapped in a real Component.
+Beware, hot reloading is not supported on functional components yet (see https://github.com/geowarin/boot-react/issues/13[this issue]) unless they are wrapped in a real Component.
 
 We can http://rackt.github.io/redux/docs/recipes/WritingTests.html[write tests] on connected components,
 but it is more effective to test them in isolation from Redux.
@@ -161,7 +172,7 @@ In production, we use the https://github.com/webpack/extract-text-webpack-plugin
 
 ## Static assets
 
-If you want to include static assets like images in the project, please see [this issue](https://github.com/geowarin/boot-react/issues/16),
+If you want to include static assets like images in the project, please see https://github.com/geowarin/boot-react/issues/16[this issue],
 which explains how to use the URL loader.
 
 I'm real bad at creating logos but if you have time, I would be happy to include this by default in the project.

@@ -6,6 +6,7 @@ var jeet = require('jeet');
 var nib = require('nib');
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './src/index'
   ],
