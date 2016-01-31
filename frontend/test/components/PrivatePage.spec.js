@@ -14,7 +14,6 @@ describeWithDOM('PrivatePage', () => {
     const store = initStore();
     const component = mount(<WrappedRoute store={store} />);
 
-    expect(store.getState().routing.path).toEqual('/login');
     expect(component.find('.loader').length).toEqual(1);
   });
 

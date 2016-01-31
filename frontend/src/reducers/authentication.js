@@ -1,4 +1,4 @@
-import { pushPath, replacePath } from 'redux-simple-router';
+import { routeActions } from 'react-router-redux';
 
 const LOGIN = 'authentication/LOGIN';
 const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
@@ -89,7 +89,7 @@ export function login(username, password) {
     afterSuccess: (dispatch, getState, response) => {
       localStorage.setItem('auth-token', response.headers['x-auth-token']);
       const routingState = getState().routing.state || {};
-      dispatch(pushPath(routingState.nextPathname));
+      dispatch(routeActions.push(routingState.nextPathname));
     }
   };
 }
@@ -99,7 +99,7 @@ export function logout() {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: (client) => client.delete('/api/session'),
     afterSuccess: (dispatch) => {
-      dispatch(pushPath('login'));
+      dispatch(routeActions.push('login'));
     }
   };
 }
@@ -115,6 +115,6 @@ export function redirectToLoginWithMessage(messageKey) {
   return (dispatch, getState) => {
     const currentPath = getState().routing.path;
     dispatch(displayAuthError(messageKey));
-    dispatch(replacePath('/login', {nextPathname: currentPath}));
+    dispatch(routeActions.replace('/login', {nextPathname: currentPath}));
   }
 }

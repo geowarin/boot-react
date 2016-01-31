@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { displayAuthError } from 'reducers/authentication';
-import { pushPath } from 'redux-simple-router';
 
 const setupAxiosInterceptors = onUnauthenticated => {
   const onRequestSuccess = config => {
