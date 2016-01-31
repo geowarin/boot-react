@@ -30,7 +30,7 @@
     "enzyme": "^1.2.0",
     "expect": "^1.13.4",
     "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^0.9.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^1.7.0",
     "jeet": "^6.1.2",
     "json-loader": "^0.5.4",
@@ -50,7 +50,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
-    "axios": "^0.8.1",
+    "axios": "^0.9.1",
     "counterpart": "^0.17.1",
     "deep-equal": "^1.0.1",
     "history": "1.17.0",
