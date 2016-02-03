@@ -10,7 +10,7 @@ let props = {fetchSimple, items};
 
 describe('components', () => {
 
-  describe('MyComponent', () => {
+  describe('ListComponent', () => {
 
     it('should render three items', () => {
       const component = shallow(<ListComponent {...props} />);
