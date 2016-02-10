@@ -53,15 +53,14 @@
     "axios": "^0.9.1",
     "counterpart": "^0.17.1",
     "deep-equal": "^1.0.1",
-    "history": "1.17.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-easy-form": "^1.1.0",
     "react-interpolate-component": "^0.8.0",
     "react-redux": "^4.1.2",
-    "react-router": "1.0.3",
+    "react-router": "2.0.0",
     "react-translate-component": "^0.10.0",
     "redux": "^3.1.6",
-    "react-router-redux": "^2.1.0"
+    "react-router-redux": "^3.0.0"
   }
 }

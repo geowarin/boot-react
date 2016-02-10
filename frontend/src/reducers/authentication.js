@@ -88,7 +88,7 @@ export function login(username, password) {
     promise: (client) => client.post('/api/session', {username, password}),
     afterSuccess: (dispatch, getState, response) => {
       localStorage.setItem('auth-token', response.headers['x-auth-token']);
-      const routingState = getState().routing.state || {};
+      const routingState = getState().routing.location.state || {};
       dispatch(routeActions.push(routingState.nextPathname));
     }
   };
@@ -113,8 +113,8 @@ export function getSession() {
 
 export function redirectToLoginWithMessage(messageKey) {
   return (dispatch, getState) => {
-    const currentPath = getState().routing.path;
+    const currentPath = getState().routing.location.pathname;
     dispatch(displayAuthError(messageKey));
-    dispatch(routeActions.replace('/login', {nextPathname: currentPath}));
+    dispatch(routeActions.replace({pathname: '/login', state: {nextPathname: currentPath}}));
   }
 }
