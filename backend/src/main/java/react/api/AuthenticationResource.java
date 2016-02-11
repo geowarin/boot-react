@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import react.model.Credentials;;
-import react.model.User;;
+import react.model.Credentials;
+import react.model.User;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,12 +31,12 @@ public class AuthenticationResource {
   }
 
   @RequestMapping(method = RequestMethod.GET)
-  User session(HttpSession session) {
+  public User session(HttpSession session) {
     return (User) session.getAttribute("user");
   }
 
   @RequestMapping(method = RequestMethod.DELETE)
-  void logout(HttpSession session) {
+  public void logout(HttpSession session) {
     session.invalidate();
   }
 }

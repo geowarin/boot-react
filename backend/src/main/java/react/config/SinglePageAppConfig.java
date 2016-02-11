@@ -59,7 +59,7 @@ public class SinglePageAppConfig extends WebMvcConfigurerAdapter {
       if (isHandled(requestPath)) {
         return locations.stream()
           .map(loc -> createRelative(loc, requestPath))
-          .filter((resource) -> resource != null && resource.exists())
+          .filter(resource -> resource != null && resource.exists())
           .findFirst()
           .orElseGet(null);
       }

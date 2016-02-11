@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class SimpleResource {
 
   @RequestMapping("/api/simple")
-  List<String> resource() {
+  public List<String> resource() {
     return IntStream.generate(() -> new Random().nextInt(42))
       .limit(2 + new Random().nextInt(10))
       .mapToObj(Integer::toString)
