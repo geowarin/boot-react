@@ -1,8 +1,10 @@
-import jsdom from 'mocha-jsdom';
+import jsdom from 'jsdom-global';
 
 export default function describeWithDOM(a, b) {
   describe('(uses jsdom)', () => {
-    jsdom();
+    let cleanup;
+    before(() => cleanup = jsdom());
     describe(a, b);
+    after(() => cleanup());
   });
 }
