@@ -1,4 +1,5 @@
-import { describeWithDOM, mount } from 'enzyme';
+import { mount } from 'enzyme';
+import describeWithDOM from '../utils/describeWithDOM';
 import  expect, { createSpy } from 'expect';
 
 import React from 'react';
