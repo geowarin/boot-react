@@ -1,4 +1,4 @@
-import { routeActions } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 const LOGIN = 'authentication/LOGIN';
 const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
@@ -88,8 +88,8 @@ export function login(username, password) {
     promise: (client) => client.post('/api/session', {username, password}),
     afterSuccess: (dispatch, getState, response) => {
       localStorage.setItem('auth-token', response.headers['x-auth-token']);
-      const routingState = getState().routing.location.state || {};
-      dispatch(routeActions.push(routingState.nextPathname));
+      const routingState = getState().routing.locationBeforeTransitions.state || {};
+      browserHistory.push(routingState.nextPathname || '');
     }
   };
 }
@@ -98,8 +98,8 @@ export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: (client) => client.delete('/api/session'),
-    afterSuccess: (dispatch) => {
-      dispatch(routeActions.push('login'));
+    afterSuccess: () => {
+      browserHistory.push('login');
     }
   };
 }
@@ -113,8 +113,8 @@ export function getSession() {
 
 export function redirectToLoginWithMessage(messageKey) {
   return (dispatch, getState) => {
-    const currentPath = getState().routing.location.pathname;
+    const currentPath = getState().routing.locationBeforeTransitions.pathname;
     dispatch(displayAuthError(messageKey));
-    dispatch(routeActions.replace({pathname: '/login', state: {nextPathname: currentPath}}));
+    browserHistory.replace({pathname: '/login', state: {nextPathname: currentPath}});
   }
 }

@@ -59,8 +59,8 @@
     "react-interpolate-component": "^0.8.0",
     "react-redux": "^4.4.0",
     "react-router": "2.0.0",
+    "react-router-redux": "^4.0.0-rc.1",
     "react-translate-component": "^0.10.0",
-    "redux": "^3.3.1",
-    "react-router-redux": "^3.0.0"
+    "redux": "^3.3.1"
   }
 }
