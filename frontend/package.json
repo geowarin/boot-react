@@ -44,7 +44,7 @@
     "redux-devtools-log-monitor": "^1.0.4",
     "stripcomment-loader": "^0.1.0",
     "style-loader": "^0.13.0",
-    "stylus-loader": "^1.5.1",
+    "stylus-loader": "^2.0.0",
     "webpack": "^1.12.13",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.7.1"
@@ -58,7 +58,7 @@
     "react-easy-form": "^1.1.0",
     "react-interpolate-component": "^0.8.0",
     "react-redux": "^4.4.0",
-    "react-router": "2.0.0",
+    "react-router": "2.0.1",
     "react-router-redux": "^4.0.0-rc.1",
     "react-translate-component": "^0.10.0",
     "redux": "^3.3.1"
