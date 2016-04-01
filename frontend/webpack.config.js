@@ -12,10 +12,19 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      minChunks(module, count) {
+        return (
+          module.resource &&
+          module.resource.indexOf(path.resolve('node_modules')) === 0
+        )
+      }
+    }),
     new HtmlWebpackPlugin({
       title: 'Boot React',
       template: path.join(__dirname, 'assets/index-template.html')
@@ -45,7 +54,7 @@ module.exports = {
     ],
     loaders: [{
       test: /\.js$/,
-      loaders: ['babel?cacheDirectory'],
+      loaders: ['babel'],
       include: path.join(__dirname, 'src')
     }, {
       test: /\.styl$/,
