@@ -11,22 +11,23 @@ export default function promiseMiddleware({ dispatch, getState }) {
       return next(action);
     }
 
-    const defaultSuccess = (dispatch, getState, result) => result;
-    const onSuccess = afterSuccess || defaultSuccess;
     const [REQUEST, SUCCESS, FAILURE] = types;
     next({...rest, type: REQUEST});
 
     const onFulfilled = result => {
       next({...rest, result, type: SUCCESS});
-      return result;
+      if (afterSuccess) {
+        afterSuccess(dispatch, getState, result);
+      }
     };
     const onRejected = (error) => {
-      next({...rest, error, type: FAILURE});
-      return error;
+      next({...rest, error, type: FAILURE})
     };
     return promise(axios)
       .then(onFulfilled, onRejected)
-      .then(result => onSuccess(dispatch, getState, result))
-      .catch(error => console.error('MIDDLEWARE ERROR:', error));
+      .catch(error => {
+        console.error('MIDDLEWARE ERROR:', error);
+        onRejected(error)
+      });
   };
 }
