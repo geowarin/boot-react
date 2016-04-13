@@ -8,6 +8,8 @@ var history = require('connect-history-api-fallback');
 var app = express();
 var compiler = webpack(config);
 
+app.use(history());
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
@@ -20,8 +22,6 @@ app.use('/api', (req, res) => {
     .on('error', (e) => { console.warn(e.message) }))
     .pipe(res);
 });
-
-app.use(history());
 
 app.listen(3000, 'localhost', (err) => {
   if (err) {
