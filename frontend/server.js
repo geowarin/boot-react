@@ -3,6 +3,7 @@ var express = require('express');
 var webpack = require('webpack');
 var request = require('request');
 var config = require('./webpack.dev.config');
+var history = require('connect-history-api-fallback');
 
 var app = express();
 var compiler = webpack(config);
@@ -19,9 +20,8 @@ app.use('/api', (req, res) => {
     .on('error', (e) => { console.warn(e.message) }))
     .pipe(res);
 });
-app.use('*', (req, res) => {
-  req.pipe(request('http://localhost:3000/index.html')).pipe(res);
-});
+
+app.use(history());
 
 app.listen(3000, 'localhost', (err) => {
   if (err) {
