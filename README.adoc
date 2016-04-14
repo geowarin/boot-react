@@ -1,6 +1,7 @@
 # Spring boot and react hot starter
 
 image:https://travis-ci.org/geowarin/boot-react.svg?branch=master["Build Status", link="https://travis-ci.org/geowarin/boot-react"]
+image:https://ci.appveyor.com/api/projects/status/y3uw0gpo9dtec349?svg=true["Windows build Status", link="https://ci.appveyor.com/project/geowarin/boot-react"]
 
 Be more productive with this simple project that uses the https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[spring dev tools]
 and https://github.com/gaearon/babel-plugin-react-transform[react transform] for hot reloading.
@@ -60,7 +61,10 @@ If you have an equivalent version of npm installed on your system, you can use i
 Go in the `frontend` directory and type `npm install` to install the dependencies.
 Then, use `npm start` to start the dev server.
 
-**You will need node 4.0+ to run the dev server.**
+**You will need node 5.0+ and npm 3 to run the dev server and build the project**
+
+If you do not have the required binaries on your machine, you can use `./gradlew frontend:npmInstall` and `./gradlew frontend:start`.
+Those two command will download the required node/npm versions automatically and use them to run the node tasks.
 
 ### Hot reloading
 

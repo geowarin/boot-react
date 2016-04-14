@@ -20,6 +20,10 @@ task bundle(type: NpmTask) {
   args = ['run', 'bundle']
 }
 
+task start(type: NpmTask) {
+  args = ['start']
+}
+
 task test(type: NpmTask) {
     args = ['test']
 }
