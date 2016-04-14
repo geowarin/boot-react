@@ -6,7 +6,6 @@ import initStore from 'config/store';
 import { setupAxiosInterceptors } from 'rest/axios';
 import DevTools from 'config/devtools';
 import { redirectToLoginWithMessage, logout } from 'reducers/authentication';
-import { setLocale } from 'reducers/locale';
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
