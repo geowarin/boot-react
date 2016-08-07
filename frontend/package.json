@@ -34,7 +34,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.15.0",
     "http-proxy-middleware": "^0.13.0",
-    "jeet": "^6.1.2",
+    "jeet": "6.1.2",
     "jsdom-global": "^1.7.0",
     "json-loader": "^0.5.4",
     "mocha": "^2.4.5",
