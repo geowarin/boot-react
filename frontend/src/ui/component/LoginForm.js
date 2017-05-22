@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, TextInput, Label } from 'react-easy-form';
 import Translate from 'react-translate-component';
 
 const LabeledInput = (props) => (
   <div className="pure-control-group">
-    <Label value={props.label} position="before">
-      <TextInput {...props}/>
-    </Label>
+    <label>
+      {props.label}
+    </label>
+    <input {...props}/>
   </div>
 );
 
@@ -17,6 +17,17 @@ const ErrorPanel = ({messageKey}) => (
 );
 
 export default class LoginForm extends Component {
+
+  state = {
+    username: "",
+    password: ""
+  };
+
+  handleInputChange = (e) => {
+    let value = e.target.value;
+    let inputName = e.target.name;
+    this.setState({[inputName]: value});
+  };
 
   render() {
     const {errorMessage} = this.props;
@@ -29,20 +40,21 @@ export default class LoginForm extends Component {
 
         {errorPanel}
 
-        <Form ref="form" initialData={{}} onSubmit={(formData) => this.handleSubmit(formData)} className="pure-form pure-form-aligned">
-          <LabeledInput label="Login" name="username"/>
-          <LabeledInput label="Password" name="password" type="password"/>
+        <form onSubmit={this.handleSubmit} className="pure-form pure-form-aligned">
+          <LabeledInput onChange={this.handleInputChange} label="Login" name="username"/>
+          <LabeledInput onChange={this.handleInputChange} label="Password" name="password" type="password"/>
 
           <div className="pure-controls">
             <button type="submit" className="pure-button pure-button-primary">Login</button>
           </div>
-        </Form>
+        </form>
       </div>
     );
   }
 
-  handleSubmit(formData) {
-    const { username, password } = formData;
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { username, password } = this.state;
     const { login } = this.props;
     login(username, password);
   }
