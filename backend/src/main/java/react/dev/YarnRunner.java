@@ -25,7 +25,7 @@ public class YarnRunner implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    if (!environment.acceptsProfiles("production")) {
+    if (!environment.acceptsProfiles("production") && !environment.acceptsProfiles("test")) {
       AtomicBoolean registered = (AtomicBoolean) Restarter.getInstance().getOrAddAttribute("yarnStarted", AtomicBoolean::new);
       boolean alreadyRun = registered.getAndSet(true);
       if (!alreadyRun) {

@@ -4,6 +4,7 @@ import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.session.MapSessionRepository
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.session.web.http.SessionRepositoryFilter
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -17,6 +18,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
   loader = SpringApplicationContextLoader,
   classes = [BootReactApplication]
 )
+@ActiveProfiles("test")
 abstract class AbstractMvcSpec extends SpockMvcSpec {
 
   @Shared
