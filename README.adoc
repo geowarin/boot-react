@@ -23,17 +23,6 @@ The `frontend` sub-project contains the javascript code.
 In development you will have access to the awesome https://github.com/gaearon/redux-devtools[redux-dev-tools], which
 will allow you keep track of your application state and undo/redo every action at will.
 
-## But... I love Groovy :'(
-
-Me too pal...
-
-The project used to be coded in Groovy but since most of us use Java at work, I figured it would be more useful for a lot
-of people if the backend code was written in Java.
-
-There is a https://github.com/geowarin/boot-react/tree/groovy[groovy branch] that should be up to date.
-
-The tests are still http://geowarin.github.io/test-java-with-groovy.html[written in groovy].
-
 ### Running the backend (recommended)
 
 The recommended way to launch the server is to use your favorite java IDE.
@@ -41,30 +30,25 @@ The main method of the application is in the `BootReactApplication` class.
 
 ### Running the frontend (recommended)
 
-For the frontend, a small wrapper script for UNIX systems can be found at the root of the project.
-It will ensure that you use the same version of npm as the gradle build.
+**You will need node 5.0+ and yarn to run the dev server and build the project**
 
-Simply run `./npmw start` to start the frontend.
+The frontend dev server will be automatically launched when you start the backend.
 
-It will automatically run `npm install` on the first run.
+I strongly recommend that you install `yarn` on your development machine.
 
-If you change the node dependencies in `package.json`, delete the `node_modules` dir or
-run `./gradlew frontend:npmInstall`
+To install download the dependencies needed by the frontend do:
+
+```
+cd frontend
+yarn
+```
+
+If you do not have the required binaries on your machine, you can use `./gradlew frontend:yarnInstall` and `./gradlew frontend:start`.
+Those two command will download the required node/yarn versions automatically and use them to run the node tasks.
 
 ### Alternatives for running the projects
 
 There is also a gradle task to run the spring server: `./gradlew bootRun`.
-
-The node version used by the gradle build is specified https://github.com/geowarin/boot-react/blob/master/frontend/build.gradle#L11-L12[here].
-If you have an equivalent version of npm installed on your system, you can use it to start the frontend.
-
-Go in the `frontend` directory and type `npm install` to install the dependencies.
-Then, use `npm start` to start the dev server.
-
-**You will need node 5.0+ and npm 3 to run the dev server and build the project**
-
-If you do not have the required binaries on your machine, you can use `./gradlew frontend:npmInstall` and `./gradlew frontend:start`.
-Those two command will download the required node/npm versions automatically and use them to run the node tasks.
 
 ### Hot reloading
 
