@@ -30,7 +30,7 @@ The main method of the application is in the `BootReactApplication` class.
 
 ### Running the frontend (recommended)
 
-**You will need node 5.0+ and yarn to run the dev server and build the project**
+**You will need node 6.0+ and yarn to run the dev server and build the project**
 
 The frontend dev server will be automatically launched when you start the backend.
 

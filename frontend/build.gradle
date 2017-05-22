@@ -8,7 +8,7 @@ version '0.0.1'
 buildDir = 'dist'
 
 node {
-  version = '5.2.0'
+  version = '6.10.3'
   download = true
 }
 
