@@ -18,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-core": "^6.24.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-module-alias": "^1.2.0",
     "babel-plugin-react-transform": "^2.0.2",

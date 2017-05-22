@@ -1,5 +1,5 @@
 plugins {
-    id "com.moowork.node" version "0.11"
+  id "com.moowork.node" version "1.1.1"
 }
 
 apply plugin: 'base'
@@ -9,25 +9,24 @@ buildDir = 'dist'
 
 node {
   version = '5.2.0'
-  npmVersion = '3.3.12'
   download = true
 }
 
-task bundle(type: NpmTask) {
+task bundle(type: YarnTask) {
   inputs.dir(new File('assets'))
   inputs.dir(new File('src'))
   outputs.dir(new File('dist'))
   args = ['run', 'bundle']
 }
 
-task start(type: NpmTask) {
+task start(type: YarnTask) {
   args = ['start']
 }
 
-task test(type: NpmTask) {
-    args = ['test']
+task test(type: YarnTask) {
+  args = ['test']
 }
 
 check.dependsOn(test)
-bundle.dependsOn(npm_install)
+bundle.dependsOn(yarn_install)
 assemble.dependsOn(bundle)
