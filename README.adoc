@@ -43,7 +43,7 @@ cd frontend
 yarn
 ```
 
-If you do not have the required binaries on your machine, you can use `./gradlew frontend:yarnInstall` and `./gradlew frontend:start`.
+If you do not have the required binaries on your machine, you can use `./gradlew frontend:yarn_install` and `./gradlew frontend:start`.
 Those two command will download the required node/yarn versions automatically and use them to run the node tasks.
 
 ### Alternatives for running the projects
