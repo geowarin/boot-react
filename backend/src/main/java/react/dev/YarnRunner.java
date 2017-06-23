@@ -36,7 +36,7 @@ public class YarnRunner implements CommandLineRunner {
 
   private void yarnStart() throws IOException {
     ProcessExecutor process = new ProcessExecutor()
-      .directory(new File("frontend"))
+      .directory(new File("../frontend"))
       .command("yarn", "start")
       .redirectOutput(Slf4jStream.of(LoggerFactory.getLogger("yarn")).asInfo())
       .redirectError(Slf4jStream.of(LoggerFactory.getLogger("yarn")).asError());
