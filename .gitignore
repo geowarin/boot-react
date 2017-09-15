@@ -2,8 +2,15 @@
 .idea
 *.iml
 
+# Eclipse files
+.settings
+.project
+
 # gradle
 .gradle
 build
 
 .DS_Store
+
+backend/bin
+backend/.classpath
