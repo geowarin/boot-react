@@ -43,7 +43,7 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, 'src'),
-      loader: ['babel-loader'],
+      loader: ['babel-loader?cacheDirectory'],
     }, {
       test: /\.styl$/,
       loaders: ['style-loader', 'css-loader', 'stylus-loader']

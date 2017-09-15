@@ -1,7 +1,7 @@
 {
   "name": "app.oakstair.se",
   "version": "0.0.1",
-  "description": "Spring boot and react application",
+  "description": "Spring boot and react frontend",
   "scripts": {
     "start": "node server.js",
     "bundle": "cross-env NODE_ENV=production webpack -p --optimize-dedupe",
@@ -14,7 +14,7 @@
     "hot",
     "reload"
   ],
-  "author": "Gunnar Eketrapp",
+  "author": "Geoffroy Warin",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
