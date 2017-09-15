@@ -1,10 +1,9 @@
 import { shallow } from 'enzyme';
-import  expect, { createSpy } from 'expect';
 
 import React from 'react';
 import ListComponent from 'component/ListComponent';
 
-const fetchSimple = createSpy();
+const fetchSimple = jest.fn();
 const items = ['one', 'two', 'three'];
 let props = {fetchSimple, items};
 

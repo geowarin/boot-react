@@ -1,5 +1,7 @@
 # Spring boot and react hot starter
 
+# WARNING. This branch is broken. I am working on it ...
+
 image:https://travis-ci.org/geowarin/boot-react.svg?branch=master["Build Status", link="https://travis-ci.org/geowarin/boot-react"]
 image:https://ci.appveyor.com/api/projects/status/y3uw0gpo9dtec349?svg=true["Windows build Status", link="https://ci.appveyor.com/project/geowarin/boot-react"]
 
