@@ -1,6 +1,6 @@
 package react
 
-import org.springframework.boot.test.SpringApplicationContextLoader
+// import org.springframework.boot.test.SpringApplicationContextLoader
 import org.springframework.session.MapSessionRepository
 import org.springframework.session.web.http.HeaderHttpSessionStrategy
 import org.springframework.session.web.http.SessionRepositoryFilter
@@ -15,7 +15,7 @@ import spockmvc.SpockMvcSpec
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity
 
 @ContextConfiguration(
-  loader = SpringApplicationContextLoader,
+  // loader = SpringApplicationContextLoader,
   classes = [BootReactApplication]
 )
 @ActiveProfiles("test")
