@@ -1,0 +1,102 @@
+{
+  "rulesDirectory": [],
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    "arrow-return-shorthand": [ true ],
+    "ban": [
+      true,
+      [ "it", "only" ]
+    ],
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "class-name": true,
+    "curly": true,
+    "import-spacing": true,
+    "ter-indent": [
+      true,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "jsdoc-format": true,
+    "no-angle-bracket-type-assertion": true,
+    "no-conditional-assignment": true,
+    "no-duplicate-variable": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
+    "no-internal-module": true,
+    "no-misused-new": true,
+    "no-reference": true,
+    "no-trailing-whitespace": true,
+    "no-var-keyword": true,
+    "no-unused-expression": true,
+    "no-unused-variable": true,
+    "object-curly-spacing": [
+      true,
+      "always"
+    ],
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
+    "object-literal-shorthand": true,
+    "one-line": [
+      true,
+      "check-catch",
+      "check-finally",
+      "check-else"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
+    "prefer-for-of": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-operator",
+
+      "check-typecast"
+    ]
+  }
+}

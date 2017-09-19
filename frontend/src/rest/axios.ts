@@ -1,18 +1,17 @@
 import axios from 'axios';
-import { displayAuthError } from 'reducers/authentication';
 
-const setupAxiosInterceptors = onUnauthenticated => {
-  const onRequestSuccess = config => {
-    var token = localStorage.getItem('auth-token');
+const setupAxiosInterceptors = (onUnauthenticated: any) => {
+  const onRequestSuccess = (config: any) => {
+    const token = localStorage.getItem('auth-token');
     if (token) {
       config.headers['x-auth-token'] = token;
     }
     config.timeout = 10000;
     return config;
   };
-  const onResponseSuccess = (response) => response;
-  const onResponseError = error => {
-    if (error.status == 403) {
+  const onResponseSuccess = (response: any) => response;
+  const onResponseError = (error: any) => {
+    if (error.status === 403) {
       localStorage.removeItem('auth-token');
       onUnauthenticated();
     }

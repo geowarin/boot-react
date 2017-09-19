@@ -15,7 +15,7 @@ module.exports = {
     filename: '[name].js'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
       minChunks(module, count) {
@@ -35,36 +35,54 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      minimize: true,
       compressor: {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+
+    new webpack.LoaderOptionsPlugin({
+        options: {
+            stylus: {
+                use: [jeet(), nib()]
+            }
+        }
+    })
   ],
   resolve: {
-    extensions: ['', '.js'],
-    root: path.join(__dirname, 'src')
+      extensions: ['.js', '.ts', '.tsx'],
+      modules: [__dirname, 'node_modules', 'src']
+      // Was:
+      //  extensions: ['', '.js'],
+      //  root: path.join(__dirname, 'src')
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.css$/,
-        loader: 'stripcomment'
-      }
-    ],
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }, {
-      test: /\.styl$/,
-      loader: ExtractTextPlugin.extract('css-loader!stylus-loader')
-    }, {
-      test: /\.json/,
-      loaders: ['json-loader']
-    }]
-  },
-  stylus: {
-    use: [jeet(), nib()]
+    loaders: [
+        {
+            enforce: 'pre',
+            test: /\.css$/,
+            loader: 'stripcomment-loader'
+        },
+        {
+            enforce: "pre",
+            test: /\.js$/,
+            loader: "source-map-loader"
+        },
+        {
+          test: /\.tsx?$/,
+          include: path.join(__dirname, 'src'),          
+          loader: ['babel-loader', 'awesome-typescript-loader']
+        },
+        {
+            test: /\.styl$/,
+            loader: ExtractTextPlugin.extract('css-loader!stylus-loader')
+        },
+        {
+            test: /\.json/,
+            loaders: ['json-loader']
+        }
+    ]
   }
 };

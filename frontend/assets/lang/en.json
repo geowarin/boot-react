@@ -1,7 +1,7 @@
 {
   "private": {
     "title": "Private page",
-    "greeting": "Hello %(name)s! How are you today?"
+    "greeting": "Hello {name}! How are you today?"
   },
   "login": {
     "title": "Login Page",
@@ -11,5 +11,9 @@
       "unauthorized": "Please login to access this resource",
       "badLogin": "Incorrect user and password"
     }
+  },
+  "fail": "An error has occurred.",
+  "simple": {
+    "no-items": "No items retrieved."
   }
 }

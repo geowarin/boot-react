@@ -1,7 +1,7 @@
 {
   "private": {
     "title": "Page privée",
-    "greeting": "Bonjour %(name)s! Comment allez-vous aujourd'hui?"
+    "greeting": "Bonjour {name}! Comment allez-vous aujourd'hui?"
   },
   "login": {
     "title": "Page de login",
@@ -11,5 +11,9 @@
       "unauthorized": "Veuillez vous authentifier pour accéder à cette resource",
       "badLogin": "Login et mot de passe incorrects"
     }
+  },
+  "fail": "Une erreur s'est produite.",
+  "simple": {
+    "no-items": "Aucun élément trouvé."
   }
 }

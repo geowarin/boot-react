@@ -1,15 +1,14 @@
 import { shallow } from 'enzyme';
-import  expect, { createSpy } from 'expect';
 
 import React from 'react';
-import ListComponent from 'component/ListComponent';
+import ListComponent from '../../src/ui/component/ListComponent';
+import { Router } from 'react-router';
 
-const fetchSimple = createSpy();
+const fetchSimple = jest.fn();
 const items = ['one', 'two', 'three'];
-let props = {fetchSimple, items};
+const props = { fetchSimple, items, wasSuccessfull: true };
 
 describe('components', () => {
-
   describe('ListComponent', () => {
 
     it('should render three items', () => {
@@ -21,6 +20,6 @@ describe('components', () => {
       const component = shallow(<ListComponent {...props} />);
       component.find('button').simulate('click');
       expect(fetchSimple).toHaveBeenCalled();
-    })
+    });
   });
 });
