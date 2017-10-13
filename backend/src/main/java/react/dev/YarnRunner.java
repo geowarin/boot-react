@@ -12,6 +12,7 @@ import org.zeroturnaround.exec.stream.slf4j.Slf4jStream;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -76,8 +77,8 @@ public class YarnRunner implements CommandLineRunner {
   }
 
   private ProcessExecutor command(String... cmd) {
-    if (isWindows()) {
-      List<String> args = Arrays.asList("cmd", "/c");
+    if (!isWindows()) {
+      List<String> args = new ArrayList<>(Arrays.asList("cmd", "/c"));
       args.addAll(Arrays.asList(cmd));
       return new ProcessExecutor().command(args);
     }
