@@ -77,7 +77,7 @@ public class YarnRunner implements CommandLineRunner {
   }
 
   private ProcessExecutor command(String... cmd) {
-    if (!isWindows()) {
+    if (isWindows()) {
       List<String> args = new ArrayList<>(Arrays.asList("cmd", "/c"));
       args.addAll(Arrays.asList(cmd));
       return new ProcessExecutor().command(args);
