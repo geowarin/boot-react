@@ -54,7 +54,7 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
-    "axios": "^0.9.1",
+    "axios": "^0.17.0",
     "counterpart": "^0.17.2",
     "deep-equal": "^1.0.1",
     "react": "^15.0.0",
